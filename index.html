@@ -499,11 +499,23 @@ body.m3 .db .dn{border-radius:20px;border-color:var(--m-outline);background:tran
 @keyframes emfade{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:0}}
 .emov.small .emc{justify-content:flex-start;padding-top:28vh}.emov.small .emb{font-size:64px;animation-duration:1.5s}.emov.small .eml{font-size:14px;animation-duration:1.5s}
 @media (prefers-reduced-motion:reduce){.emb,.emb.e1,.emb.e2{animation:emfade 2.9s forwards}}
+.bankbtn{appearance:none;display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;font-weight:600;border-radius:999px;min-height:36px;padding:0 14px 0 10px;cursor:pointer}
+.bankbtn .ms{font-size:20px}.bankbtn .rt{display:none}
+body:not(.m3) .bankbtn .ms{display:none}body:not(.m3) .bankbtn .rt{display:inline}
+.bankbtn.on{background:var(--m-sec-c,#C8372D);color:var(--m-on-sec-c,#fff);border-color:transparent}
+nav.bar button .ms{font-size:25px}
+nav.bar button .g{height:34px;width:min(50px,88%);border-radius:17px}
+body:not(.m3) nav.bar button .g{font-size:20px;height:auto;width:auto}
+.logo small:empty{display:none}
+.hcol{flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+#hleft:empty{display:none}
+.themebtn{appearance:none;border:1.5px dashed var(--line);background:transparent;color:inherit;font:inherit;font-size:12px;border-radius:999px;min-height:32px;padding:0 10px;cursor:pointer;white-space:nowrap}
+.themebtn::before{content:'🎨 ';}
 </style>
 </head>
 <body>
 <header>
-  <div class="logo">НЭП<small>банк стола <span class="ver">v2.1</span></small></div>
+  <div class="hcol"><div class="logo">НЭП<small><span class="ver">v2.1</span></small></div><div id="hleft"></div></div>
   <div class="hright" id="hright"></div>
 </header>
 <div class="ticker" id="ticker"></div>
@@ -795,9 +807,10 @@ function renderTicker(){const el=$('#ticker');
   const t=el.querySelector('.txt'),m=el.querySelector('.mq');
   if(t&&m)requestAnimationFrame(()=>{const dist=m.scrollWidth-t.clientWidth;if(dist>4){t.style.setProperty('--dist',(dist+16)+'px');t.style.setProperty('--dur',Math.max(7,(dist+16)/32+4).toFixed(1)+'s');t.classList.add('run')}});
 }
-function headerRight(){const me=pById(meId());
+function headerRight(){const me=pById(meId()),m3=document.body.classList.contains('m3');
+  {const hl=$('#hleft');if(hl)hl.innerHTML=`<button class="themebtn" data-act="theme" data-v="${m3?'retro':'m3'}" aria-label="Оформление: сейчас ${m3?'Android':'Ретро'}. Нажмите, чтобы переключить" title="Оформление">${m3?'Ретро':'Android'}</button>`}
   const s=online?`<span class="sync${stale||dead?' off':''}"><i></i>${dead?'Нет связи':stale?'Связь не подтверждена':'Синхронизация'}</span>`:'<span class="sync off"><i></i>Только это устройство</span>';
-  $('#hright').innerHTML=view==='table'&&table?`<div class="row" style="justify-content:flex-end"><button class="tname" data-act="lobby" aria-label="К списку столов">${esc(table.name)}</button><button class="mechip" data-act="seat" aria-label="Сменить игрока">${me?spr(me)+esc(me.name):'Кто вы?'}</button>${readOnly?'':isPaused()?'<button class="pausebtn on" data-act="resume">▶ Продолжить</button>':'<button class="pausebtn" data-act="pause" data-label="⏸ Точно?">⏸ Пауза</button>'}</div>${s}`:s}
+  $('#hright').innerHTML=view==='table'&&table?`<div class="row" style="justify-content:flex-end"><button class="tname" data-act="lobby" aria-label="К списку столов">${esc(table.name)}</button><button class="mechip" data-act="seat" aria-label="Сменить игрока">${me?spr(me)+esc(me.name):'Кто вы?'}</button>${readOnly?'':isPaused()?'<button class="pausebtn on" data-act="resume">▶ Продолжить</button>':'<button class="pausebtn" data-act="pause" data-label="⏸ Точно?">⏸ Пауза</button>'}<button class="bankbtn${tab==='bank'?' on':''}" data-act="tab" data-v="bank" aria-current="${tab==='bank'?'page':'false'}"><span class="ms" aria-hidden="true">account_balance</span><span class="rt" aria-hidden="true">≡</span>Банк</button></div>${s}`:s}
 
 function calcGet(){const s=S(),a=(get.lap?+s.passStart:0)+(get.stock||0)*(+s.stockBonus),parts=[];if(get.lap)parts.push('круг');if(get.stock)parts.push(get.stock>1?`акции ×${get.stock}`:'акция');const n=parts.join(' + ');get.amount=a?String(a):'';get.note=n?n[0].toUpperCase()+n.slice(1):''}
 /* ---------- operation animations ---------- */
@@ -884,7 +897,6 @@ function vMe(){const me=pById(meId());if(!me)return vSeat();
   <div class="lbl">Вернуть за кругов</div><div class="seg">${[1,2,3,4,5].map(n=>`<button class="${loan.rounds===n?'on':''}" data-act="lrounds" data-v="${n}">${n}</button>`).join('')}</div>
   ${lt>0?`<p class="small" style="margin-top:8px">Вернуть ${rub(lt)} — по ${rub(Math.ceil(lt/loan.rounds))} за круг.</p>`:''}
   <button class="btn wide" data-act="loan">Взять ссуду</button></section>`}
-  <section class="sheet"><div class="lbl" style="margin-top:0">Оформление</div><div class="seg"><button class="${document.body.classList.contains('m3')?'on':''}" data-act="theme" data-v="m3">Android</button><button class="${document.body.classList.contains('m3')?'':'on'}" data-act="theme" data-v="retro">Ретро</button></div></section>
   <section class="sheet"><label class="chk" style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-snd${lget('nepbank2.sound',true)?' checked':''} style="width:20px;height:20px"> Звук и вибрация при денежных операциях</label></section>
   <section class="sheet"><h2>Мои события</h2>${mine.length?`<ul class="hl">${mine.map(e=>`<li class="${und.has(e.id)?'off':''}"><span class="tm">${hm(e.ts)}</span><span class="tx">${esc(describe(e))}</span>${canSelfUndo(e,me.id,und)?`<button class="undo" data-act="sundo" data-v="${esc(e.id)}">Отменить</button>`:'<span></span>'}</li>`).join('')}</ul>`:'<p class="muted">Пока пусто.</p>'}</section>
   ${readOnly?'':`<section class="sheet quitbox"><h2>Выйти из игры</h2><p class="muted small">Если вы банкрот или уходите из-за стола. Деньги и доллары обнулятся, патенты с постройками и акции вернутся в банк и снова станут свободными, ссуды и предложения сделок закроются. Отменить выход нельзя.</p><button class="btn ghost wide" data-act="quit" data-label="Выйти из игры">Выйти из игры</button></section>`}`}
@@ -1088,7 +1100,7 @@ function render(){
   if(view==='table'&&table)ensureClaim();
   headerRight();renderTicker();if(view==='table'&&(tab==='dice'||tab==='tax'))tab='me';renderDiceBar();
   const bar=$('#bar');
-  if(view==='table'&&table){bar.hidden=false;bar.innerHTML=`<div>${[['me','₽','Счёт','account_balance_wallet'],['pat','⌂','Патенты','storefront'],['shares','↗','Акции','trending_up'],['fx','$','Биржа','currency_exchange'],['bank','≡','Банк','account_balance']].map(([k,g,l,ic])=>`<button class="${tab===k?'on':''}" data-act="tab" data-v="${k}" aria-current="${tab===k?'page':'false'}"><span class="g"><span class="ms" aria-hidden="true">${ic}</span><span class="rt">${g}</span></span>${l}</button>`).join('')}</div>`}else bar.hidden=true;
+  if(view==='table'&&table){bar.hidden=false;bar.innerHTML=`<div>${[['me','₽','Счёт','account_balance_wallet'],['pat','⌂','Патенты','storefront'],['shares','↗','Акции','trending_up'],['fx','$','Биржа','currency_exchange']].map(([k,g,l,ic])=>`<button class="${tab===k?'on':''}" data-act="tab" data-v="${k}" aria-current="${tab===k?'page':'false'}"><span class="g"><span class="ms" aria-hidden="true">${ic}</span><span class="rt">${g}</span></span>${l}</button>`).join('')}</div>`}else bar.hidden=true;
   const html=view==='boot'?'<section class="sheet"><p class="muted">Загрузка…</p></section>':view==='lobby'?vLobby():view==='new'?vNew():vTable();
   const ae=document.activeElement,key=ae&&(ae.dataset.in||ae.dataset.set||ae.dataset.dk||ae.dataset.dw||ae.dataset.nm);
   document.body.classList.toggle('paused',view==='table'&&isPaused());
