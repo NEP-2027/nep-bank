@@ -479,6 +479,26 @@ body.m3 .db .dn{border-radius:20px;border-color:var(--m-outline);background:tran
 .tdel{appearance:none;flex:none;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:3px;padding:0 10px;font:inherit;font-size:13px;cursor:pointer;min-width:72px}
 .tdel[data-armed='1']{background:#C8372D;color:#fff;border-color:#C8372D}
 .seat.taken{opacity:.5;cursor:not-allowed}
+.ebx{display:flex;align-items:center;gap:6px;margin-top:6px;background:var(--paper);color:var(--ink);border-radius:12px;padding:4px 6px;box-shadow:0 4px 14px rgba(0,0,0,.14)}
+.ebx select{flex:none;max-width:88px;min-height:34px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-size:13px;padding:0 4px}
+.ems{flex:1;min-width:0;display:flex;justify-content:space-between;gap:2px;overflow-x:auto;scrollbar-width:none}
+.ems::-webkit-scrollbar{display:none}
+.em{appearance:none;flex:none;border:0;background:none;font-size:21px;line-height:1;width:32px;height:36px;padding:0;border-radius:50%;cursor:pointer;transition:transform .12s}
+.em:active{transform:scale(1.35);background:var(--surface)}
+.emov{position:fixed;inset:0;z-index:30;pointer-events:none;overflow:hidden}
+.emp{position:absolute;left:var(--x);bottom:-60px;font-size:calc(34px*var(--s));animation:emup var(--t) cubic-bezier(.2,.6,.4,1) var(--d) forwards;opacity:0}
+@keyframes emup{0%{opacity:0;transform:translate(0,0) rotate(0)}10%{opacity:1}100%{opacity:0;transform:translate(var(--dx),-105vh) rotate(30deg)}}
+.emc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.emb{font-size:120px;line-height:1;animation:empop 2.9s cubic-bezier(.2,1.4,.4,1) forwards;filter:drop-shadow(0 8px 16px rgba(0,0,0,.3))}
+.emb.e2{animation:empop 2.9s cubic-bezier(.2,1.4,.4,1) forwards,emshake .25s ease-in-out .35s 6}
+.emb.e1{animation:empop 2.9s cubic-bezier(.2,1.4,.4,1) forwards,embeat .5s ease-in-out .3s 4}
+.eml{font-weight:700;font-size:18px;background:rgba(0,0,0,.6);color:#fff;padding:6px 14px;border-radius:999px;animation:emfade 2.9s forwards}
+@keyframes empop{0%{transform:scale(0) rotate(-20deg);opacity:0}18%{transform:scale(1.25) rotate(6deg);opacity:1}30%{transform:scale(1) rotate(0)}80%{transform:scale(1);opacity:1}100%{transform:scale(.6) translateY(-40px);opacity:0}}
+@keyframes emshake{0%,100%{translate:0 0}25%{translate:-10px 0}75%{translate:10px 0}}
+@keyframes embeat{0%,100%{scale:1}50%{scale:1.15}}
+@keyframes emfade{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:0}}
+.emov.small .emc{justify-content:flex-start;padding-top:28vh}.emov.small .emb{font-size:64px;animation-duration:1.5s}.emov.small .eml{font-size:14px;animation-duration:1.5s}
+@media (prefers-reduced-motion:reduce){.emb,.emb.e1,.emb.e2{animation:emfade 2.9s forwards}}
 </style>
 </head>
 <body>
@@ -724,6 +744,7 @@ function describe2(e){const n=who(e.pid),c=e.cell?cellById(e.cell):null;
     case 'buy':return `${n}: покупка «${c?c.name:'?'}» за ${rub(e.price)}`;
     case 'build':return `${n}: ${c&&e.lvl>c.maxStores?'торговый дом':'магазин'} в «${c?c.name:'?'}» за ${rub(e.cost)}`;
     case 'unbuild':return `${n}: продажа постройки в «${c?c.name:'?'}», +${rub(e.refund)}`;
+    case 'emo':return `${n} → ${e.to==='all'?'всем':who(e.to)}: ${e.e}`;
     case 'claim':return `${n}: место занято с телефона`;
     case 'release':return `🔓 Место «${who(e.of)}» освобождено — ${e.pid?n:'банк'}. Его можно занять с другого телефона.`;
     case 'shsell':return `${n}: продажа акции «${(GRP(e.group)||{name:'?'}).name}» банку, +${rub(e.price)}`;
@@ -753,8 +774,8 @@ function describe(e){const n=who(e.pid);{const d2=describe2(e);if(d2!==null)retu
     case 'react':return '';
   }return ''}
 async function addEv(ev){
-  if(isPaused()&&!['pause','resume','react','claim','release'].includes(ev.kind)){toast('Игра на паузе. Нажмите «▶ Продолжить», чтобы играть дальше.');return false}
-  if(ev.pid&&isOut(ev.pid)&&!['react','pause','resume'].includes(ev.kind)){toast('Вы вышли из игры и можете только наблюдать.');return false}
+  if(isPaused()&&!['pause','resume','react','claim','release','emo'].includes(ev.kind)){toast('Игра на паузе. Нажмите «▶ Продолжить», чтобы играть дальше.');return false}
+  if(ev.pid&&isOut(ev.pid)&&!['react','pause','resume','emo'].includes(ev.kind)){toast('Вы вышли из игры и можете только наблюдать.');return false}
   if(false){toast('Игра на паузе. Нажмите «▶ Продолжить», чтобы играть дальше.');return false}
   if(readOnly){toast('Режим просмотра: записывать события может владелец страницы или приглашённый редактор.');return false}
   try{await store.addEv(tid,Object.assign({ts:Date.now()},ev));return true}
@@ -766,7 +787,7 @@ function spr(p,w){return p?`<span class="spr"${w?` style="width:${w}px"`:''}>${s
 function picker(key,list){return `<div class="pick" role="group">${list.map(o=>`<button class="pchip${sel[key]===o.id?' on':''}" data-act="pick" data-k="${key}" data-v="${o.id}" aria-pressed="${sel[key]===o.id}">${o.id==='bank'?'<span class="bankico">₽</span>':spr(o)}<span>${esc(o.name)}</span></button>`).join('')}</div>`}
 function renderTicker(){const el=$('#ticker');
   if(view!=='table'||!table){el.innerHTML='';tkKey='';return}
-  const list=evs.filter(e=>e.kind!=='join'&&e.kind!=='claim'&&e.kind!=='react').slice(-8).reverse(),top=list[0];
+  const list=evs.filter(e=>e.kind!=='join'&&e.kind!=='claim'&&e.kind!=='emo'&&e.kind!=='react').slice(-8).reverse(),top=list[0];
   const key=(top?top.id:'')+'|'+tickOpen+'|'+evs.length+'|'+players().map(p=>p.name).join(',');
   if(key===tkKey)return;tkKey=key;
   const fresh=top&&lastTop&&top.id!==lastTop;lastTop=top?top.id:null;
@@ -796,7 +817,8 @@ function animHtml(o){
     case 'chance':return `<div class="lab"><div class="ccov"><b>Шанс</b><span>${esc(o.text)}</span></div></div>`;
     case 'rate':return `<div class="lab"><div class="ovbig in sm">Купить ${o.buy} ₽</div><div class="ovbig out sm">Продать ${o.sell} ₽</div><div class="sub">Новый курс доллара — биржа открыта</div></div>`;
   }return ''}
-function animFor(e,me){if(!me)return;
+function animFor(e,me){if(e.kind==='emo'){if(e.pid!==me&&(e.to==='all'||e.to===me)){playEmo(e.e,`${who(e.pid)}${e.to==='all'?' — всем':''}`);try{if(lget('nepbank2.sound',true)&&navigator.vibrate)navigator.vibrate([30,40,30])}catch(_){}}return}
+  if(!me)return;
   if(e.pid===me&&['buy','build','share'].includes(e.kind)){const c=e.cell?cellById(e.cell):null,amt=e.kind==='buy'?e.price:e.kind==='build'?e.cost:e.price;playAnim({type:'out',amount:amt,sub:e.kind==='buy'?`Патент «${c?c.name:''}»`:e.kind==='build'?`Постройка в «${c?c.name:''}»`:`Акция «${(GRP(e.group)||{name:''}).name}»`});return}
   if(e.pid===me&&e.kind==='unbuild'){playAnim({type:'in',amount:e.refund,sub:'Продажа постройки'});return}
   if(e.kind==='deal'&&e.to===me){toast(`${who(e.pid)} предлагает сделку — откройте «Счёт»`);feedback('in');return}
@@ -1008,7 +1030,7 @@ function bFinal(){const {und}=ledger(),cr=curRate(),rate=cr?cr.sell:0,live=evs.f
 function bAcc(){const st=state(),cr=curRate(),rate=cr?cr.sell:0;
   return `<section class="sheet"><h2>Счета</h2>${table.code?`<p class="muted small">Код стола для игроков: <b style="font-size:18px;letter-spacing:.15em;color:var(--ink)">${table.code}</b></p>`:''}<div class="scroll"><table class="btbl"><thead><tr><th>Игрок</th><th class="r">Рубли</th><th class="r">Доллары</th><th class="r">Вложения</th><th class="r">${cr?`Капитал (курс ${rate})`:'Капитал'}</th><th>Телефон</th></tr></thead><tbody>${players().map(p=>{const w=st.b[p.id],iv=invest(st,p.id).total;return `<tr><td>${spr(p)} ${esc(p.name)}</td><td class="r${w.rub<0?' neg':''}">${rub(w.rub)}</td><td class="r">${usd(w.usd)}</td><td class="r">${rub(iv)}</td><td class="r">${rub(w.rub+w.usd*rate+iv)}</td><td>${st.seats[p.id]?(readOnly?'занято':`<button class="btn sm ghost" data-act="release" data-v="${p.id}" data-label="Освободить">Освободить</button>`):'<span class="muted small">свободно</span>'}</td></tr>`}).join('')}</tbody></table></div><p class="muted small" style="margin-top:8px">Место игрока закреплено за его телефоном. «Освободить» — если игрок сменил телефон или очистил браузер: место снова можно занять, а все увидят это в ленте.</p><p class="muted small" style="margin-top:8px">Вложения — патенты, постройки и акции по цене покупки. От них считается налог. Капитал — вложения плюс наличные.</p></section>`}
 function bHist(){const {und}=ledger(),kinds={all:'Все',pay:'Деньги',prop:'Имущество',share:'Акции',deal:'Сделки',fx:'Валюта',rate:'Курс',dice:'Кости',chance:'Шанс',loan:'Ссуды',undo:'Отмены'};
-  const hist=evs.filter(e=>e.kind!=='join'&&e.kind!=='claim'&&e.kind!=='react'&&(hFilter==='all'||e.kind===hFilter||(hFilter==='prop'&&['buy','build','unbuild'].includes(e.kind))||(hFilter==='deal'&&['deal','dealOk','offerResp','offer'].includes(e.kind)))&&(!hWho||e.pid===hWho||e.from===hWho||e.to===hWho)).slice().reverse().slice(0,200);
+  const hist=evs.filter(e=>e.kind!=='join'&&e.kind!=='claim'&&e.kind!=='emo'&&e.kind!=='react'&&(hFilter==='all'||e.kind===hFilter||(hFilter==='prop'&&['buy','build','unbuild'].includes(e.kind))||(hFilter==='deal'&&['deal','dealOk','offerResp','offer'].includes(e.kind)))&&(!hWho||e.pid===hWho||e.from===hWho||e.to===hWho)).slice().reverse().slice(0,200);
   return `<section class="sheet"><h2>История</h2>${table.cp?`<p class="muted small">Ранние события (${table.cp.n||0}) свёрнуты в итоговые балансы — так журнал не переполняется.</p>`:''}<button class="btn ghost sm" data-act="export" style="margin-bottom:8px">Скачать историю (CSV)</button><div class="chips">${Object.entries(kinds).map(([k,l])=>`<button class="chip${hFilter===k?' on':''}" data-act="hf" data-v="${k}">${l}</button>`).join('')}</div>
   <div class="chips"><button class="chip${!hWho?' on':''}" data-act="hw" data-v="">Все игроки</button>${players().map(p=>`<button class="chip${hWho===p.id?' on':''}" data-act="hw" data-v="${p.id}">${esc(p.name)}</button>`).join('')}</div>
   ${hist.length?`<ul class="hl" style="margin-top:8px">${hist.map(e=>{const fl=state().failed.has(e.id),can=!readOnly&&!fl&&['pay','fx','loan','buy','build','unbuild','share','shsell'].includes(e.kind)&&!und.has(e.id);return `<li class="${und.has(e.id)?'off':''}"><span class="tm">${new Date(e.ts).toLocaleString('ru-RU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</span><span class="tx">${esc(describe(e))}${fl?' <span class="neg small">(не проведено)</span>':''}</span>${can?`<button class="undo" data-act="undo" data-v="${esc(e.id)}" data-label="Отменить">Отменить</button>`:'<span></span>'}</li>`}).join('')}</ul>`:'<p class="muted" style="margin-top:8px">Событий нет.</p>'}</section>`}
@@ -1039,14 +1061,22 @@ function vTable(){
   return ({me:vMe,pat:vPat,shares:vShares,dice:vDice,chance:vChance,fx:vFx,bank:vBank})[tab]()}
 
 let diceRolling=false;
-function renderDiceBar(){const el=$('#dicebar');if(!el)return;if(!(view==='table'&&table)){el.innerHTML='';return}if(diceRolling)return;
+const EMOS=['👍','😘','😂','😮','😢','😡','🔥'];let emoTo='all',emoLast=0;
+document.addEventListener('change',e=>{if(e.target&&e.target.id==='emoTo')emoTo=e.target.value});
+const EMOP={'😘':['❤️','💋','😘','💕'],'🔥':['🔥','💥','🔥'],'😂':['😂','🤣','💦'],'👍':['👍','✨','⭐'],'😢':['😢','💧','💧'],'😡':['😡','💢','💨'],'😮':['😮','❗','❓']};
+function playEmo(x,label,small){const el=document.createElement('div');el.className='emov'+(small?' small':'');el.setAttribute('aria-hidden','true');
+  const parts=EMOP[x]||[x];let h='';if(!reduceMo)for(let i=0;i<(small?6:16);i++){const p=parts[rint(parts.length)];h+=`<span class="emp" style="--x:${rint(90)+5}vw;--dx:${rint(80)-40}px;--d:${(i*.08).toFixed(2)}s;--s:${(0.7+Math.random()*0.9).toFixed(2)};--t:${(1.6+Math.random()*1.2).toFixed(2)}s">${p}</span>`}
+  el.innerHTML=h+`<div class="emc"><span class="emb e${EMOS.indexOf(x)}">${x}</span>${label?`<span class="eml">${esc(label)}</span>`:''}</div>`;
+  document.body.appendChild(el);setTimeout(()=>el.remove(),small?1600:3200)}
+function renderDiceBar(){const el=$('#dicebar');if(!el)return;if(document.activeElement&&document.activeElement.id==='emoTo')return;if(!(view==='table'&&table)){el.innerHTML='';return}if(diceRolling)return;
   const me=pById(meId()),can=!!me&&!readOnly&&!isOut(me.id),deck=(table.chance||[]).filter(c=>(+c.w||0)>0),vals=lastDice&&lastDice.length===diceN?lastDice:null,sum=vals?vals.reduce((a,b)=>a+b,0):null;
   el.innerHTML=`<div class="db"><button class="dn" data-act="dcycle" aria-label="Число кубиков: ${diceN}. Нажмите, чтобы изменить">⚂ ${diceN}</button>
   <div class="dd" aria-live="polite">${(vals||Array(diceN).fill(0)).map(d=>d?dieHtml(d):'<span class="die empty" aria-hidden="true"></span>').join('')}</div>
   <span class="ds">${sum!=null?sum:''}</span>
   <button class="btn red" data-act="roll"${can?'':' disabled'}>Бросить</button></div>
   <div class="cbx${lastCard?' has':''}${cardAnim?' pop':''}"><span class="cl">Шанс</span><span class="ct">${lastCard?esc(lastCard):'<span class="muted">Встали на «Шанс» — тяните карточку</span>'}</span>
-  ${lastCard?'<button class="cx" data-act="cclr" aria-label="Скрыть карточку">×</button>':''}<button class="btn sm" data-act="draw"${can&&deck.length?'':' disabled'}>${deck.length?'Тянуть':'Пусто'}</button><button class="cr${tab==='chance'?' on':''}" data-act="tab" data-v="chance" aria-label="Рулетка против банка" title="Рулетка">🎰</button></div>`;cardAnim=false}
+  ${lastCard?'<button class="cx" data-act="cclr" aria-label="Скрыть карточку">×</button>':''}<button class="btn sm" data-act="draw"${can&&deck.length?'':' disabled'}>${deck.length?'Тянуть':'Пусто'}</button><button class="cr${tab==='chance'?' on':''}" data-act="tab" data-v="chance" aria-label="Рулетка против банка" title="Рулетка">🎰</button></div>
+  ${me&&!readOnly?`<div class="ebx"><select id="emoTo" aria-label="Кому отправить">${[['all','Всем']].concat(players().filter(p=>p.id!==me.id).map(p=>[p.id,p.name])).map(([id,n])=>`<option value="${esc(id)}"${emoTo===id?' selected':''}>${esc(n)}</option>`).join('')}</select><div class="ems">${EMOS.map(x=>`<button class="em" data-act="emo" data-v="${x}" aria-label="Отправить ${x}">${x}</button>`).join('')}</div></div>`:''}`;cardAnim=false}
 function rollAnim(vals,done){const el=$('#dicebar');const dd=el&&el.querySelector('.dd'),ds=el&&el.querySelector('.ds');
   if(!dd||reduceMo){done();return}
   diceRolling=true;dd.innerHTML=vals.map(()=>dieHtml(1+rint(6))).join('');[...dd.children].forEach((d,i)=>{d.classList.add('spin');d.style.animationDelay=(i*0.04)+'s'});if(ds)ds.textContent='…';
@@ -1134,6 +1164,8 @@ document.addEventListener('click',async e=>{
     case 'quit':{if(!me||isOut(me))return;if(isPaused()){toast('Игра на паузе.');return}const st=state(),w=st.b[me]||{rub:0,usd:0},cr=curRate(),cap=Math.round(w.rub+w.usd*(cr?cr.sell:0)+invest(st,me).total);
       if(await addEv({kind:'quit',pid:me,cap})){toast('Вы вышли из игры.');tab='me'}break}
     case 'cclr':{lastCard=null;break}
+    case 'emo':{if(!me)return;const now=Date.now();if(now-emoLast<1500)return;emoLast=now;const to=emoTo==='all'||pById(emoTo)?emoTo:'all';
+      if(await addEv({kind:'emo',pid:me,to,e:v})){playEmo(v,to==='all'?'Всем':'→ '+who(to),true);try{if(navigator.vibrate)navigator.vibrate(15)}catch(_){}}return}
     case 'forget':{const h=lget('nepbank2.hidden',[]);if(!h.includes(v))h.push(v);lset('nepbank2.hidden',h.slice(-200));
       const my=lget('nepbank2.my',null);if(Array.isArray(my)&&my.includes(v)){lset('nepbank2.my',my.filter(x=>x!==v));window.dispatchEvent(new Event('nepmy'))}
       toast('Стол убран из списка на этом устройстве.');break}
@@ -1184,7 +1216,7 @@ document.addEventListener('click',async e=>{
     case 'announce':{const rows=finalRows();await addEv({kind:'final',pid:me||'',rank:rows.map(r=>({id:r.p.id,cap:Math.round(r.cap)}))});toast('Итоги объявлены всем игрокам.');break}
     case 'savepreset':{const name=(presetName||'').trim();if(!name){toast('Введите название набора.');return}try{await store.addPreset({name:name.slice(0,40),created:Date.now(),settings:S(),rates:rates(),chance:table.chance||[],sharePrices:table.sharePrices||null});presetName='';toast(`Набор «${name}» сохранён.`)}catch(_){toast('Не удалось сохранить набор.')}break}
     case 'export':{const dl=window.claude&&window.claude.use?await window.claude.use('downloads'):null;
-      const q=x=>'"'+String(x).replace(/"/g,'""')+'"',rows=[['Время','Событие','Отменено']].concat(evs.filter(e=>e.kind!=='react'&&e.kind!=='join'&&e.kind!=='claim').map(e=>[new Date(e.ts).toLocaleString('ru-RU'),describe(e),ledger().und.has(e.id)?'да':'']));
+      const q=x=>'"'+String(x).replace(/"/g,'""')+'"',rows=[['Время','Событие','Отменено']].concat(evs.filter(e=>e.kind!=='react'&&e.kind!=='join'&&e.kind!=='claim'&&e.kind!=='emo').map(e=>[new Date(e.ts).toLocaleString('ru-RU'),describe(e),ledger().und.has(e.id)?'да':'']));
       const name=(table.name||'стол').replace(/[^\wа-яё\- ]/gi,'').trim()||'стол';
       const fname=`${name} — история.csv`,payload='\uFEFF'+rows.map(r=>r.map(q).join(';')).join('\r\n');if(!dl){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([payload],{type:'text/csv;charset=utf-8'}));a.download=fname;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);return}try{await dl.save({filename:fname,data:payload})}catch(err){if(!err||err.code!=='declined')toast('Не удалось скачать историю.')}return}
     case 'goc':tab='bank';bsub=v;window.scrollTo(0,0);break;
