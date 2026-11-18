@@ -510,15 +510,42 @@ body:not(.m3) nav.bar button .g{font-size:20px;height:auto;width:auto}
 .hcol{flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 #hleft:empty{display:none}
 .themebtn{appearance:none;border:1.5px dashed var(--line);background:transparent;color:inherit;font:inherit;font-size:12px;border-radius:999px;min-height:32px;padding:0 10px;cursor:pointer;white-space:nowrap}
-.themebtn::before{content:'🎨 ';}
+.themebtn::before{content:'🎨 '}
+header{flex-wrap:wrap}
+.hmenu{appearance:none;display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;font-weight:600;border-radius:999px;min-height:40px;padding:0 12px 0 10px;cursor:pointer}
+.hmenu .spr,.hmenu svg,.hmenu img,.hmenu canvas{max-height:24px}
+.hmenu.on{border-color:var(--m-primary,#C8372D)}
+.hdot{width:8px;height:8px;border-radius:50%;background:#3BA55C;flex:none}.hdot.off{background:#E0A030}
+.hch{font-size:11px;opacity:.8}
+#hpanel{flex-basis:100%;min-width:0}
+#hpanel:empty{display:none}
+.hrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-top:8px;animation:hdrop .18s ease-out}
+@keyframes hdrop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.hsync{margin-top:6px}
+#hpanel .hrow{gap:5px}
+#hpanel .hrow .tname{max-width:24vw;padding:6px 8px;font-size:13px}
+#hpanel .hrow .themebtn{padding:0 8px;min-height:32px}
+#hpanel .hrow .mechip{padding:4px 8px;font-size:13px;min-height:32px;gap:4px}
+#hpanel .hrow .mechip .spr{width:18px}
+#hpanel .hrow .pausebtn{padding:7px 8px;font-size:12px}
+#hpanel .hrow .bankbtn{min-height:32px;padding:0 10px 0 8px;font-size:13px;gap:4px}
+#hpanel .hrow .bankbtn .ms,#hpanel .hrow .bankbtn .rt{display:none}
+#hpanel .hrow .bankbtn{padding:0 10px}
+#hpanel .hrow .mechip{max-width:28vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#hpanel .hrow .themebtn::before{content:'🎨';margin-right:3px}
+.emobar{max-width:640px;margin:0 auto 8px;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+.emobar:empty{display:none}
+.emobar .ebx{margin-top:0}
 </style>
 </head>
 <body>
 <header>
   <div class="hcol"><div class="logo">НЭП<small><span class="ver">v2.1</span></small></div><div id="hleft"></div></div>
   <div class="hright" id="hright"></div>
+  <div id="hpanel"></div>
 </header>
 <div class="ticker" id="ticker"></div>
+<div class="emobar" id="emobar"></div>
 <div class="dicebar" id="dicebar"></div>
 <main id="app"><div class="sheet"><p class="muted">Загрузка…</p></div></main>
 <nav class="bar" id="bar" hidden></nav>
@@ -807,10 +834,17 @@ function renderTicker(){const el=$('#ticker');
   const t=el.querySelector('.txt'),m=el.querySelector('.mq');
   if(t&&m)requestAnimationFrame(()=>{const dist=m.scrollWidth-t.clientWidth;if(dist>4){t.style.setProperty('--dist',(dist+16)+'px');t.style.setProperty('--dur',Math.max(7,(dist+16)/32+4).toFixed(1)+'s');t.classList.add('run')}});
 }
+let hopen=lget('nepbank2.hopen',false);
+function shortName(n){const w=String(n||'').trim().split(/\s+/).filter(Boolean);if(!w.length)return 'Стол';let r=w[0].length>2?w[0].slice(0,2):w[0];for(const x of w.slice(1))r+=/^\d+$/.test(x)?x:x[0];return r.slice(0,8)}
 function headerRight(){const me=pById(meId()),m3=document.body.classList.contains('m3');
-  {const hl=$('#hleft');if(hl)hl.innerHTML=`<button class="themebtn" data-act="theme" data-v="${m3?'retro':'m3'}" aria-label="Оформление: сейчас ${m3?'Android':'Ретро'}. Нажмите, чтобы переключить" title="Оформление">${m3?'Ретро':'Android'}</button>`}
-  const s=online?`<span class="sync${stale||dead?' off':''}"><i></i>${dead?'Нет связи':stale?'Связь не подтверждена':'Синхронизация'}</span>`:'<span class="sync off"><i></i>Только это устройство</span>';
-  $('#hright').innerHTML=view==='table'&&table?`<div class="row" style="justify-content:flex-end"><button class="tname" data-act="lobby" aria-label="К списку столов">${esc(table.name)}</button><button class="mechip" data-act="seat" aria-label="Сменить игрока">${me?spr(me)+esc(me.name):'Кто вы?'}</button>${readOnly?'':isPaused()?'<button class="pausebtn on" data-act="resume">▶ Продолжить</button>':'<button class="pausebtn" data-act="pause" data-label="⏸ Точно?">⏸ Пауза</button>'}<button class="bankbtn${tab==='bank'?' on':''}" data-act="tab" data-v="bank" aria-current="${tab==='bank'?'page':'false'}"><span class="ms" aria-hidden="true">account_balance</span><span class="rt" aria-hidden="true">≡</span>Банк</button></div>${s}`:s}
+  const hl=$('#hleft');if(hl)hl.innerHTML='';
+  const off=!online||stale||dead,stxt=dead?'Нет связи':stale?'Связь не подтверждена':online?'Синхронизация':'Только это устройство';
+  const s=`<span class="sync${off?' off':''}"><i></i>${stxt}</span>`;
+  const hp=$('#hpanel');
+  if(view==='table'&&table){
+    $('#hright').innerHTML=`<button class="hmenu${hopen?' on':''}" data-act="hmenu" aria-expanded="${hopen}" aria-controls="hpanel" title="${esc(stxt)}"><i class="hdot${off?' off':''}"></i>${isPaused()?'⏸ ':''}${me?spr(me):''}<span class="hm">Меню</span><span class="hch" aria-hidden="true">${hopen?'▴':'▾'}</span></button>`;
+    hp.innerHTML=hopen?`<div class="hrow"><button class="themebtn" data-act="theme" data-v="${m3?'retro':'m3'}" aria-label="Оформление: сейчас ${m3?'Android':'Ретро'}. Нажмите, чтобы переключить" title="Оформление">${m3?'Ретро':'Android'}</button><button class="tname" data-act="lobby" aria-label="К списку столов. Стол: ${esc(table.name)}" title="${esc(table.name)}">${esc(shortName(table.name))}</button><button class="mechip" data-act="seat" aria-label="Игрок">${me?spr(me)+esc(me.name):'Кто вы?'}</button>${readOnly?'':isPaused()?'<button class="pausebtn on" data-act="resume">▶ Продолжить</button>':'<button class="pausebtn" data-act="pause" data-label="⏸ Точно?">⏸ Пауза</button>'}<button class="bankbtn${tab==='bank'?' on':''}" data-act="tab" data-v="bank" aria-current="${tab==='bank'?'page':'false'}"><span class="ms" aria-hidden="true">account_balance</span><span class="rt" aria-hidden="true">≡</span>Банк</button></div><div class="hsync">${s}</div>`:'';
+  }else{$('#hright').innerHTML=s;hp.innerHTML=''}}
 
 function calcGet(){const s=S(),a=(get.lap?+s.passStart:0)+(get.stock||0)*(+s.stockBonus),parts=[];if(get.lap)parts.push('круг');if(get.stock)parts.push(get.stock>1?`акции ×${get.stock}`:'акция');const n=parts.join(' + ');get.amount=a?String(a):'';get.note=n?n[0].toUpperCase()+n.slice(1):''}
 /* ---------- operation animations ---------- */
@@ -997,8 +1031,11 @@ function vDice(){const me=pById(meId());
   <div class="dice${diceAnim?' roll':''}" style="--ds:${diceN>3?60:72}px">${vals.map(d=>d?dieHtml(d):'<span class="die" aria-hidden="true"></span>').join('')}</div>
   ${sum!=null?`<div class="big">${sum}</div>`:''}
   ${me?`<button class="btn red wide" data-act="roll">Бросить ${diceN} кубика</button><p class="muted small center" style="margin-top:8px">Результат сразу увидят все игроки.</p>`:'<p class="note">Выберите себя за столом, чтобы бросать кости.</p>'}</section>`}
-function vChance(){const me=pById(meId()),deck=(table.chance||[]).filter(c=>(+c.w||0)>0),m=me&&!isOut(me.id)?me:null;
-  return `${roulHtml(m)}<p class="muted small center" style="margin:4px 0 16px">Карточки Шанса тянутся в шапке под кубиками. В колоде ${deck.length} карточек. <button class="linkbtn" data-act="goc" data-v="chance">Конструктор шансов</button></p>`}
+function vChance(){const me=pById(meId()),deck=(table.chance||[]).filter(c=>(+c.w||0)>0),m=me&&!isOut(me.id)&&!readOnly?me:null;
+  return `<section class="sheet"><h2>Шанс</h2><p class="muted small">Встали на клетку «Шанс» — тяните карточку. Карточку выполняете сами, а её текст сразу увидят все.</p>
+  ${lastCard?`<div class="card${cardAnim?' pop':''}" style="margin-top:22px"><span class="num">Шанс</span><div class="tx">${esc(lastCard)}</div></div>`:''}
+  ${m?`<button class="btn red wide" data-act="draw"${deck.length?'':' disabled'}>${deck.length?'Тянуть карточку':'Колода пуста'}</button>`:me?'':'<p class="note">Выберите себя за столом, чтобы тянуть карточки.</p>'}
+  <p class="muted small center" style="margin-top:8px">В колоде ${deck.length} карточек. <button class="linkbtn" data-act="goc" data-v="chance">Конструктор шансов</button></p></section>${roulHtml(m)}`}
 let roulSpin=false,roulRot=0;
 function roulHtml(me){const bet=+roul.bet||0,k=roul.k;
   return `<section class="sheet"><h2>Рулетка против банка</h2><p class="muted small">Для карточек со ставкой. Шанс всегда 50 на 50: красное — выигрыш, чёрное — проигрыш. Коэффициент задаёт, сколько ставит банк: при 1:5 на вашу ставку 200 ₽ банк ставит 1000 ₽.</p>
@@ -1080,15 +1117,15 @@ function playEmo(x,label,small){const el=document.createElement('div');el.classN
   const parts=EMOP[x]||[x];let h='';if(!reduceMo)for(let i=0;i<(small?6:16);i++){const p=parts[rint(parts.length)];h+=`<span class="emp" style="--x:${rint(90)+5}vw;--dx:${rint(80)-40}px;--d:${(i*.08).toFixed(2)}s;--s:${(0.7+Math.random()*0.9).toFixed(2)};--t:${(1.6+Math.random()*1.2).toFixed(2)}s">${p}</span>`}
   el.innerHTML=h+`<div class="emc"><span class="emb e${EMOS.indexOf(x)}">${x}</span>${label?`<span class="eml">${esc(label)}</span>`:''}</div>`;
   document.body.appendChild(el);setTimeout(()=>el.remove(),small?1600:3200)}
+function renderEmoBar(){const el=$('#emobar');if(!el)return;if(document.activeElement&&document.activeElement.id==='emoTo')return;if(!(view==='table'&&table)){el.innerHTML='';return}const me=pById(meId());
+  el.innerHTML=`${me&&!readOnly?`<div class="ebx"><select id="emoTo" aria-label="Кому отправить">${[['all','Всем']].concat(players().filter(p=>p.id!==me.id).map(p=>[p.id,p.name])).map(([id,n])=>`<option value="${esc(id)}"${emoTo===id?' selected':''}>${esc(n)}</option>`).join('')}</select><div class="ems">${EMOS.map(x=>`<button class="em" data-act="emo" data-v="${x}" aria-label="Отправить ${x}">${x}</button>`).join('')}</div></div>`:''}`}
 function renderDiceBar(){const el=$('#dicebar');if(!el)return;if(document.activeElement&&document.activeElement.id==='emoTo')return;if(!(view==='table'&&table)){el.innerHTML='';return}if(diceRolling)return;
   const me=pById(meId()),can=!!me&&!readOnly&&!isOut(me.id),deck=(table.chance||[]).filter(c=>(+c.w||0)>0),vals=lastDice&&lastDice.length===diceN?lastDice:null,sum=vals?vals.reduce((a,b)=>a+b,0):null;
   el.innerHTML=`<div class="db"><button class="dn" data-act="dcycle" aria-label="Число кубиков: ${diceN}. Нажмите, чтобы изменить">⚂ ${diceN}</button>
   <div class="dd" aria-live="polite">${(vals||Array(diceN).fill(0)).map(d=>d?dieHtml(d):'<span class="die empty" aria-hidden="true"></span>').join('')}</div>
   <span class="ds">${sum!=null?sum:''}</span>
   <button class="btn red" data-act="roll"${can?'':' disabled'}>Бросить</button></div>
-  <div class="cbx${lastCard?' has':''}${cardAnim?' pop':''}"><span class="cl">Шанс</span><span class="ct">${lastCard?esc(lastCard):'<span class="muted">Встали на «Шанс» — тяните карточку</span>'}</span>
-  ${lastCard?'<button class="cx" data-act="cclr" aria-label="Скрыть карточку">×</button>':''}<button class="btn sm" data-act="draw"${can&&deck.length?'':' disabled'}>${deck.length?'Тянуть':'Пусто'}</button><button class="cr${tab==='chance'?' on':''}" data-act="tab" data-v="chance" aria-label="Рулетка против банка" title="Рулетка">🎰</button></div>
-  ${me&&!readOnly?`<div class="ebx"><select id="emoTo" aria-label="Кому отправить">${[['all','Всем']].concat(players().filter(p=>p.id!==me.id).map(p=>[p.id,p.name])).map(([id,n])=>`<option value="${esc(id)}"${emoTo===id?' selected':''}>${esc(n)}</option>`).join('')}</select><div class="ems">${EMOS.map(x=>`<button class="em" data-act="emo" data-v="${x}" aria-label="Отправить ${x}">${x}</button>`).join('')}</div></div>`:''}`;cardAnim=false}
+`}
 function rollAnim(vals,done){const el=$('#dicebar');const dd=el&&el.querySelector('.dd'),ds=el&&el.querySelector('.ds');
   if(!dd||reduceMo){done();return}
   diceRolling=true;dd.innerHTML=vals.map(()=>dieHtml(1+rint(6))).join('');[...dd.children].forEach((d,i)=>{d.classList.add('spin');d.style.animationDelay=(i*0.04)+'s'});if(ds)ds.textContent='…';
@@ -1098,9 +1135,9 @@ function rollAnim(vals,done){const el=$('#dicebar');const dd=el&&el.querySelecto
       setTimeout(()=>{diceRolling=false;done()},380)}},70)}
 function render(){
   if(view==='table'&&table)ensureClaim();
-  headerRight();renderTicker();if(view==='table'&&(tab==='dice'||tab==='tax'))tab='me';renderDiceBar();
+  headerRight();renderTicker();if(view==='table'&&(tab==='dice'||tab==='tax'))tab='me';renderDiceBar();renderEmoBar();
   const bar=$('#bar');
-  if(view==='table'&&table){bar.hidden=false;bar.innerHTML=`<div>${[['me','₽','Счёт','account_balance_wallet'],['pat','⌂','Патенты','storefront'],['shares','↗','Акции','trending_up'],['fx','$','Биржа','currency_exchange']].map(([k,g,l,ic])=>`<button class="${tab===k?'on':''}" data-act="tab" data-v="${k}" aria-current="${tab===k?'page':'false'}"><span class="g"><span class="ms" aria-hidden="true">${ic}</span><span class="rt">${g}</span></span>${l}</button>`).join('')}</div>`}else bar.hidden=true;
+  if(view==='table'&&table){bar.hidden=false;bar.innerHTML=`<div>${[['me','₽','Счёт','account_balance_wallet'],['pat','⌂','Патенты','storefront'],['shares','↗','Акции','trending_up'],['fx','$','Биржа','currency_exchange'],['chance','?','Шанс','style']].map(([k,g,l,ic])=>`<button class="${tab===k?'on':''}" data-act="tab" data-v="${k}" aria-current="${tab===k?'page':'false'}"><span class="g"><span class="ms" aria-hidden="true">${ic}</span><span class="rt">${g}</span></span>${l}</button>`).join('')}</div>`}else bar.hidden=true;
   const html=view==='boot'?'<section class="sheet"><p class="muted">Загрузка…</p></section>':view==='lobby'?vLobby():view==='new'?vNew():vTable();
   const ae=document.activeElement,key=ae&&(ae.dataset.in||ae.dataset.set||ae.dataset.dk||ae.dataset.dw||ae.dataset.nm);
   document.body.classList.toggle('paused',view==='table'&&isPaused());
@@ -1141,7 +1178,7 @@ document.addEventListener('click',async e=>{
     case 'tick':tickOpen=!tickOpen;break;
     case 'lobby':unsubs.forEach(f=>f());unsubs=[];if(evUnsub){evUnsub();evUnsub=null}evSince=-1;tid=null;table=null;view='lobby';lset('nepbank2.last',null);break;
     case 'open':openTable(v);if(!meId())view='seat';return;
-    case 'seat':view='seat';break;
+    case 'seat':view='seat';if(b.closest('#hpanel')){hopen=false;lset('nepbank2.hopen',false)}break;
     case 'iam':{const st=state(),mine=mySeat(st);
       if(v&&mine&&mine!==v){toast('Ваше место уже закреплено за этим телефоном.');return}
       if(v&&st.seats[v]&&st.seats[v]!==DEV){toast('Это место уже занято с другого телефона.');return}
@@ -1176,6 +1213,7 @@ document.addEventListener('click',async e=>{
     case 'quit':{if(!me||isOut(me))return;if(isPaused()){toast('Игра на паузе.');return}const st=state(),w=st.b[me]||{rub:0,usd:0},cr=curRate(),cap=Math.round(w.rub+w.usd*(cr?cr.sell:0)+invest(st,me).total);
       if(await addEv({kind:'quit',pid:me,cap})){toast('Вы вышли из игры.');tab='me'}break}
     case 'cclr':{lastCard=null;break}
+    case 'hmenu':hopen=!hopen;lset('nepbank2.hopen',hopen);break;
     case 'emo':{if(!me)return;const now=Date.now();if(now-emoLast<1500)return;emoLast=now;const to=emoTo==='all'||pById(emoTo)?emoTo:'all';
       if(await addEv({kind:'emo',pid:me,to,e:v})){playEmo(v,to==='all'?'Всем':'→ '+who(to),true);try{if(navigator.vibrate)navigator.vibrate(15)}catch(_){}}return}
     case 'forget':{const h=lget('nepbank2.hidden',[]);if(!h.includes(v))h.push(v);lset('nepbank2.hidden',h.slice(-200));
