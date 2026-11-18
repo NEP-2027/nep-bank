@@ -422,7 +422,7 @@ body.m3 input[type=checkbox]{accent-color:var(--m-primary)}
 .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:0}
 .pausebtn{appearance:none;border:1.5px solid currentColor;background:transparent;color:inherit;font:500 13px/1 inherit;padding:7px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
 .pausebtn.on{background:#C8372D;border-color:#C8372D;color:#fff}
-.pausebar{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#C8372D;color:#fff;padding:12px 14px;border-radius:8px;margin-bottom:12px;font-weight:500;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.pausebar{position:relative;z-index:6;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#C8372D;color:#fff;padding:12px 14px;border-radius:8px;margin-bottom:12px;font-weight:500;box-shadow:0 6px 16px rgba(0,0,0,.25)}
 .pausebar .btn{background:#fff;color:#C8372D;border-color:#fff;box-shadow:none;margin:0}
 body.paused #app .sheet{opacity:.6}
 body.paused #app .btn.red,body.paused #app .btn.wide{filter:grayscale(1)}
@@ -430,6 +430,29 @@ nav.bar button{min-width:0;padding-inline:0;font-size:11px;letter-spacing:0}
 body.m3 nav.bar button{font-size:11px;letter-spacing:0;min-height:72px}
 body.m3 nav.bar button .g{width:min(48px,88%)}
 .tbl .pz{font-size:12px;color:#C8372D;font-weight:600}
+.mg{margin-top:14px}.mg:first-of-type{margin-top:6px}
+.mgh{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-bottom:6px;border-bottom:2px solid var(--c);margin-bottom:4px}
+.mgh b{font-size:16px;text-transform:uppercase;letter-spacing:.04em}
+.syn-badge{display:inline-block;background:#1A1A1A;color:#FFE34D;font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;letter-spacing:.02em}
+.glr .btn.red{white-space:nowrap}
+.dicebar{position:sticky;top:env(safe-area-inset-top,0px);z-index:7;max-width:640px;margin:0 auto 10px;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+.dicebar:empty{display:none}
+.db{display:flex;align-items:center;gap:8px;background:var(--paper);color:var(--ink);border-radius:12px;padding:8px 10px;box-shadow:0 4px 14px rgba(0,0,0,.22)}
+.db .dn{appearance:none;flex:none;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:600 14px/1 inherit;border-radius:8px;min-width:52px;min-height:40px;padding:0 8px;cursor:pointer;font-variant-numeric:tabular-nums}
+.db .dd{flex:1;display:flex;gap:5px;justify-content:center;min-width:0}
+.db .die{--ds:30px;border-width:2px;box-shadow:0 2px 0 #2A221C;flex:none;transform-origin:50% 60%;will-change:transform}
+.db .die.empty{opacity:.35}
+.db .ds{flex:none;min-width:30px;text-align:center;font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.db .btn{flex:none;margin:0;min-height:40px;padding:8px 14px}
+.db .die.spin{animation:dshake .22s linear infinite}
+.db .die.land{animation:dland .32s cubic-bezier(.2,1.7,.4,1)}
+.db .ds.land{animation:dland .32s cubic-bezier(.2,1.7,.4,1)}
+@keyframes dshake{0%{transform:translate3d(0,0,0) rotate(0)}25%{transform:translate3d(-2px,-6px,0) rotate(-20deg)}50%{transform:translate3d(2px,0,0) rotate(14deg)}75%{transform:translate3d(-1px,-4px,0) rotate(-10deg)}100%{transform:translate3d(0,0,0) rotate(0)}}
+@keyframes dland{0%{transform:scale(1.35)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.db .die.spin,.db .die.land,.db .ds.land{animation:none}}
+body.m3 .db{background:var(--m-scl);box-shadow:0 1px 3px rgba(0,0,0,.25),0 4px 8px 3px rgba(0,0,0,.1)}
+body.m3 .db .dn{border-radius:20px;border-color:var(--m-outline);background:transparent;font-family:Roboto,sans-serif}
+@media (max-width:360px){.db .die{--ds:26px}.db .btn{padding:8px 10px}}
 </style>
 </head>
 <body>
@@ -438,6 +461,7 @@ body.m3 nav.bar button .g{width:min(48px,88%)}
   <div class="hright" id="hright"></div>
 </header>
 <div class="ticker" id="ticker"></div>
+<div class="dicebar" id="dicebar"></div>
 <main id="app"><div class="sheet"><p class="muted">Загрузка…</p></div></main>
 <nav class="bar" id="bar" hidden></nav>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
@@ -791,29 +815,38 @@ function vMe(){const me=pById(meId());if(!me)return vSeat();
 /* ===== v2 views ===== */
 let lapOpen=false,dealB=null,sprDraft=null;
 function blankDeal(){return {give:{patents:[],shares:{},loans:[],rub:'',usd:''},take:{patents:[],shares:{},loans:[],rub:'',usd:''},text:''}}
-function pcCard(c,o){const g=c.type==='patent'?GRP(c.group):null;
+function fullSyn(st,c){if(!c||c.type!=='patent')return false;const o=st.own[c.id];if(!o)return false;return BCELLS.filter(x=>x.group===c.group).every(x=>st.own[x.id]&&st.own[x.id].pid===o.pid)}
+function rentNow(st,c){const o=st.own[c.id];if(!o)return null;if(c.type==='utility')return {amount:c.payment,label:'выплата'};
+  const lv=o.level;if(lv>c.maxStores)return {amount:c.rent.tradeHouse,label:'торговый дом'};if(lv>0)return {amount:c.rent.stores[lv-1],label:`${lv} ${lv===1?'магазин':'магазина'}`};
+  return fullSyn(st,c)?{amount:c.rent.syndicate,label:'синдикат'}:{amount:c.rent.field,label:'поле'}}
+function pcCard(c,o,full){const g=c.type==='patent'?GRP(c.group):null;
   if(!g)return `<div class="pc pcu" role="img" aria-label="${esc(c.name)}, цена ${c.price}, выплата ${c.payment}"><div class="u1">${c.price}</div><div class="u2">${esc(c.name)}</div><div class="u3">Выплата<br>${c.payment}</div></div>`;
   const lv=o?o.level:0;
   return `<div class="pc" style="--c:${g.color};--b:${g.band};--gi:${g.ink}" role="img" aria-label="${esc(c.name)}, ${esc(g.name)}, цена ${c.price}">
   <div class="pcb">${[...g.name.toUpperCase()].filter(ch=>ch!==' ').map(ch=>`<span>${esc(ch)}</span>`).join('')}</div>
   <span class="pcc">${c.code.replace('-','‑')}</span><div class="pcp">${c.price}</div>
   <div class="pcn${c.name.length>8?' long':''}">${esc(c.name)}</div>
-  <div class="pcr"><div class="pole${o&&lv===0?' hl':''}">ПОЛЕ ${c.rent.field}</div><div class="syn">СИНДИКАТ ${c.rent.syndicate}</div>
+  <div class="pcr"><div class="pole${o&&lv===0&&!full?' hl':''}">ПОЛЕ ${c.rent.field}</div><div class="syn${o&&lv===0&&full?' hl':''}">СИНДИКАТ ${c.rent.syndicate}</div>
   <div class="st">${c.rent.stores.map((v,i)=>`<div class="${lv===i+1?'hl':''}">${i+1} ${i?'магазина':'магазин'} ${v}</div>`).join('')}<div class="${lv>c.maxStores?'hl':''}">Торговый дом ${c.rent.tradeHouse}</div></div></div>
   <div class="pcd">Развитие ${c.develop}</div></div>`}
 function ownerTag(st,id){const o=st.own[id];if(!o)return '<span class="muted small">в банке</span>';const p=pById(o.pid);return `<span class="own">${p?spr(p):''}${esc(who(o.pid))}</span>`}
 function vPat(){const me=pById(meId()),st=state(),s=S(),mine=me?Object.keys(st.own).filter(id=>st.own[id].pid===me.id):[];
   const inv=me?invest(st,me.id):null,refund=c=>Math.round(c.develop*(+s.sellBuildPct||0)/100);
-  const myHtml=mine.length?`<div class="pcgrid">${mine.map(id=>{const c=cellById(id),o=st.own[id],ml=maxLevel(c);
-    return `<figure>${pcCard(c,o)}<figcaption><b>${levelName(c,o.level)}</b>${c.type==='patent'?` · вложено ${rub(c.price+o.level*c.develop)}`:''}</figcaption>
-    ${c.type==='patent'&&!readOnly?`<div class="pcact"><button class="btn sm red" data-act="build" data-v="${id}"${o.level>=ml?' disabled':''}>${o.level>=ml?'Развито полностью':o.level===c.maxStores?`Торговый дом ${rub(c.develop)}`:`Магазин ${rub(c.develop)}`}</button>${o.level>0?`<button class="btn sm ghost" data-act="unbuild" data-v="${id}" data-label="Продать постройку +${refund(c)} ₽">Продать постройку +${refund(c)} ₽</button>`:''}</div>`:''}</figure>`}).join('')}</div>`:'<p class="muted">У вас пока нет патентов. Купите поле, на которое встала ваша фишка, — ниже список всех полей.</p>';
-  const grp=BOARD.groups.map(g=>{const cs=BCELLS.filter(c=>c.group===g.id),cap=synCap(st,g.id);
-    return `<div class="gl" style="--c:${g.color};--b:${g.band};--gi:${g.ink}"><div class="glh"><b>${esc(g.name)}</b><span>капитализация ${rub(cap)}</span></div>${cs.map(c=>{const o=st.own[c.id];
-      return `<div class="glr"><span class="gln">${c.code} ${esc(c.name)}</span><span class="glp">${rub(c.price)}</span><span class="glo">${ownerTag(st,c.id)}${o&&o.level?` <span class="lvl">${levelName(c,o.level)}</span>`:''}</span>${!o&&me&&!readOnly?`<button class="btn sm" data-act="buyp" data-v="${c.id}">Купить</button>`:'<span></span>'}</div>`}).join('')}</div>`}).join('');
+  const myHtml=mine.length?BOARD.groups.concat([{id:'__util',name:'Коммунальные'}]).map(g=>{const ids=BCELLS.filter(c=>(g.id==='__util'?c.type==='utility':c.group===g.id)&&mine.includes(c.id)).map(c=>c.id);if(!ids.length)return '';
+    const full=g.id!=='__util'&&fullSyn(st,cellById(ids[0])),tot=BCELLS.filter(c=>c.group===g.id).length;
+    return `<div class="mg"><div class="mgh" style="--c:${g.color||'#808080'}"><i class="sw" style="background:${g.color||'#808080'}"></i><b>${esc(g.name)}</b>${g.id==='__util'?'':full?'<span class="syn-badge">Синдикат собран</span>':`<span class="muted small">${ids.length} из ${tot}</span>`}</div><div class="pcgrid">${ids.map(id=>{const c=cellById(id),o=st.own[id],ml=maxLevel(c),rn=rentNow(st,c);
+    return `<figure>${pcCard(c,o,full)}<figcaption><b>${levelName(c,o.level)}</b>${rn?` · рента ${rub(rn.amount)}`:''}${c.type==='patent'?`<br>вложено ${rub(c.price+o.level*c.develop)}`:''}</figcaption>
+    ${c.type==='patent'&&!readOnly?`<div class="pcact"><button class="btn sm red" data-act="build" data-v="${id}"${o.level>=ml?' disabled':''}>${o.level>=ml?'Развито полностью':o.level===c.maxStores?`Торговый дом ${rub(c.develop)}`:`Магазин ${rub(c.develop)}`}</button>${o.level>0?`<button class="btn sm ghost" data-act="unbuild" data-v="${id}" data-label="Продать постройку +${refund(c)} ₽">Продать постройку +${refund(c)} ₽</button>`:''}</div>`:''}</figure>`}).join('')}</div></div>`}).join(''):'<p class="muted">У вас пока нет патентов. Купите поле, на которое встала ваша фишка, — ниже список всех полей.</p>';
+  const rowHtml=c=>{const o=st.own[c.id],rn=rentNow(st,c),mineC=o&&me&&o.pid===me.id;
+    return `<div class="glr"><span class="gln">${c.code?c.code+' ':''}${esc(c.name)}${c.type==='utility'?` · выплата ${c.payment}`:''}</span><span class="glp">${rub(c.price)}</span>
+    <span class="glo">${ownerTag(st,c.id)}${o?` <span class="lvl">${rn.label} · рента ${rub(rn.amount)}</span>`:''}</span>
+    ${!o&&me&&!readOnly?`<button class="btn sm" data-act="buyp" data-v="${c.id}">Купить</button>`:o&&me&&!mineC&&!readOnly?`<button class="btn sm red" data-act="rentpay" data-v="${c.id}">Оплатить ${rub(rn.amount)}</button>`:'<span></span>'}</div>`};
+  const grp=BOARD.groups.map(g=>{const cs=BCELLS.filter(c=>c.group===g.id),cap=synCap(st,g.id),f=cs.length&&fullSyn(st,cs[0]);
+    return `<div class="gl" style="--c:${g.color};--b:${g.band};--gi:${g.ink}"><div class="glh"><b>${esc(g.name)}</b><span>${f?`<span class="syn-badge">Синдикат: ${esc(who(st.own[cs[0].id].pid))}</span> `:''}капитализация ${rub(cap)}</span></div>${cs.map(rowHtml).join('')}</div>`}).join('');
   const utils=BCELLS.filter(c=>c.type==='utility');
   return `${me?`<section class="sheet"><h2>Мои патенты</h2><p class="muted small">Вложено в имущество: <b>${rub(inv.total)}</b> — патенты ${rub(inv.pat)}, постройки ${rub(inv.bld)}${inv.util?`, Вода и Энергия ${rub(inv.util)}`:''}${inv.sh?`, акции ${rub(inv.sh)}`:''}.</p>${myHtml}</section>`:'<section class="sheet"><p class="note">Выберите себя за столом, чтобы покупать и развивать патенты.</p></section>'}
-  <section class="sheet"><h2>Все поля</h2><p class="muted small">Кто чем владеет и что построено — это видно и на столе, поэтому здесь открыто для всех.</p>${grp}
-  <div class="gl" style="--c:#808080;--b:#CCCCCC;--gi:#333"><div class="glh"><b>Коммунальные</b><span>не развиваются</span></div>${utils.map(c=>{const o=st.own[c.id];return `<div class="glr"><span class="gln">${esc(c.name)} · выплата ${c.payment}</span><span class="glp">${rub(c.price)}</span><span class="glo">${ownerTag(st,c.id)}</span>${!o&&me&&!readOnly?`<button class="btn sm" data-act="buyp" data-v="${c.id}">Купить</button>`:'<span></span>'}</div>`}).join('')}</div></section>`}
+  <section class="sheet"><h2>Все поля</h2><p class="muted small">Владелец, статус и текущая рента каждого поля. Встали на чужое поле — оплатите ренту владельцу кнопкой «Оплатить»: сумма считается по статусу — поле, синдикат, магазины или торговый дом.</p>${grp}
+  <div class="gl" style="--c:#808080;--b:#CCCCCC;--gi:#333"><div class="glh"><b>Коммунальные</b><span>не развиваются</span></div>${utils.map(rowHtml).join('')}</div></section>`}
 function vShares(){const me=pById(meId()),st=state(),s=S(),lim=+s.shareLimit||10,lc=me?lapCalc(st,me.id):null;
   const rows=BOARD.groups.map(g=>{const cap=synCap(st,g.id),per=cap*(+s.sharePct||0)/100,iss=issued(st,g.id),my=me?((st.shares[g.id]||{})[me.id]||0):0,pr=sharePrice(g.id),holders=Object.entries(st.shares[g.id]||{}).filter(([,n])=>n>0);
     return `<div class="shr" style="--c:${g.color};--b:${g.band};--gi:${g.ink}"><div class="shb"></div><div class="shm"><div class="shh"><b>${esc(g.name)}</b><span>акция ${rub(pr)}</span></div>
@@ -948,10 +981,25 @@ function vTable(){
   if(!table)return `<section class="sheet"><p class="muted">${stale?'Не удаётся загрузить стол. Проверьте связь.':'Открываю стол…'}</p><button class="btn ghost wide" data-act="lobby">К списку столов</button></section>`;
   if(view==='seat')return vSeat();
   return ({me:vMe,pat:vPat,shares:vShares,dice:vDice,chance:vChance,fx:vFx,tax:vTax,bank:vBank})[tab]()}
+
+let diceRolling=false;
+function renderDiceBar(){const el=$('#dicebar');if(!el)return;if(!(view==='table'&&table)){el.innerHTML='';return}if(diceRolling)return;
+  const me=pById(meId()),vals=lastDice&&lastDice.length===diceN?lastDice:null,sum=vals?vals.reduce((a,b)=>a+b,0):null;
+  el.innerHTML=`<div class="db"><button class="dn" data-act="dcycle" aria-label="Число кубиков: ${diceN}. Нажмите, чтобы изменить">⚂ ${diceN}</button>
+  <div class="dd" aria-live="polite">${(vals||Array(diceN).fill(0)).map(d=>d?dieHtml(d):'<span class="die empty" aria-hidden="true"></span>').join('')}</div>
+  <span class="ds">${sum!=null?sum:''}</span>
+  <button class="btn red" data-act="roll"${me&&!readOnly?'':' disabled'}>Бросить</button></div>`}
+function rollAnim(vals,done){const el=$('#dicebar');const dd=el&&el.querySelector('.dd'),ds=el&&el.querySelector('.ds');
+  if(!dd||reduceMo){done();return}
+  diceRolling=true;dd.innerHTML=vals.map(()=>dieHtml(1+rint(6))).join('');[...dd.children].forEach((d,i)=>{d.classList.add('spin');d.style.animationDelay=(i*0.04)+'s'});if(ds)ds.textContent='…';
+  let t=0;const iv=setInterval(()=>{t+=70;[...dd.children].forEach(d=>{const n=1+rint(6);const P={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]}[n];[...d.children].forEach((pip,k)=>{pip.className=P.includes(k)?(n===1?'r':''):'o'})})
+    if(t>=700){clearInterval(iv);dd.innerHTML=vals.map(dieHtml).join('');[...dd.children].forEach((d,i)=>{d.classList.add('land');d.style.animationDelay=(i*0.05)+'s'});if(ds){ds.textContent=vals.reduce((a,b)=>a+b,0);ds.classList.add('land')}
+      try{if(lget('nepbank2.sound',true)&&navigator.vibrate)navigator.vibrate(25)}catch(_){}
+      setTimeout(()=>{diceRolling=false;done()},380)}},70)}
 function render(){
-  headerRight();renderTicker();
+  headerRight();renderTicker();if(view==='table'&&tab==='dice')tab='me';renderDiceBar();
   const bar=$('#bar');
-  if(view==='table'&&table){bar.hidden=false;bar.innerHTML=`<div>${[['me','₽','Счёт','account_balance_wallet'],['pat','⌂','Патенты','storefront'],['shares','↗','Акции','trending_up'],['dice','⚂','Кости','casino'],['chance','?','Шанс','style'],['fx','$','Биржа','currency_exchange'],['tax','%','Налог','receipt_long'],['bank','≡','Банк','account_balance']].map(([k,g,l,ic])=>`<button class="${tab===k?'on':''}" data-act="tab" data-v="${k}" aria-current="${tab===k?'page':'false'}"><span class="g"><span class="ms" aria-hidden="true">${ic}</span><span class="rt">${g}</span></span>${l}</button>`).join('')}</div>`}else bar.hidden=true;
+  if(view==='table'&&table){bar.hidden=false;bar.innerHTML=`<div>${[['me','₽','Счёт','account_balance_wallet'],['pat','⌂','Патенты','storefront'],['shares','↗','Акции','trending_up'],['chance','?','Шанс','style'],['fx','$','Биржа','currency_exchange'],['tax','%','Налог','receipt_long'],['bank','≡','Банк','account_balance']].map(([k,g,l,ic])=>`<button class="${tab===k?'on':''}" data-act="tab" data-v="${k}" aria-current="${tab===k?'page':'false'}"><span class="g"><span class="ms" aria-hidden="true">${ic}</span><span class="rt">${g}</span></span>${l}</button>`).join('')}</div>`}else bar.hidden=true;
   const html=view==='boot'?'<section class="sheet"><p class="muted">Загрузка…</p></section>':view==='lobby'?vLobby():view==='new'?vNew():vTable();
   const ae=document.activeElement,key=ae&&(ae.dataset.in||ae.dataset.set||ae.dataset.dk||ae.dataset.dw||ae.dataset.nm);
   document.body.classList.toggle('paused',view==='table'&&isPaused());
@@ -985,7 +1033,7 @@ document.addEventListener('click',async e=>{
   const b=e.target.closest('[data-act]');if(!b||b.disabled)return;const a=b.dataset.act,v=b.dataset.v;
   if(b.dataset.label!==undefined&&b.dataset.armed!=='1'){b.dataset.armed='1';b.textContent='Точно?';setTimeout(()=>{if(b.isConnected){b.dataset.armed='';b.textContent=b.dataset.label}},2500);return}
   const me=meId();
-  if(view==='table'&&isPaused()&&!['tab','tick','lobby','open','seat','iam','resume','bsub','hf','hw','theme','unlock','export','pick','lapopen','dn','fxside','lrounds','rk','csum'].includes(a)){toast('Игра на паузе. Нажмите «▶ Продолжить», чтобы играть дальше.');return}
+  if(view==='table'&&isPaused()&&!['tab','tick','lobby','open','seat','iam','resume','bsub','hf','hw','theme','unlock','export','pick','lapopen','dn','dcycle','fxside','lrounds','rk','csum'].includes(a)){toast('Игра на паузе. Нажмите «▶ Продолжить», чтобы играть дальше.');return}
   switch(a){
     case 'tab':tab=v;view='table';window.scrollTo(0,0);break;
     case 'tick':tickOpen=!tickOpen;break;
@@ -1015,7 +1063,8 @@ document.addEventListener('click',async e=>{
     case 'gstock':get.stock=clamp((get.stock||1)+(+v),1,10);calcGet();break;
     case 'get':{const amt=+get.amount||0;if(amt<=0){toast('Введите сумму.');return}if(await addEv({kind:'pay',from:'bank',to:me,amount:amt,note:get.note.trim(),pid:me})){get={amount:'',note:''}}break}
     case 'dn':diceN=+v;lastDice=null;break;
-    case 'roll':{const vals=Array.from({length:diceN},()=>1+rint(6));lastDice=vals;diceAnim=true;addEv({kind:'dice',pid:me,vals});break}
+    case 'roll':{if(diceRolling||!me)return;const vals=Array.from({length:diceN},()=>1+rint(6));lastDice=vals;addEv({kind:'dice',pid:me,vals});rollAnim(vals,()=>renderDiceBar());return}
+    case 'dcycle':{if(diceRolling)return;diceN=diceN>=4?2:diceN+1;lastDice=null;renderDiceBar();return}
     case 'draw':{const deck=(table.chance||[]).filter(c=>(+c.w||0)>0),tot=deck.reduce((s,c)=>s+(+c.w),0);let r=rint(tot),pick=deck[0];for(const c of deck){r-=+c.w;if(r<0){pick=c;break}}
       lastCard=pick.text;cardAnim=true;addEv({kind:'chance',pid:me,text:pick.text});break}
     case 'rate':{const s=S(),list=rates().filter(x=>(+x.w||0)>0);if(!list.length){toast('В конструкторе нет курсов.');return}const tot=list.reduce((t,x)=>t+(+x.w),0);let r=rint(tot),pk=list[0];for(const x of list){r-=+x.w;if(r<0){pk=x;break}}
@@ -1029,6 +1078,7 @@ document.addEventListener('click',async e=>{
     case 'buyp':{const c=cellById(v);if(!c||state().own[v]){toast('Это поле уже куплено.');break}await addEv({kind:'buy',cell:v,price:c.price,pid:me});break}
     case 'build':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o||o.pid!==me||o.level>=maxLevel(c))break;await addEv({kind:'build',cell:v,cost:c.develop,lvl:o.level+1,pid:me});break}
     case 'unbuild':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o||o.pid!==me||o.level<=0)break;await addEv({kind:'unbuild',cell:v,refund:Math.round(c.develop*(+S().sellBuildPct||0)/100),pid:me});break}
+    case 'rentpay':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o){toast('У этого поля нет владельца.');break}if(o.pid===me)break;const rn=rentNow(st,c);await addEv({kind:'pay',from:me,to:o.pid,amount:rn.amount,note:`Рента «${c.name}»: ${rn.label}`,rent:v,pid:me});break}
     case 'buysh':{const st=state();if(issued(st,v)>=(+S().shareLimit||10)){toast('Все акции этого синдиката уже проданы.');break}await addEv({kind:'share',group:v,price:sharePrice(v),pid:me});break}
     case 'taxpay':{const t=taxCalc(state(),me);await addEv({kind:'pay',from:me,to:'bank',amount:t.total,note:`Налог: ${S().taxBase} + ${S().taxPct}% от вложений ${t.inv.total}`,tax:true,pid:me});break}
     case 'dpat':{dealB=dealB||blankDeal();const l=dealB[b.dataset.side].patents,i=l.indexOf(v);if(i<0)l.push(v);else l.splice(i,1);break}
