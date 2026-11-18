@@ -453,6 +453,13 @@ body.m3 nav.bar button .g{width:min(48px,88%)}
 body.m3 .db{background:var(--m-scl);box-shadow:0 1px 3px rgba(0,0,0,.25),0 4px 8px 3px rgba(0,0,0,.1)}
 body.m3 .db .dn{border-radius:20px;border-color:var(--m-outline);background:transparent;font-family:Roboto,sans-serif}
 @media (max-width:360px){.db .die{--ds:26px}.db .btn{padding:8px 10px}}
+.rodds{display:flex;justify-content:space-between;gap:10px;margin-top:10px;font-variant-numeric:tabular-nums}
+.rodds .up{color:var(--green)}.rodds .down{color:var(--red)}
+.rw{position:relative;width:min(240px,70vw);aspect-ratio:1;margin:18px auto 6px}
+.rwh{position:absolute;inset:0;border-radius:50%;border:6px solid #2A221C;background:repeating-conic-gradient(#C8372D 0 22.5deg,#1E1E1E 22.5deg 45deg);box-shadow:0 6px 14px rgba(0,0,0,.3),inset 0 0 0 3px #D79A2B;will-change:transform}
+.rwh::after{content:"";position:absolute;inset:34%;border-radius:50%;background:#D79A2B;box-shadow:inset 0 0 0 4px #2A221C}
+.rwp{position:absolute;left:50%;top:-10px;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:22px solid #FFE34D;filter:drop-shadow(0 2px 1px rgba(0,0,0,.5));z-index:2}
+.rwc{position:absolute;inset:0;display:grid;place-items:center;font-weight:700;font-size:20px;color:#2A221C;z-index:1}
 </style>
 </head>
 <body>
@@ -913,10 +920,14 @@ function vChance(){const me=pById(meId()),deck=(table.chance||[]).filter(c=>(+c.
   ${lastCard?`<div class="card${cardAnim?' pop':''}" style="margin-top:22px"><span class="num">Шанс</span><div class="tx">${esc(lastCard)}</div></div>`:''}
   ${me?`<button class="btn red wide" data-act="draw"${deck.length?'':' disabled'}>${deck.length?'Тянуть карточку':'Колода пуста'}</button>`:'<p class="note">Выберите себя за столом, чтобы тянуть карточки.</p>'}
   <p class="muted small center" style="margin-top:8px">В колоде ${deck.length} карточек. <button class="linkbtn" data-act="goc" data-v="chance">Конструктор шансов</button></p></section>${roulHtml(me)}`}
-function roulHtml(me){return `<section class="sheet"><h2>Рулетка против банка</h2><p class="muted small">Для карточек со ставкой. 1:1 — выигрыш с шансом 1 из 2, 1:2 — 1 из 3, 1:5 — 1 из 6. Выигрыш — ставка, умноженная на коэффициент, проигрыш — ставка уходит банку.</p>
-  <div class="seg">${[1,2,5].map(k=>`<button class="${roul.k===k?'on':''}" data-act="rk" data-v="${k}">1:${k}</button>`).join('')}</div>
-  <label class="field"><span>Ставка, ₽</span><input class="amt" inputmode="numeric" data-in="roulBet" value="${esc(roul.bet)}" placeholder="0"></label>
-  ${roul.res?`<div class="big ${roul.res.win?'up':'down'}" style="margin-top:12px">${roul.res.win?'+':'−'}${rub(roul.res.amt)}</div><p class="center muted small">${roul.res.win?'Выигрыш!':'Ставка уходит банку.'}</p>`:''}
+let roulSpin=false,roulRot=0;
+function roulHtml(me){const bet=+roul.bet||0,k=roul.k;
+  return `<section class="sheet"><h2>Рулетка против банка</h2><p class="muted small">Для карточек со ставкой. Шанс всегда 50 на 50: красное — выигрыш, чёрное — проигрыш. Коэффициент задаёт, сколько ставит банк: при 1:5 на вашу ставку 200 ₽ банк ставит 1000 ₽.</p>
+  <div class="seg">${[1,2,5].map(x=>`<button class="${k===x?'on':''}" data-act="rk" data-v="${x}">1:${x}</button>`).join('')}</div>
+  <label class="field"><span>Ваша ставка, ₽</span><input class="amt" inputmode="numeric" data-in="roulBet" value="${esc(roul.bet)}" placeholder="0"></label>
+  ${bet>0?`<div class="rodds"><span>Выигрыш <b class="up">+${rub(bet*k)}</b></span><span>Проигрыш <b class="down">−${rub(bet)}</b></span></div>`:''}
+  <div class="rw" aria-hidden="true"><div class="rwh" id="rwh" style="transform:rotate(${roulRot}deg)"></div><i class="rwp"></i><span class="rwc">1:${k}</span></div>
+  ${roul.res?`<div class="big ${roul.res.win?'up':'down'}" style="margin-top:12px">${roul.res.win?'+':'−'}${rub(roul.res.amt)}</div><p class="center muted small">${roul.res.win?'Красное — выигрыш! Банк платит.':'Чёрное — ставка уходит банку.'}</p>`:''}
   ${me&&!readOnly?'<button class="btn red wide" data-act="roul">Крутить</button>':''}</section>`}
 function fxOpenLeft(){const s=S();if(s.fxMode==='always')return Infinity;const u=lget('nepbank2.fx.'+tid,0);return Math.max(0,u-Date.now())}
 function vFx(){const me=pById(meId()),{b}=ledger(),w=me?b[me.id]:null,left=fxOpenLeft(),cr=curRate(),S0=S();
@@ -1004,6 +1015,7 @@ function render(){
   const ae=document.activeElement,key=ae&&(ae.dataset.in||ae.dataset.set||ae.dataset.dk||ae.dataset.dw||ae.dataset.nm);
   document.body.classList.toggle('paused',view==='table'&&isPaused());
   const pz=view==='table'&&isPaused()?`<div class="pausebar" role="status"><span>⏸ Пауза — ${esc(who(table.paused.by))}, ${hm(table.paused.ts)}. Операции недоступны.</span>${readOnly?'':'<button class="btn sm" data-act="resume">▶ Продолжить</button>'}</div>`:'';
+  if(roulSpin&&tab==='chance')return;
   $('#app').innerHTML=pz+(dead?'<p class="note sheet">Связь с хранилищем прервалась. Данные на экране могут быть устаревшими — перезагрузите страницу.</p>':'')+html;
   diceAnim=false;cardAnim=false;
 }
@@ -1102,8 +1114,12 @@ document.addEventListener('click',async e=>{
     case 'loan':{const s=S(),amt=+loan.amount||0;if(amt<=0){toast('Введите сумму ссуды.');return}const total=Math.round(amt*(1+(+s.loanRate||0)/100));if(await addEv({kind:'loan',pid:me,amount:amt,total,rounds:loan.rounds,per:Math.ceil(total/loan.rounds)})){loan={amount:'',rounds:loan.rounds}}break}
     case 'loanpay':{const L=activeLoans(me).find(x=>x.id===v);if(L)await addEv({kind:'pay',from:me,to:'bank',amount:L.left,note:'Ссуда: досрочное погашение',loanId:L.id,pid:me});break}
     case 'rk':roul.k=+v;roul.res=null;break;
-    case 'roul':{const bet=+roul.bet||0;if(bet<=0){toast('Введите ставку.');return}const win=rint(roul.k+1)===0,amt=win?bet*roul.k:bet;
-      if(await addEv(win?{kind:'pay',from:'bank',to:me,amount:amt,note:`Рулетка 1:${roul.k}: выигрыш`,pid:me}:{kind:'pay',from:me,to:'bank',amount:amt,note:`Рулетка 1:${roul.k}: проигрыш`,pid:me}))roul.res={win,amt};break}
+    case 'roul':{if(roulSpin)return;const bet=+roul.bet||0;if(bet<=0){toast('Введите ставку.');return}const k=roul.k,win=rint(2)===0,amt=win?bet*k:bet;
+      const segs=[...Array(16).keys()].filter(i=>(i%2===0)===win),idx=segs[rint(segs.length)],target=360-(idx*22.5+11.25);
+      roulRot=roulRot+360*5+((target-(roulRot%360))+360)%360;roul.res=null;
+      const finish=async()=>{roulSpin=false;if(await addEv(win?{kind:'pay',from:'bank',to:me,amount:amt,note:`Рулетка 1:${k}: выигрыш, ставка ${bet}`,pid:me}:{kind:'pay',from:me,to:'bank',amount:amt,note:`Рулетка 1:${k}: проигрыш, ставка ${bet}`,pid:me}))roul.res={win,amt};render()};
+      const wh=$('#rwh');if(!wh||reduceMo){finish();return}
+      roulSpin=true;b.disabled=true;wh.style.transition='transform 2.4s cubic-bezier(.15,.7,.2,1)';requestAnimationFrame(()=>{wh.style.transform=`rotate(${roulRot}deg)`});setTimeout(finish,2550);return}
     case 'announce':{const rows=finalRows();await addEv({kind:'final',pid:me||'',rank:rows.map(r=>({id:r.p.id,cap:Math.round(r.cap)}))});toast('Итоги объявлены всем игрокам.');break}
     case 'savepreset':{const name=(presetName||'').trim();if(!name){toast('Введите название набора.');return}try{await store.addPreset({name:name.slice(0,40),created:Date.now(),settings:S(),rates:rates(),chance:table.chance||[],sharePrices:table.sharePrices||null});presetName='';toast(`Набор «${name}» сохранён.`)}catch(_){toast('Не удалось сохранить набор.')}break}
     case 'export':{const dl=window.claude&&window.claude.use?await window.claude.use('downloads'):null;
