@@ -566,6 +566,11 @@ header{flex-wrap:wrap}
 .tkl li.bonus{background:#FFF1C2;color:#3A2A00;border-radius:8px;font-weight:600}
 .chip.on{background:var(--m-sec-c,#C8372D);color:var(--m-on-sec-c,#fff);border-color:transparent}
 .chip .spr{width:18px;vertical-align:middle}
+.hcode{margin-top:10px;padding:12px 14px;border-radius:14px;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);animation:hdrop .18s ease-out}
+.hcode .hcn{font-weight:600;font-size:14px}.hcode .hcl{font-size:12px;opacity:.75;margin-top:6px;text-transform:uppercase;letter-spacing:.08em}
+.hcode .hcc{font:700 40px/1.1 Oswald,Roboto,sans-serif;letter-spacing:.25em;font-variant-numeric:tabular-nums;margin:2px 0 4px}
+.hcode .hcb{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+#hpanel .hrow .tname.on{outline:2px solid currentColor}
 </style>
 </head>
 <body>
@@ -873,7 +878,7 @@ function renderTicker(){const el=$('#ticker');
   const t=el.querySelector('.txt'),m=el.querySelector('.mq');
   if(t&&m)requestAnimationFrame(()=>{const dist=m.scrollWidth-t.clientWidth;if(dist>4){t.style.setProperty('--dist',(dist+16)+'px');t.style.setProperty('--dur',Math.max(7,(dist+16)/32+4).toFixed(1)+'s');t.classList.add('run')}});
 }
-let hopen=lget('nepbank2.hopen',false);
+let hopen=lget('nepbank2.hopen',false),hcode=false;
 function shortName(n){const w=String(n||'').trim().split(/\s+/).filter(Boolean);if(!w.length)return 'Стол';let r=w[0].length>2?w[0].slice(0,2):w[0];for(const x of w.slice(1))r+=/^\d+$/.test(x)?x:x[0];return r.slice(0,8)}
 function headerRight(){const me=pById(meId()),m3=document.body.classList.contains('m3');
   const hl=$('#hleft');if(hl)hl.innerHTML='';
@@ -882,7 +887,7 @@ function headerRight(){const me=pById(meId()),m3=document.body.classList.contain
   const hp=$('#hpanel');
   if(view==='table'&&table){
     $('#hright').innerHTML=`<button class="hmenu${hopen?' on':''}" data-act="hmenu" aria-expanded="${hopen}" aria-controls="hpanel" title="${esc(stxt)}"><i class="hdot${off?' off':''}"></i>${isPaused()?'⏸ ':''}${me?spr(me):''}<span class="hm">Меню</span><span class="hch" aria-hidden="true">${hopen?'▴':'▾'}</span></button>`;
-    hp.innerHTML=hopen?`<div class="hrow"><button class="themebtn" data-act="theme" data-v="${m3?'retro':'m3'}" aria-label="Оформление: сейчас ${m3?'Android':'Ретро'}. Нажмите, чтобы переключить" title="Оформление">${m3?'Ретро':'Android'}</button><button class="tname" data-act="lobby" aria-label="К списку столов. Стол: ${esc(table.name)}" title="${esc(table.name)}">${esc(shortName(table.name))}</button><button class="mechip" data-act="seat" aria-label="Игрок">${me?spr(me)+esc(me.name):'Кто вы?'}</button>${readOnly?'':isPaused()?'<button class="pausebtn on" data-act="resume">▶ Продолжить</button>':'<button class="pausebtn" data-act="pause" data-label="⏸ Точно?">⏸ Пауза</button>'}<button class="bankbtn${tab==='bank'?' on':''}" data-act="tab" data-v="bank" aria-current="${tab==='bank'?'page':'false'}"><span class="ms" aria-hidden="true">account_balance</span><span class="rt" aria-hidden="true">≡</span>Банк</button></div><div class="hsync">${s}</div>`:'';
+    hp.innerHTML=hopen?`<div class="hrow"><button class="themebtn" data-act="theme" data-v="${m3?'retro':'m3'}" aria-label="Оформление: сейчас ${m3?'Android':'Ретро'}. Нажмите, чтобы переключить" title="Оформление">${m3?'Ретро':'Android'}</button><button class="tname${hcode?' on':''}" data-act="tcode" aria-expanded="${hcode}" aria-label="Стол ${esc(table.name)}: показать код подключения" title="${esc(table.name)}">${esc(shortName(table.name))}</button><button class="mechip" data-act="seat" aria-label="Игрок">${me?spr(me)+esc(me.name):'Кто вы?'}</button>${readOnly?'':isPaused()?'<button class="pausebtn on" data-act="resume">▶ Продолжить</button>':'<button class="pausebtn" data-act="pause" data-label="⏸ Точно?">⏸ Пауза</button>'}<button class="bankbtn${tab==='bank'?' on':''}" data-act="tab" data-v="bank" aria-current="${tab==='bank'?'page':'false'}"><span class="ms" aria-hidden="true">account_balance</span><span class="rt" aria-hidden="true">≡</span>Банк</button></div>${hcode?`<div class="hcode"><div class="hcn">Стол «${esc(table.name)}»</div>${table.code?`<div class="hcl">Код подключения</div><div class="hcc" aria-label="Код ${esc(String(table.code).split('').join(' '))}">${esc(table.code)}</div><p class="small">Остальные игроки вводят этот код на своих телефонах: «Войти по коду» в списке столов.</p><div class="hcb"><button class="btn sm red" data-act="copycode">Скопировать код</button><button class="btn sm ghost" data-act="lobby">К списку столов</button></div>`:`<p class="small">Код подключения есть в онлайн-версии приложения. Здесь стол открывается по ссылке — поделитесь ею через «Поделиться».</p><div class="hcb"><button class="btn sm ghost" data-act="lobby">К списку столов</button></div>`}</div>`:''}<div class="hsync">${s}</div>`:'';
   }else{$('#hright').innerHTML=s;hp.innerHTML=''}}
 
 function calcGet(){const s=S(),a=(get.lap?+s.passStart:0)+(get.stock||0)*(+s.stockBonus),parts=[];if(get.lap)parts.push('круг');if(get.stock)parts.push(get.stock>1?`акции ×${get.stock}`:'акция');const n=parts.join(' + ');get.amount=a?String(a):'';get.note=n?n[0].toUpperCase()+n.slice(1):''}
@@ -1275,11 +1280,11 @@ document.addEventListener('click',async e=>{
   const b=e.target.closest('[data-act]');if(!b||b.disabled)return;const a=b.dataset.act,v=b.dataset.v;
   if(b.dataset.label!==undefined&&b.dataset.armed!=='1'){b.dataset.armed='1';b.textContent='Точно?';setTimeout(()=>{if(b.isConnected){b.dataset.armed='';b.textContent=b.dataset.label}},2500);return}
   const me=meId();
-  if(view==='table'&&isPaused()&&!['tab','tick','lobby','open','seat','iam','resume','bsub','hf','hw','theme','unlock','export','pick','lapopen','dn','dcycle','fxside','lrounds','rk','csum','tdir','tpick','shtab','tmode','tpid','tusd','gtto','gtcur','gtpick','gtdir'].includes(a)){toast('Игра на паузе. Нажмите «▶ Продолжить», чтобы играть дальше.');return}
+  if(view==='table'&&isPaused()&&!['tab','tick','lobby','open','seat','iam','resume','bsub','hf','hw','theme','unlock','export','pick','lapopen','dn','dcycle','fxside','lrounds','rk','csum','tdir','tpick','shtab','tmode','tpid','tusd','gtto','gtcur','gtpick','gtdir','tcode','copycode','hmenu'].includes(a)){toast('Игра на паузе. Нажмите «▶ Продолжить», чтобы играть дальше.');return}
   switch(a){
     case 'tab':tab=v;view='table';window.scrollTo(0,0);break;
     case 'tick':tickOpen=!tickOpen;break;
-    case 'lobby':unsubs.forEach(f=>f());unsubs=[];if(evUnsub){evUnsub();evUnsub=null}evSince=-1;tid=null;table=null;view='lobby';lset('nepbank2.last',null);break;
+    case 'lobby':hcode=false;unsubs.forEach(f=>f());unsubs=[];if(evUnsub){evUnsub();evUnsub=null}evSince=-1;tid=null;table=null;view='lobby';lset('nepbank2.last',null);break;
     case 'open':openTable(v);if(!meId())view='seat';return;
     case 'seat':view='seat';if(b.closest('#hpanel')){hopen=false;lset('nepbank2.hopen',false)}break;
     case 'iam':{const st=state(),mine=mySeat(st);
@@ -1316,7 +1321,9 @@ document.addEventListener('click',async e=>{
     case 'quit':{if(!me||isOut(me))return;if(isPaused()){toast('Игра на паузе.');return}const st=state(),w=st.b[me]||{rub:0,usd:0},cr=curRate(),cap=Math.round(w.rub+w.usd*(cr?cr.sell:0)+invest(st,me).total);
       if(await addEv({kind:'quit',pid:me,cap})){toast('Вы вышли из игры.');tab='me'}break}
     case 'cclr':{lastCard=null;break}
-    case 'hmenu':hopen=!hopen;lset('nepbank2.hopen',hopen);break;
+    case 'hmenu':hopen=!hopen;lset('nepbank2.hopen',hopen);if(!hopen)hcode=false;break;
+    case 'tcode':hcode=!hcode;break;
+    case 'copycode':{const c=String(table&&table.code||'');if(!c)return;try{await navigator.clipboard.writeText(c);toast('Код '+c+' скопирован.')}catch(_){toast('Код стола: '+c)}return}
     case 'emo':{if(!me)return;const now=Date.now();if(now-emoLast<1500)return;emoLast=now;const to=emoTo==='all'||pById(emoTo)?emoTo:'all';
       if(await addEv({kind:'emo',pid:me,to,e:v})){playEmo(v,to==='all'?'Всем':'→ '+who(to),true);try{if(navigator.vibrate)navigator.vibrate(15)}catch(_){}}return}
     case 'forget':{const h=lget('nepbank2.hidden',[]);if(!h.includes(v))h.push(v);lset('nepbank2.hidden',h.slice(-200));
