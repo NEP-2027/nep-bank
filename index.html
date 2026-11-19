@@ -561,6 +561,11 @@ header{flex-wrap:wrap}
 .avr{display:grid;grid-template-columns:10px 92px minmax(0,1fr) auto;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
 .avr .avh{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;opacity:.85}.avr b{white-space:nowrap}
 .shrules{margin-top:6px}.shrules summary{cursor:pointer;font-size:13px;opacity:.85;min-height:32px;display:flex;align-items:center;gap:6px;list-style:none}.shrules summary::-webkit-details-marker{display:none}.shrules summary::before{content:'▸';transition:transform .2s}.shrules[open] summary::before{transform:rotate(90deg)}
+.tk.bonus{background:linear-gradient(90deg,#FFE9A8,#FFD45E)!important;color:#3A2A00!important;outline:2px solid #E0A800;outline-offset:-2px}
+.tk.bonus .dot{background:#C77700!important}
+.tkl li.bonus{background:#FFF1C2;color:#3A2A00;border-radius:8px;font-weight:600}
+.chip.on{background:var(--m-sec-c,#C8372D);color:var(--m-on-sec-c,#fff);border-color:transparent}
+.chip .spr{width:18px;vertical-align:middle}
 </style>
 </head>
 <body>
@@ -576,7 +581,8 @@ header{flex-wrap:wrap}
 <nav class="bar" id="bar" hidden></nav>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script>
-const DECK=["Отчисления в банк 300 ₽", "Ходи назад два раза", "Ходи назад, скорость 2х", "Рулетка против банка, ставка 1:1", "Двигайся вперёд на поле Начало", "Двигайся назад на поле Акция", "Обслуживание ТД, 100 ₽ каждый", "Без убытков до конца круга", "Ходи назад, произвольный стоп", "Ссуда-рассрочка до 5 кругов", "Ходи вперёд, произвольный стоп", "Двигайся назад на поле Налоги", "Двигайся на поле Курс валюты", "Двигайся назад на поле Аренда кубика", "Произвольное направление и стоп, 1 ход", "Построй до 2 ТД, оплата 1/2 от суммы", "Торговый дом за счёт банка", "Рулетка против банка, ставка 1:2", "Ходи вперёд, произвольный стоп, 2 хода", "Двигайся вперёд на поле Аренда кубика", "Построй 2 ТД за счёт банка", "Двигайся на поле Курс валюты, 2 попытки", "Рулетка против банка, ставка 1:5"];
+const DECK=["Рулетка против банка", "Двигайся вперёд на поле Начало", "Двигайся назад на поле Акция", "Ходи назад, произвольный стоп", "Ходи вперёд, произвольный стоп", "Двигайся назад на поле Налоги", "Двигайся на поле Курс валюты", "Двигайся назад на поле Аренда кубика", "Двигайся на поле Курс валюты, 2 попытки", "Посети любое поле 1-й линии и выполни действие поля", "Посети любое поле 2-й линии и выполни действие поля", "Посети любое поле 3-й линии и выполни действие поля", "Посети любое поле 4-й линии и выполни действие поля", "+5 долларов", "+10 долларов"];
+const OLDDECK="Отчисления в банк 300 ₽\nХоди назад два раза\nХоди назад, скорость 2х\nРулетка против банка, ставка 1:1\nДвигайся вперёд на поле Начало\nДвигайся назад на поле Акция\nОбслуживание ТД, 100 ₽ каждый\nБез убытков до конца круга\nХоди назад, произвольный стоп\nСсуда-рассрочка до 5 кругов\nХоди вперёд, произвольный стоп\nДвигайся назад на поле Налоги\nДвигайся на поле Курс валюты\nДвигайся назад на поле Аренда кубика\nПроизвольное направление и стоп, 1 ход\nПострой до 2 ТД, оплата 1/2 от суммы\nТорговый дом за счёт банка\nРулетка против банка, ставка 1:2\nХоди вперёд, произвольный стоп, 2 хода\nДвигайся вперёд на поле Аренда кубика\nПострой 2 ТД за счёт банка\nДвигайся на поле Курс валюты, 2 попытки\nРулетка против банка, ставка 1:5";
 const PCOLORS=['#C0392B','#2F7D63','#C08A1E','#3B5BA9','#8A4A8C','#5F7A86'];
 const PAL={K:'#1B1B1B',S:'#F4BE8C',W:'#FFFFFF',H:'#7A4320',G:'#8C8C8C',D:'#3A3B44',R:'#E03A3A',U:'#2C4FA8',B:'#8B5A2B',P:'#F2A0B5',L:'#9ED4F2',Y:'#F5D04A',V:'#FFF1A8',A:'#6BCB5A'};
 const CHAR_NAMES=['Джентльмен','Девочка','Гангстер','Мальчик','Малыш','Ковбой','Бабушка','Кролик','Автомобиль','Пришелец'];
@@ -719,6 +725,7 @@ const activeP=()=>players().filter(p=>!isOut(p.id));
 const who=id=>id==='bank'?'Банк':(pById(id)?.name||'—');
 const S=()=>{const o=Object.assign({},DEFSET,(table&&table.settings)||{});/* старое значение по умолчанию 2% → новое 3%, пока банк не сохранил своё */if(table&&table.settings&&!table.settings.v3&&+table.settings.sharePct===2)o.sharePct=3;return o};
 const OLDRATES='40/36,44/40,46/42,48/44,50/46,52/48,54/50,56/52,60/55,65/60';
+const chanceDeck=()=>{const c=table&&Array.isArray(table.chance)?table.chance:[];if(c.length&&c.map(x=>x.text).join('\n')===OLDDECK&&c.every(x=>(+x.w||0)===1))return DECK.map(t=>({text:t,w:1}));return c};
 const rates=()=>{const r=table&&Array.isArray(table.rates)&&table.rates.length?table.rates:null;if(!r)return DEFRATES;
   /* столы со старыми стандартными курсами (40–65) переходят на новые стандартные; свои курсы стола не трогаем */
   return r.map(x=>`${+x.buy}/${+x.sell}`).join(',')===OLDRATES&&r.every(x=>(+x.w||0)===1)?DEFRATES:r};
@@ -753,7 +760,7 @@ function moveSide(st,from,to,side){if(!side)return;const b=st.b;
   for(const [g,n] of Object.entries(side.shares||{})){const m=+n||0;if(!m)continue;const sh=st.shares[g];sh[from]-=m;if(!sh[from])delete sh[from];sh[to]=(sh[to]||0)+m}
   for(const id of side.loans||[])st.loans[id].pid=to;
   const r=+side.rub||0,u=+side.usd||0;if(r){b[from].rub-=r;b[to].rub+=r}if(u){b[from].usd-=u;b[to].usd+=u}}
-const OUTBLOCK=new Set(['shsell','pay','fx','loan','buy','build','unbuild','share','deal','dealOk','quit']);
+const OUTBLOCK=new Set(['patsell','shsell','pay','fx','loan','buy','build','unbuild','share','deal','dealOk','quit']);
 function applyEv(st,e){const b=st.b;
   if(OUTBLOCK.has(e.kind)&&((e.pid&&st.out[e.pid])||(e.kind==='pay'&&(st.out[e.from]||st.out[e.to]))))return false;
   switch(e.kind){
@@ -772,10 +779,11 @@ function applyEv(st,e){const b=st.b;
     case 'buy':{const c=cellById(e.cell);if(!c||st.own[e.cell]||!b[e.pid])return false;st.own[e.cell]={pid:e.pid,level:0};b[e.pid].rub-=+e.price||0;return true}
     case 'build':{const o=st.own[e.cell],c=cellById(e.cell);if(!o||o.pid!==e.pid||!c||o.level>=maxLevel(c))return false;if(e.syn&&!fullSyn(st,c))return false;if(e.syn&&o.level===c.maxStores&&!allStores(st,c))return false;o.level++;b[e.pid].rub-=+e.cost||0;return true}
     case 'unbuild':{const o=st.own[e.cell];if(!o||o.pid!==e.pid||o.level<=0)return false;o.level--;b[e.pid].rub+=+e.refund||0;return true}
+    case 'patsell':{const o=st.own[e.cell],c=cellById(e.cell);if(!o||!c||o.pid!==e.pid||o.level>0||!b[e.pid]||grpBuilt(st,c))return false;delete st.own[e.cell];b[e.pid].rub+=+e.price||0;return true}
     case 'share':{if(!b[e.pid]||issued(st,e.group)>=(+S().shareLimit||10))return false;const sh=st.shares[e.group]=st.shares[e.group]||{};sh[e.pid]=(sh[e.pid]||0)+1;b[e.pid].rub-=+e.price||0;return true}
     case 'claim':{if(!b[e.pid]||!e.dev)return false;const cur=st.seats[e.pid];if(cur&&cur!==e.dev)return false;if(Object.entries(st.seats).some(([p,d])=>d===e.dev&&p!==e.pid))return false;st.seats[e.pid]=e.dev;return true}
     case 'release':{if(!st.seats[e.of])return false;delete st.seats[e.of];return true}
-    case 'topup':{const a=+e.amount||0;if(!a||!Array.isArray(e.to))return false;let n=0;for(const id of e.to)if(b[id]&&!st.out[id]){b[id].rub+=a;n++}return n>0}
+    case 'topup':{const a=+e.amount||0;if(!a||!Array.isArray(e.to))return false;let n=0;for(const id of e.to)if(b[id]&&!st.out[id]){if(e.cur==='usd')b[id].usd+=a;else b[id].rub+=a;n++}return n>0}
     case 'shsell':{const sh=st.shares[e.group];if(!b[e.pid]||!sh||!(sh[e.pid]>0))return false;sh[e.pid]--;if(!sh[e.pid])delete sh[e.pid];b[e.pid].rub+=+e.price||0;return true}
     case 'deal':{st.offers[e.id]={id:e.id,pid:e.pid,to:e.to,give:e.give||{},take:e.take||{},text:e.text||''};return true}
     case 'offerResp':{delete st.offers[e.of];return true}
@@ -801,7 +809,7 @@ function lapCalc(st,pid){const s=S(),every=Math.max(1,+s.idxEvery||5),k=(st.laps
   return {k,base,rows,raw,sharesTot,total:base+sharesTot,nextAt:s.idxOn&&+s.idxStep?(steps+1)*every+1:null,nextBase:base+(+s.idxStep||0)}}
 function taxCalc(st,pid){const s=S(),inv=invest(st,pid),pct=+s.taxPct||0,part=inv.total*pct/100,base=+s.taxBase||0;return {inv,pct,base,part,total:Math.ceil(base+part-1e-9)}}
 function finalRows(){const st=state(),cr=curRate(),rate=cr?cr.sell:0;return players().map(p=>{const w=st.b[p.id],inv=invest(st,p.id).total;return {p,inv,cap:w.rub+w.usd*rate+inv}}).sort((a,c)=>c.cap-a.cap)}
-function canSelfUndo(e,meid,und){return !readOnly&&!isPaused()&&e.pid===meid&&['pay','fx','loan','buy','build','unbuild','share','shsell'].includes(e.kind)&&!und.has(e.id)&&Date.now()-e.ts<10000}
+function canSelfUndo(e,meid,und){return !readOnly&&!isPaused()&&e.pid===meid&&['pay','fx','loan','buy','build','unbuild','share','shsell','patsell'].includes(e.kind)&&!und.has(e.id)&&Date.now()-e.ts<10000}
 function sideText(side){if(!side)return '';const p=[];
   for(const id of side.patents||[]){const c=cellById(id);if(c)p.push(`«${c.name}»`)}
   for(const [g,n] of Object.entries(side.shares||{}))if(+n)p.push(`${n} акц. ${(GRP(g)||{name:g}).name}`);
@@ -811,11 +819,12 @@ function describe2(e){const n=who(e.pid),c=e.cell?cellById(e.cell):null;
   switch(e.kind){
     case 'buy':return `${n}: покупка «${c?c.name:'?'}» за ${rub(e.price)}`;
     case 'build':return `${n}: ${c&&e.lvl>c.maxStores?'торговый дом':'магазин'} в «${c?c.name:'?'}» за ${rub(e.cost)}`;
+    case 'patsell':return `${n}: продажа патента «${c?c.name:'?'}» банку, +${rub(e.price)}`;
     case 'unbuild':return `${n}: продажа постройки в «${c?c.name:'?'}», +${rub(e.refund)}`;
     case 'emo':return `${n} → ${e.to==='all'?'всем':who(e.to)}: ${e.e}`;
     case 'claim':return `${n}: место занято с телефона`;
     case 'release':return `🔓 Место «${who(e.of)}» освобождено — ${e.pid?n:'банк'}. Его можно занять с другого телефона.`;
-    case 'topup':return `💰 ${e.amount<0?'Списание':'Пополнение'}: всем по ${rub(Math.abs(e.amount))} — ${e.pid?n:'банк'}`;
+    case 'topup':{const f=x=>e.cur==='usd'?usd(x):rub(x),a=+e.amount||0,all=e.all||(e.cur!=='usd'&&!('all' in e)&&(e.to||[]).length>1);return `💰 БАНК: ${a<0?'−':'+'}${f(Math.abs(a))} — ${all?'всем':(e.to||[]).map(who).join(', ')}${e.note?` (${e.note})`:''}${e.pid&&!(!all&&(e.to||[]).length===1&&e.to[0]===e.pid)?` · ${n}`:''}`}
     case 'shsell':return `${n}: продажа акции «${(GRP(e.group)||{name:'?'}).name}» банку, +${rub(e.price)}`;
     case 'share':return `${n}: акция «${(GRP(e.group)||{name:'?'}).name}» за ${rub(e.price)}`;
     case 'deal':{const g=sideText(e.give),t=sideText(e.take);return `${n} → ${who(e.to)}: предложение сделки — ${g?'отдаёт '+g:''}${g&&t?'; ':''}${t?'просит '+t:''}`}
@@ -860,7 +869,7 @@ function renderTicker(){const el=$('#ticker');
   const key=(top?top.id:'')+'|'+tickOpen+'|'+evs.length+'|'+players().map(p=>p.name).join(',');
   if(key===tkKey)return;tkKey=key;
   const fresh=top&&lastTop&&top.id!==lastTop;lastTop=top?top.id:null;
-  el.innerHTML=`<button class="tk${fresh?' fresh':''}" data-act="tick" aria-expanded="${tickOpen}"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="mq">${top?esc(describe(top)):'Событий пока нет. Всё, что происходит за столом, появится здесь у всех.'}</span></span>${top?`<span class="tm">${hm(top.ts)}</span>`:''}</button>${tickOpen&&list.length?`<ul class="tkl">${list.map(e=>`<li><span class="tm">${hm(e.ts)}</span><span class="tx">${esc(describe(e))}</span><span class="rx">${['👍','😮','😂'].map(em=>{const rs=evs.filter(r=>r.kind==='react'&&r.of===e.id&&r.emoji===em),mine=rs.some(r=>r.pid===meId());return `<button class="rxb${mine?' on':''}" data-act="react" data-v="${esc(e.id)}" data-e="${em}" aria-label="Реакция ${em}">${em}${rs.length?' '+rs.length:''}</button>`}).join('')}</span></li>`).join('')}</ul>`:''}`;
+  el.innerHTML=`<button class="tk${fresh?' fresh':''}${top&&top.kind==='topup'?' bonus':''}" data-act="tick" aria-expanded="${tickOpen}"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="mq">${top?esc(describe(top)):'Событий пока нет. Всё, что происходит за столом, появится здесь у всех.'}</span></span>${top?`<span class="tm">${hm(top.ts)}</span>`:''}</button>${tickOpen&&list.length?`<ul class="tkl">${list.map(e=>`<li${e.kind==='topup'?' class="bonus"':''}><span class="tm">${hm(e.ts)}</span><span class="tx">${esc(describe(e))}</span><span class="rx">${['👍','😮','😂'].map(em=>{const rs=evs.filter(r=>r.kind==='react'&&r.of===e.id&&r.emoji===em),mine=rs.some(r=>r.pid===meId());return `<button class="rxb${mine?' on':''}" data-act="react" data-v="${esc(e.id)}" data-e="${em}" aria-label="Реакция ${em}">${em}${rs.length?' '+rs.length:''}</button>`}).join('')}</span></li>`).join('')}</ul>`:''}`;
   const t=el.querySelector('.txt'),m=el.querySelector('.mq');
   if(t&&m)requestAnimationFrame(()=>{const dist=m.scrollWidth-t.clientWidth;if(dist>4){t.style.setProperty('--dist',(dist+16)+'px');t.style.setProperty('--dur',Math.max(7,(dist+16)/32+4).toFixed(1)+'s');t.classList.add('run')}});
 }
@@ -887,8 +896,8 @@ function nextAnim(){const o=animQ.shift();if(!o){animOn=false;return}animOn=true
 function coins(sym,n){let h='';for(let i=0;i<n;i++)h+=`<span class="coin${sym==='$'?' usd':''}" style="--x:${rint(260)-130}px;--r:${rint(720)-360}deg;--d:${(i*.07).toFixed(2)}s">${sym}</span>`;return h}
 function animHtml(o){
   switch(o.type){
-    case 'in':return coins('₽',9)+`<div class="lab"><div class="ovbig in">+${rub(o.amount)}</div><div class="sub">${esc(o.sub)}</div></div>`;
-    case 'out':return coins('₽',9)+`<div class="lab"><div class="ovbig out">−${rub(o.amount)}</div><div class="sub">${esc(o.sub)}</div></div>`;
+    case 'in':return coins(o.cur==='usd'?'$':'₽',9)+`<div class="lab"><div class="ovbig in">+${o.cur==='usd'?usd(o.amount):rub(o.amount)}</div><div class="sub">${esc(o.sub)}</div></div>`;
+    case 'out':return coins(o.cur==='usd'?'$':'₽',9)+`<div class="lab"><div class="ovbig out">−${o.cur==='usd'?usd(o.amount):rub(o.amount)}</div><div class="sub">${esc(o.sub)}</div></div>`;
     case 'fx':return (o.side==='buy'?coins('$',9):coins('₽',9))+`<div class="lab"><div class="ovbig in">+${o.side==='buy'?usd(o.usd):rub(o.rub)}</div><div class="ovbig out sm">−${o.side==='buy'?rub(o.rub):usd(o.usd)}</div><div class="sub">${o.side==='buy'?'Покупка долларов':'Продажа долларов'}${o.price?` по курсу ${o.price} ₽`:''}</div></div>`;
     case 'dice':return `<div class="lab"><div class="dbox">${o.vals.map((d,i)=>dieHtml(d).replace('class="die"',`class="die" style="animation-delay:${(i*.09).toFixed(2)}s"`)).join('')}</div><div class="ovbig">${o.vals.reduce((a,b)=>a+b,0)}</div></div>`;
     case 'chance':return `<div class="lab"><div class="ccov"><b>Шанс</b><span>${esc(o.text)}</span></div></div>`;
@@ -897,8 +906,9 @@ function animHtml(o){
 function animFor(e,me){if(e.kind==='emo'){if(e.pid!==me&&(e.to==='all'||e.to===me)){playEmo(e.e,`${who(e.pid)}${e.to==='all'?' — всем':''}`);try{if(lget('nepbank2.sound',true)&&navigator.vibrate)navigator.vibrate([30,40,30])}catch(_){}}return}
   if(!me)return;
   if(e.pid===me&&['buy','build','share'].includes(e.kind)){const c=e.cell?cellById(e.cell):null,amt=e.kind==='buy'?e.price:e.kind==='build'?e.cost:e.price;playAnim({type:'out',amount:amt,sub:e.kind==='buy'?`Патент «${c?c.name:''}»`:e.kind==='build'?`Постройка в «${c?c.name:''}»`:`Акция «${(GRP(e.group)||{name:''}).name}»`});return}
-  if(e.kind==='topup'&&Array.isArray(e.to)&&e.to.includes(me)){const a=+e.amount||0;if(a)playAnim({type:a>0?'in':'out',amount:Math.abs(a),sub:`${a>0?'Пополнение от банка':'Списание банком'} — всем игрокам${e.pid?` (${who(e.pid)})`:''}`});return}
+  if(e.kind==='topup'&&Array.isArray(e.to)&&e.to.includes(me)){const a=+e.amount||0;if(a)playAnim({type:a>0?'in':'out',cur:e.cur,amount:Math.abs(a),sub:`${a>0?'От банка':'Списание банком'}${(e.all||(!('all' in e)&&e.cur!=='usd'&&(e.to||[]).length>1))?' — всем игрокам':''}${e.note?': '+e.note:''}${e.pid&&e.pid!==me?` (${who(e.pid)})`:''}`});return}
   if(e.pid===me&&e.kind==='fx'){playAnim({type:'fx',side:e.side,usd:e.usd,rub:e.rub,price:e.price});return}
+  if(e.pid===me&&e.kind==='patsell'){const c=cellById(e.cell);playAnim({type:'in',amount:e.price,sub:`Продажа патента «${c?c.name:''}» банку`});return}
   if(e.pid===me&&e.kind==='unbuild'){playAnim({type:'in',amount:e.refund,sub:'Продажа постройки'});return}
   if(e.kind==='deal'&&e.to===me){toast(`${who(e.pid)} предлагает сделку — откройте «Счёт»`);feedback('in');return}
   if(e.kind==='dealOk'){const o=evs.find(x=>x.id===e.of);if(o&&(o.pid===me||o.to===me)){toast(state().failed.has(e.id)?'Сделка не прошла: части имущества уже нет.':'Сделка совершена.');feedback('in')}return}
@@ -936,6 +946,18 @@ function vSeat(){const st=state(),mine=mySeat(st);
   return `<section class="sheet"><h2>Кто вы за этим столом?</h2>${table&&table.code?`<p class="note">Код стола: <b style="font-size:22px;letter-spacing:.2em">${table.code}</b><br>Сообщите его остальным игрокам — они введут его на своих телефонах.</p>`:''}<p class="muted small">Выбор закрепится за этим телефоном до конца партии: сменить персонажа потом нельзя, а занятое место недоступно другим. Вы увидите только свой счёт, а события стола — все.</p>
   ${players().map(p=>{const tk=st.seats[p.id]&&st.seats[p.id]!==DEV;return `<button class="seat${tk?' taken':''}" data-act="iam" data-v="${p.id}"${tk?' disabled':''}>${spr(p)}${esc(p.name)}${tk?' <span class="muted small">— занято</span>':''}</button>`}).join('')}
   <button class="btn ghost wide" data-act="iam" data-v="">Просто смотреть</button></section>`}
+let gt={to:'',cur:'rub',amount:'',note:'',dir:1};
+function gtLabel(){const a=+gt.amount||0,m=gt.dir<0,u=gt.cur==='usd',f=x=>u?usd(x):rub(x),p=gt.to==='all'?null:pById(gt.to);
+  if(!gt.to||a<=0)return 'Выберите получателя и сумму';return `${m?'Списать':'Начислить'} ${m?'−':'+'}${f(a)} — ${p?p.name:'всем'}`}
+function gtHtml(me){const act=activeP(),u=gt.cur==='usd',m=gt.dir<0,tgt=gt.to||me.id;if(!gt.to)gt.to=me.id;
+  return `<section class="sheet"><h2>Получить от банка</h2><p class="muted small">Начисления от банка по карточкам Шанса и договорённостям: одному игроку или всем сразу, рублями или долларами. Операция выделяется в бегущей строке золотом, у получателя — анимация.</p>
+  <div class="lbl">Кому</div><div class="chips">${act.map(p=>`<button class="chip${tgt===p.id?' on':''}" data-act="gtto" data-v="${p.id}">${spr(p)} ${esc(p.id===me.id?p.name+' (я)':p.name)}</button>`).join('')}<button class="chip${tgt==='all'?' on':''}" data-act="gtto" data-v="all">👥 Всем (${act.length})</button></div>
+  <div class="lbl">Валюта</div><div class="seg"><button class="${u?'':'on'}" data-act="gtcur" data-v="rub">Рубли ₽</button><button class="${u?'on':''}" data-act="gtcur" data-v="usd">Доллары $</button></div>
+  <label class="field"><span>Сумма${tgt==='all'?' каждому':''}, ${u?'$':'₽'}</span><input class="amt" inputmode="numeric" data-in="gtAmt" value="${esc(gt.amount)}" placeholder="0"></label>
+  <div class="chips">${(u?[5,10,20]:[50,100,250,500,1000]).map(x=>`<button class="chip${+gt.amount===x?' on':''}" data-act="gtpick" data-v="${x}">${u?'+'+x+' $':x}</button>`).join('')}</div>
+  <label class="field"><span>За что</span><input data-in="gtNote" value="${esc(gt.note)}" placeholder="Например, Шанс"></label>
+  <label class="chk small" style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="checkbox" data-act="gtdir"${m?' checked':''} style="width:18px;height:18px"> Списать вместо начисления (корректировка по договорённости)</label>
+  <button class="btn ${m?'':'red'} wide" style="margin-top:12px" data-act="gtgo" data-label="Точно?">${esc(gtLabel())}</button></section>`}
 function vMe(){const me=pById(meId());if(!me)return vSeat();
   if(isOut(me.id))return `<section class="sheet"><div class="wallet">${spr(me)}<span class="nm">${esc(me.name)}</span><span class="rub">${rub(0)}</span><span class="usd">${usd(0)}</span></div><h2 style="margin-top:14px">Вы вышли из игры</h2><p class="muted small">Деньги, патенты с постройками и акции вернулись в банк, ссуды закрыты. Вы можете наблюдать за партией: лента и курс продолжают обновляться.</p></section>`;
   const {b,und}=ledger(),w=b[me.id]||{rub:0,usd:0},s=S(),loans=activeLoans(me.id),lt=Math.round((+loan.amount||0)*(1+(+s.loanRate||0)/100));
@@ -952,10 +974,7 @@ function vMe(){const me=pById(meId());if(!me)return vSeat();
   <div class="chips">${[50,100,200,250,500].map(v=>`<button class="chip" data-act="padd" data-v="${v}">+${v}</button>`).join('')}<button class="chip" data-act="pclr">Сброс</button></div>
   <div class="chips">${['Покупка','Рента','Налог','Постройка','Сделка'].map(n=>`<button class="chip${pay.note===n?' on':''}" data-act="pnote" data-v="${n}">${n}</button>`).join('')}</div>
   <button class="btn red wide" data-act="pay">${pay.okNeg?'Всё равно заплатить':'Заплатить'}</button></section>
-  <section class="sheet"><h2>Получить от банка</h2><p class="muted small">Для прочих выплат, например бонусов по карточкам.</p>
-  <label class="field"><span>Сумма, ₽</span><input class="amt" inputmode="numeric" data-in="getAmt" value="${esc(get.amount)}" placeholder="0"></label>
-  <label class="field"><span>За что</span><input data-in="getNote" value="${esc(get.note)}" placeholder="Например, бонус Шанса"></label>
-  <button class="btn wide" data-act="get">Получить</button></section>`}
+  ${gtHtml(me)}`}
   ${dealHtml(me)}
   ${readOnly?'':`<section class="sheet"><h2>Ссуда</h2><p class="muted small">Банк выдаёт ссуду под ${s.loanRate}% на срок до 5 кругов. Получение денег за круг — сигнал погашения: каждый раз автоматически списывается один взнос, и через выбранное число кругов долг закрыт.</p>
   ${loans.map(L=>`<p class="small">Осталось вернуть ${rub(L.left)} (внесено ${L.paidN} из ${L.rounds}). <button class="linkbtn" data-act="loanpay" data-v="${esc(L.id)}">Погасить сразу</button></p>`).join('')}
@@ -969,6 +988,8 @@ function vMe(){const me=pById(meId());if(!me)return vSeat();
 /* ===== v2 views ===== */
 let lapOpen=false,dealB=null,sprDraft=null;
 function blankDeal(){return {give:{patents:[],shares:{},loans:[],rub:'',usd:''},take:{patents:[],shares:{},loans:[],rub:'',usd:''},text:''}}
+function grpBuilt(st,c){return c.type==='patent'&&BCELLS.some(x=>x.group===c.group&&st.own[x.id]&&st.own[x.id].level>0)}
+function patSellPrice(c){return Math.ceil(c.price*(+S().sellBuildPct||50)/100-1e-9)}
 function allStores(st,c){return !!c&&c.type==='patent'&&BCELLS.filter(x=>x.group===c.group).every(x=>st.own[x.id]&&st.own[x.id].level>=x.maxStores)}
 function fullSyn(st,c){if(!c||c.type!=='patent')return false;const o=st.own[c.id];if(!o)return false;return BCELLS.filter(x=>x.group===c.group).every(x=>st.own[x.id]&&st.own[x.id].pid===o.pid)}
 function rentNow(st,c){const o=st.own[c.id];if(!o)return null;if(c.type==='utility')return {amount:c.payment,label:'выплата'};
@@ -992,7 +1013,7 @@ function vPat(){const me=pById(meId()),st=state(),s=S(),mine=me?Object.keys(st.o
     const full=g.id!=='__util'&&fullSyn(st,cellById(ids[0])),tot=BCELLS.filter(c=>c.group===g.id).length;
     return `<div class="mg"><div class="mgh" style="--c:${g.color||'#808080'}"><i class="sw" style="background:${g.color||'#808080'}"></i><b>${esc(g.name)}</b>${g.id==='__util'?'':full?'<span class="syn-badge">Синдикат собран</span>':`<span class="muted small">${ids.length} из ${tot}</span>`}</div><div class="pcgrid">${ids.map(id=>{const c=cellById(id),o=st.own[id],ml=maxLevel(c),rn=rentNow(st,c);
     return `<figure>${pcCard(c,o,full)}<figcaption><b>${levelName(c,o.level)}</b>${rn?` · рента ${rub(rn.amount)}`:''}${c.type==='patent'?`<br>вложено ${rub(c.price+o.level*c.develop)}`:''}</figcaption>
-    ${c.type==='patent'&&!readOnly?`<div class="pcact">${!full&&o.level<ml?`<button class="btn sm" disabled title="Магазины открываются после сбора синдиката">🔒 Магазин — нужен синдикат</button>`:o.level===c.maxStores&&!allStores(st,c)?`<button class="btn sm" disabled title="Торговый дом открывается, когда на всех полях синдиката построены все магазины">🔒 ТД — сначала все магазины синдиката</button>`:`<button class="btn sm red" data-act="build" data-v="${id}"${o.level>=ml?' disabled':''}>${o.level>=ml?'Развито полностью':o.level===c.maxStores?`Торговый дом ${rub(c.develop)}`:`Магазин ${rub(c.develop)}`}</button>`}${o.level>0?`<button class="btn sm ghost" data-act="unbuild" data-v="${id}" data-label="Продать постройку +${refund(c)} ₽">Продать постройку +${refund(c)} ₽</button>`:''}</div>`:''}</figure>`}).join('')}</div></div>`}).join(''):'<p class="muted">У вас пока нет патентов. Купите поле, на которое встала ваша фишка, — ниже список всех полей.</p>';
+    ${c.type==='patent'&&!readOnly?`<div class="pcact">${!full&&o.level<ml?`<button class="btn sm" disabled title="Магазины открываются после сбора синдиката">🔒 Магазин — нужен синдикат</button>`:o.level===c.maxStores&&!allStores(st,c)?`<button class="btn sm" disabled title="Торговый дом открывается, когда на всех полях синдиката построены все магазины">🔒 ТД — сначала все магазины синдиката</button>`:`<button class="btn sm red" data-act="build" data-v="${id}"${o.level>=ml?' disabled':''}>${o.level>=ml?'Развито полностью':o.level===c.maxStores?`Торговый дом ${rub(c.develop)}`:`Магазин ${rub(c.develop)}`}</button>`}${o.level>0?`<button class="btn sm ghost" data-act="unbuild" data-v="${id}" data-label="Продать постройку +${refund(c)} ₽">Продать постройку +${refund(c)} ₽</button>`:''}${grpBuilt(st,c)?`<span class="muted small">Продать патент можно, когда на полях синдиката нет построек</span>`:`<button class="btn sm ghost" data-act="patsell" data-v="${id}" data-label="Продать патент +${rub(patSellPrice(c))}">Продать патент +${rub(patSellPrice(c))}</button>`}</div>`:c.type==='utility'&&!readOnly?`<div class="pcact"><button class="btn sm ghost" data-act="patsell" data-v="${id}" data-label="Продать банку +${rub(patSellPrice(c))}">Продать банку +${rub(patSellPrice(c))}</button></div>`:''}</figure>`}).join('')}</div></div>`}).join(''):'<p class="muted">У вас пока нет патентов. Купите поле, на которое встала ваша фишка, — ниже список всех полей.</p>';
   const rowHtml=c=>{const o=st.own[c.id],rn=rentNow(st,c),mineC=o&&me&&o.pid===me.id;
     return `<div class="glr"><span class="gln">${c.code?c.code+' ':''}${esc(c.name)}${c.type==='utility'?` · выплата ${c.payment}`:''}</span><span class="glp">${rub(c.price)}</span>
     <span class="glo">${ownerTag(st,c.id)}${o?` <span class="lvl">${rn.label} · рента ${rub(rn.amount)}</span>`:''}</span>
@@ -1018,7 +1039,7 @@ function vPat(){const me=pById(meId()),st=state(),s=S(),mine=me?Object.keys(st.o
   return `${rentHtml}${me?`<section class="sheet"><h2>Мои патенты</h2><p class="muted small">Вложено в имущество: <b>${rub(inv.total)}</b> — патенты ${rub(inv.pat)}, постройки ${rub(inv.bld)}${inv.util?`, Вода и Энергия ${rub(inv.util)}`:''}${inv.sh?`, акции ${rub(inv.sh)}`:''}.</p>${myHtml}</section>`:'<section class="sheet"><p class="note">Выберите себя за столом, чтобы покупать и развивать патенты.</p></section>'}
   <section class="sheet"><h2>Все поля</h2><p class="muted small">Владелец, статус и текущая рента каждого поля. Встали на чужое поле — оплатите ренту владельцу кнопкой «Оплатить»: сумма считается по статусу — поле, синдикат, магазины или торговый дом.</p>${grp}
   <div class="gl" style="--c:#808080;--b:#CCCCCC;--gi:#333"><div class="glh"><b>Коммунальные</b><span>не развиваются</span></div>${utils.map(rowHtml).join('')}</div></section>`}
-function shSellPrice(g){return Math.ceil(sharePrice(g)*(+S().sellSharePct||0)/100-1e-9)}
+function shSellPrice(g){const st=state();return Math.ceil(sharePrice(g)+synCap(st,g)*(+S().sharePct||0)/100-1e-9)}
 function vShares(){const me=pById(meId()),st=state(),s=S(),lim=+s.shareLimit||10,lc=me?lapCalc(st,me.id):null;
   const rows=BOARD.groups.map(g=>{const cap=synCap(st,g.id),per=cap*(+s.sharePct||0)/100,iss=issued(st,g.id),my=me?((st.shares[g.id]||{})[me.id]||0):0,pr=sharePrice(g.id),holders=Object.entries(st.shares[g.id]||{}).filter(([,n])=>n>0);
     return `<div class="shr" style="--c:${g.color};--b:${g.band};--gi:${g.ink}"><div class="shb"></div><div class="shm"><div class="shh"><b>${esc(g.name)}</b><span>акция ${rub(pr)}</span></div>
@@ -1026,7 +1047,7 @@ function vShares(){const me=pById(meId()),st=state(),s=S(),lim=+s.shareLimit||10
     <div class="shs"><span>Капитализация <b>${rub(cap)}</b></span><span>Доход акции за круг <b>${fmt2(per)} ₽</b></span>${my?`<span>У вас <b>${my} шт</b></span>`:''}</div>
     <div class="shho">${holders.length?holders.map(([pid,n])=>`<span class="own">${spr(pById(pid))}${esc(who(pid))} — ${n} шт</span>`).join(''):'<span class="muted small">Владельцев пока нет</span>'}</div>
     ${me&&!readOnly?`<button class="btn sm${iss<lim?' red':''}" data-act="buysh" data-v="${g.id}"${iss>=lim?' disabled':''}>${iss>=lim?'Все акции проданы':`Купить акцию ${rub(pr)}`}</button>${my&&!isOut(me.id)?` <button class="btn sm ghost" data-act="sellsh" data-v="${g.id}" data-label="Продать банку +${rub(shSellPrice(g.id))}">Продать банку +${rub(shSellPrice(g.id))}</button>`:''}`:''}</div></div>`}).join('');
-  const rules=`<details class="shrules"><summary>Правила акций</summary><p class="muted small">Акция приносит ${String(s.sharePct).replace('.',',')}% капитализации своего синдиката при каждом вашем круге — даже если патенты синдиката у другого игрока. Капитализация — цены купленных патентов и постройки.</p><p class="rulebox small"><b>Лимит покупки.</b> За одну покупку — не больше 2 акций одного синдиката. Синдикатов в одной покупке может быть сколько угодно, но каждого — максимум 2 шт. Правило соблюдают сами игроки.</p><p class="muted small">Всего ${lim} акций на синдикат. Продать акцию банку можно за ${String(s.sellSharePct).replace('.',',')}% цены — она снова станет свободной.</p></details>`;
+  const rules=`<details class="shrules"><summary>Правила акций</summary><p class="muted small">Акция приносит ${String(s.sharePct).replace('.',',')}% капитализации своего синдиката при каждом вашем круге — даже если патенты синдиката у другого игрока. Капитализация — цены купленных патентов и постройки.</p><p class="rulebox small"><b>Лимит покупки.</b> За одну покупку — не больше 2 акций одного синдиката. Синдикатов в одной покупке может быть сколько угодно, но каждого — максимум 2 шт. Правило соблюдают сами игроки.</p><p class="muted small">Всего ${lim} акций на синдикат. Продать акцию банку можно по «зрелой» цене: цена покупки + ${String(s.sharePct).replace('.',',')}% текущей капитализации синдиката. Чем больше развит синдикат, тем дороже акция; после продажи она снова свободна.</p></details>`;
   return `<section class="sheet"><h2>Акции</h2>${me?`<div class="seg sub" style="margin:4px 0 6px">${[['mine','Мои акции'],['all','Все синдикаты']].map(([k,l])=>`<button class="${shTab===k?'on':''}" data-act="shtab" data-v="${k}">${l}</button>`).join('')}</div>`:''}${rules}</section>
   ${me&&shTab==='mine'?myShares(st,me,s,lim,lc):`${lc?`<div class="note" style="margin:0 0 12px">Ваши акции принесут на следующем круге <b>${rub(lc.sharesTot)}</b>.</div>`:''}<section class="sheet">${rows}</section>`}`}
 let shTab='mine';
@@ -1077,7 +1098,7 @@ function bEcon(){if(readOnly)return '<section class="sheet"><p class="muted">П�
   const s=setDraft||S(),sp=sprDraft||Object.fromEntries(BOARD.groups.map(g=>[g.id,sharePrice(g.id)]));
   const F=(k,l)=>`<label class="field"><span>${l}</span><input inputmode="decimal" data-set="${k}" value="${esc(s[k])}"></label>`;
   return `<section class="sheet"><h2>Налог</h2><p class="muted small">Налог = базовая ставка + процент от вложений игрока (патенты, постройки, акции по цене покупки).</p><div class="fgrid">${F('taxBase','Базовая ставка, ₽')}${F('taxPct','Процент от вложений')}</div></section>
-  <section class="sheet"><h2>Акции</h2><p class="muted small">Доход акции за круг = процент от капитализации её синдиката. Цена по умолчанию — «Развитие» синдиката.</p><div class="fgrid">${F('shareLimit','Акций на синдикат')}${F('sharePct','Доход за круг, %')}${F('sellSharePct','Продажа акции банку, % цены')}</div>
+  <section class="sheet"><h2>Акции</h2><p class="muted small">Доход акции за круг = процент от капитализации её синдиката. Цена по умолчанию — «Развитие» синдиката.</p><div class="fgrid">${F('shareLimit','Акций на синдикат')}${F('sharePct','Доход за круг, %')}</div>
   <div class="lbl">Цена акции, ₽</div><div class="fgrid">${BOARD.groups.map(g=>`<label class="field"><span><i class="sw" style="background:${g.color}"></i>${esc(g.name)}</span><input inputmode="numeric" data-spr="${g.id}" value="${esc(sp[g.id])}"></label>`).join('')}</div></section>
   <section class="sheet"><h2>Круг и индексация</h2><div class="fgrid">${F('passStart','Ставка за круг, ₽')}${F('idxStep','Прибавка, ₽')}${F('idxEvery','Каждые N кругов')}</div>
   <label class="chk" style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="checkbox" data-setbool="idxOn"${s.idxOn?' checked':''} style="width:20px;height:20px"> Индексация ставки за круг включена</label></section>
@@ -1091,7 +1112,7 @@ function vDice(){const me=pById(meId());
   <div class="dice${diceAnim?' roll':''}" style="--ds:${diceN>3?60:72}px">${vals.map(d=>d?dieHtml(d):'<span class="die" aria-hidden="true"></span>').join('')}</div>
   ${sum!=null?`<div class="big">${sum}</div>`:''}
   ${me?`<button class="btn red wide" data-act="roll">Бросить ${diceN} кубика</button><p class="muted small center" style="margin-top:8px">Результат сразу увидят все игроки.</p>`:'<p class="note">Выберите себя за столом, чтобы бросать кости.</p>'}</section>`}
-function vChance(){const me=pById(meId()),deck=(table.chance||[]).filter(c=>(+c.w||0)>0),m=me&&!isOut(me.id)&&!readOnly?me:null;
+function vChance(){const me=pById(meId()),deck=chanceDeck().filter(c=>(+c.w||0)>0),m=me&&!isOut(me.id)&&!readOnly?me:null;
   return `<section class="sheet"><h2>Шанс</h2><p class="muted small">Встали на клетку «Шанс» — тяните карточку. Карточку выполняете сами, а её текст сразу увидят все.</p>
   ${lastCard?`<div class="card${cardAnim?' pop':''}" style="margin-top:22px"><span class="num">Шанс</span><div class="tx">${esc(lastCard)}</div></div>`:''}
   ${m?`<button class="btn red wide" data-act="draw"${deck.length?'':' disabled'}>${deck.length?'Тянуть карточку':'Колода пуста'}</button>`:me?'':'<p class="note">Выберите себя за столом, чтобы тянуть карточки.</p>'}
@@ -1121,18 +1142,25 @@ function vFx(){const me=pById(meId()),{b}=ledger(),w=me?b[me.id]:null,left=fxOpe
   <button class="btn red wide" data-act="fx"${ok?'':' disabled'}>Подтвердить обмен</button></section>`:''}`}
 function vBank(){
   if(table.pin&&!bankOpen)return `<section class="sheet"><h2>Банк</h2><p class="muted">Здесь все счета, полная история и конструкторы шансов и курсов. Вкладка закрыта PIN-кодом ведущего.</p><div class="pin"><input id="pin" inputmode="numeric" maxlength="6" aria-label="PIN"><button class="btn" data-act="unlock">Открыть</button></div></section>`;
-  const subs=[['acc','Счета'],['topup','Пополнить'],['hist','История'],['econ','Налог и акции'],['chance','Шансы'],['rates','Курсы'],['final','Итоги'],['set','Настройки']];
+  const subs=[['acc','Счета'],['hist','История'],['econ','Налог и акции'],['chance','Шансы'],['rates','Курсы'],['final','Итоги'],['set','Настройки']];
   return `<section class="sheet"><h2>Банк</h2><p class="muted small">Вся подноготная стола: счета, история и конструкторы.</p><div class="seg sub">${subs.map(([k,l])=>`<button class="${bsub===k?'on':''}" data-act="bsub" data-v="${k}">${l}</button>`).join('')}</div></section>`+({acc:bAcc,topup:bTopup,hist:bHist,econ:bEcon,chance:bChance,rates:bRates,final:bFinal,set:bSet})[bsub]()}
-let topup={amount:'',dir:1};
-function bTopup(){const act=activeP(),a=+topup.amount||0,minus=topup.dir<0;
+let topup={amount:'',dir:1,mode:'all',pid:'',usd:''};
+function bTopup(){const act=activeP(),a=+topup.amount||0,minus=topup.dir<0,usdM=topup.mode==='usd';
   const past=evs.filter(e=>e.kind==='topup'&&!ledger().und.has(e.id));
-  return `<section class="sheet"><h2>${minus?'Списать со всех':'Пополнить всех'}</h2><p class="muted small">Корректировка стартового капитала по договорённости всех игроков, без сброса партии. Сумма одинаково ${minus?'списывается со счёта':'зачисляется на счёт'} каждого игрока в игре (${act.length}); вышедшие не участвуют. Операцию увидят все в ленте.</p>
-  <div class="seg"><button class="${minus?'':'on'}" data-act="tdir" data-v="1">Пополнить</button><button class="${minus?'on':''}" data-act="tdir" data-v="-1">Списать</button></div>
+  const modes=`<div class="seg"><button class="${!usdM&&!minus?'on':''}" data-act="tdir" data-v="1">Пополнить всем</button><button class="${!usdM&&minus?'on':''}" data-act="tdir" data-v="-1">Списать всем</button><button class="${usdM?'on':''}" data-act="tmode" data-v="usd">Валюта игроку</button></div>`;
+  const hist=past.length?`<section class="sheet"><h2>Прошлые пополнения</h2>${past.slice().reverse().map(e=>`<p class="small">${new Date(e.ts).toLocaleString('ru-RU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})} — ${e.cur==='usd'?`${e.amount<0?'−':'+'}${usd(Math.abs(e.amount))} → ${(e.to||[]).map(x=>esc(who(x))).join(', ')}`:`${e.amount<0?'−':'+'}${rub(Math.abs(e.amount))} каждому (${(e.to||[]).length})`}, ${esc(e.pid?who(e.pid):'банк')}</p>`).join('')}</section>`:'';
+  if(usdM){const u=+topup.usd||0,sel=pById(topup.pid);
+    return `<section class="sheet"><h2>Валюта игроку</h2><p class="muted small">Для карточек Шанса «+5 долларов» и «+10 долларов». Выберите игрока и сумму — доллары придут на его счёт, у него проиграется анимация, а в бегущей строке операция будет выделена.</p>${modes}
+    <div class="lbl">Кому</div><div class="chips">${act.map(p=>`<button class="chip${topup.pid===p.id?' on':''}" data-act="tpid" data-v="${p.id}">${spr(p)} ${esc(p.name)}</button>`).join('')}</div>
+    <label class="field"><span>Сумма, $</span><input class="amt" inputmode="numeric" data-in="topUsd" value="${esc(topup.usd)}" placeholder="0"></label>
+    <div class="chips">${[5,10].map(x=>`<button class="chip${u===x?' on':''}" data-act="tusd" data-v="${x}">+${x} $</button>`).join('')}</div>
+    ${readOnly?'':`<button class="btn red wide" style="margin-top:12px" data-act="topusd"${sel&&u>0?'':' disabled'} data-label="Точно? +${u} $ → ${esc(sel?sel.name:'')}">${sel&&u>0?`Начислить +${usd(u)} — ${esc(sel.name)}`:'Выберите игрока и сумму'}</button>`}</section>${hist}`}
+  return `<section class="sheet"><h2>${minus?'Списать со всех':'Пополнить всех'}</h2><p class="muted small">Корректировка стартового капитала по договорённости всех игроков, без сброса партии. Сумма одинаково ${minus?'списывается со счёта':'зачисляется на счёт'} каждого игрока в игре (${act.length}); вышедшие не участвуют. Операция выделяется в бегущей строке.</p>
+  ${modes}
   <label class="field"><span>Сумма каждому игроку, ₽</span><input class="amt" inputmode="numeric" data-in="topAmt" value="${esc(topup.amount)}" placeholder="0"></label>
   <div class="chips">${[100,250,500,1000].map(x=>`<button class="chip" data-act="tpick" data-v="${x}">${x}</button>`).join('')}</div>
   <p class="muted small" id="topHint">${a>0?`Каждому ${minus?'−':'+'}${rub(a)}, всего ${minus?'спишется':'выдаст банк'} ${rub(a*act.length)}.`:'Введите сумму.'}</p>
-  ${readOnly?'':`<button class="btn ${minus?'':'red'} wide" data-act="topup" data-label="Точно? ${minus?'−':'+'}${a} ₽ каждому">${minus?'Списать':'Пополнить'} всем${a>0?` ${minus?'−':'+'}${rub(a)}`:''}</button>`}</section>
-  ${past.length?`<section class="sheet"><h2>Прошлые корректировки</h2>${past.slice().reverse().map(e=>`<p class="small">${new Date(e.ts).toLocaleString('ru-RU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})} — ${e.amount<0?'−':'+'}${rub(Math.abs(e.amount))} каждому (${(e.to||[]).length}), ${esc(e.pid?who(e.pid):'банк')}</p>`).join('')}</section>`:''}`}
+  ${readOnly?'':`<button class="btn ${minus?'':'red'} wide" data-act="topup" data-label="Точно? ${minus?'−':'+'}${a} ₽ каждому">${minus?'Списать':'Пополнить'} всем${a>0?` ${minus?'−':'+'}${rub(a)}`:''}</button>`}</section>${hist}`}
 function bFinal(){const {und}=ledger(),cr=curRate(),rate=cr?cr.sell:0,live=evs.filter(e=>!und.has(e.id)),rows=finalRows();
   const sum=f=>{const m={};players().forEach(p=>m[p.id]=0);live.forEach(e=>f(e,m));return m};
   const rentPaid=sum((e,m)=>{if(e.kind==='pay'&&/рента/i.test(e.note||'')&&m[e.from]!=null)m[e.from]+=+e.amount});
@@ -1152,12 +1180,12 @@ function bHist(){const {und}=ledger(),kinds={all:'Все',pay:'Деньги',pro
   const hist=evs.filter(e=>e.kind!=='join'&&e.kind!=='claim'&&e.kind!=='emo'&&e.kind!=='react'&&(hFilter==='all'||e.kind===hFilter||(hFilter==='prop'&&['buy','build','unbuild'].includes(e.kind))||(hFilter==='deal'&&['deal','dealOk','offerResp','offer'].includes(e.kind)))&&(!hWho||e.pid===hWho||e.from===hWho||e.to===hWho)).slice().reverse().slice(0,200);
   return `<section class="sheet"><h2>История</h2>${table.cp?`<p class="muted small">Ранние события (${table.cp.n||0}) свёрнуты в итоговые балансы — так журнал не переполняется.</p>`:''}<button class="btn ghost sm" data-act="export" style="margin-bottom:8px">Скачать историю (CSV)</button><div class="chips">${Object.entries(kinds).map(([k,l])=>`<button class="chip${hFilter===k?' on':''}" data-act="hf" data-v="${k}">${l}</button>`).join('')}</div>
   <div class="chips"><button class="chip${!hWho?' on':''}" data-act="hw" data-v="">Все игроки</button>${players().map(p=>`<button class="chip${hWho===p.id?' on':''}" data-act="hw" data-v="${p.id}">${esc(p.name)}</button>`).join('')}</div>
-  ${hist.length?`<ul class="hl" style="margin-top:8px">${hist.map(e=>{const fl=state().failed.has(e.id),can=!readOnly&&!fl&&['pay','fx','loan','buy','build','unbuild','share','shsell'].includes(e.kind)&&!und.has(e.id);return `<li class="${und.has(e.id)?'off':''}"><span class="tm">${new Date(e.ts).toLocaleString('ru-RU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</span><span class="tx">${esc(describe(e))}${fl?' <span class="neg small">(не проведено)</span>':''}</span>${can?`<button class="undo" data-act="undo" data-v="${esc(e.id)}" data-label="Отменить">Отменить</button>`:'<span></span>'}</li>`}).join('')}</ul>`:'<p class="muted" style="margin-top:8px">Событий нет.</p>'}</section>`}
-function bChance(){const dk=deckDraft||(table.chance||[]).map(c=>({text:c.text,w:+c.w||0})),tot=dk.reduce((a,c)=>a+(+c.w||0),0);
+  ${hist.length?`<ul class="hl" style="margin-top:8px">${hist.map(e=>{const fl=state().failed.has(e.id),can=!readOnly&&!fl&&['pay','fx','loan','buy','build','unbuild','share','shsell','patsell'].includes(e.kind)&&!und.has(e.id);return `<li class="${und.has(e.id)?'off':''}"><span class="tm">${new Date(e.ts).toLocaleString('ru-RU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</span><span class="tx">${esc(describe(e))}${fl?' <span class="neg small">(не проведено)</span>':''}</span>${can?`<button class="undo" data-act="undo" data-v="${esc(e.id)}" data-label="Отменить">Отменить</button>`:'<span></span>'}</li>`}).join('')}</ul>`:'<p class="muted" style="margin-top:8px">Событий нет.</p>'}</section>`}
+function bChance(){const dk=deckDraft||chanceDeck().map(c=>({text:c.text,w:+c.w||0})),tot=dk.reduce((a,c)=>a+(+c.w||0),0);
   return `<section class="sheet"><h2>Конструктор шансов</h2><p class="muted small">Карточка выпадает случайно. Частота — во сколько раз чаще остальных: 1 — обычная, 2 — вдвое чаще, 0 — убрана из колоды. Над каждой карточкой видно, с какой вероятностью она выпадет сейчас.</p>
   ${readOnly?'':`<button class="btn ghost wide" data-act="dadd"${dk.length>=50?' disabled':''}>Добавить карточку (${dk.length} из 50)</button>`}
   <div class="deck" style="margin-top:10px">${dk.map((c,i)=>`<div class="ccard"><span class="no">Карточка ${i+1}${tot&&+c.w?`, шанс ${Math.round((+c.w)/tot*1000)/10}%`:', не выпадает'}</span><textarea rows="2" aria-label="Текст карточки ${i+1}" data-dk="${i}" placeholder="Текст новой карточки"${readOnly?' readonly':''}>${esc(c.text)}</textarea><span class="side"><input inputmode="numeric" aria-label="Частота карточки ${i+1}" data-dw="${i}" value="${esc(c.w)}"${readOnly?' readonly':''}><span>частота</span>${readOnly?'':`<button class="btn ghost sm" data-act="ddel" data-v="${i}" aria-label="Удалить карточку ${i+1}">✕</button>`}</span></div>`).join('')}</div>
-  ${readOnly?'':dk.length>=50?'<p class="muted small" style="margin-top:10px">Достигнут предел: 50 карточек.</p>':'<button class="btn ghost wide" data-act="dadd">Добавить карточку</button>'}${deckDraft?'<div class="savebar"><button class="btn red" style="flex:1" data-act="dsave">Сохранить колоду</button><button class="btn ghost" data-act="dreset">Отменить</button></div>':''}</section>`}
+  ${readOnly?'':dk.length>=50?'<p class="muted small" style="margin-top:10px">Достигнут предел: 50 карточек.</p>':'<button class="btn ghost wide" data-act="dadd">Добавить карточку</button>'}${readOnly?'':`<button class="btn ghost wide" style="margin-top:8px" data-act="ddef">Стандартная колода (${DECK.length} карточек)</button>`}${deckDraft?'<div class="savebar"><button class="btn red" style="flex:1" data-act="dsave">Сохранить колоду</button><button class="btn ghost" data-act="dreset">Отменить</button></div>':''}</section>`}
 function bRates(){const rd=ratesDraft||rates().map(x=>({buy:x.buy,sell:x.sell,w:x.w})),tot=rd.reduce((a,x)=>a+(+x.w||0),0),bad=rd.some(x=>+x.sell>+x.buy);
   return `<section class="sheet"><h2>Конструктор курсов</h2><p class="muted small">«Узнать курс» выдаёт случайную строку из этого списка. «Купить» — почём игрок покупает доллар у банка, «Продать» — почём продаёт. Частота работает как у шансов.</p>
   ${bad?'<p class="note">В некоторых строках продать дороже, чем купить: так можно бесконечно зарабатывать на обмене туда-обратно.</p>':''}
@@ -1190,7 +1218,7 @@ function playEmo(x,label,small){const el=document.createElement('div');el.classN
 function renderEmoBar(){const el=$('#emobar');if(!el)return;if(document.activeElement&&document.activeElement.id==='emoTo')return;if(!(view==='table'&&table)){el.innerHTML='';return}const me=pById(meId());
   el.innerHTML=`${me&&!readOnly?`<div class="ebx"><select id="emoTo" aria-label="Кому отправить">${[['all','Всем']].concat(players().filter(p=>p.id!==me.id).map(p=>[p.id,p.name])).map(([id,n])=>`<option value="${esc(id)}"${emoTo===id?' selected':''}>${esc(n)}</option>`).join('')}</select><div class="ems">${EMOS.map(x=>`<button class="em" data-act="emo" data-v="${x}" aria-label="Отправить ${x}">${x}</button>`).join('')}</div></div>`:''}`}
 function renderDiceBar(){const el=$('#dicebar');if(!el)return;if(document.activeElement&&document.activeElement.id==='emoTo')return;if(!(view==='table'&&table)){el.innerHTML='';return}if(diceRolling)return;
-  const me=pById(meId()),can=!!me&&!readOnly&&!isOut(me.id),deck=(table.chance||[]).filter(c=>(+c.w||0)>0),vals=lastDice&&lastDice.length===diceN?lastDice:null,sum=vals?vals.reduce((a,b)=>a+b,0):null;
+  const me=pById(meId()),can=!!me&&!readOnly&&!isOut(me.id),deck=chanceDeck().filter(c=>(+c.w||0)>0),vals=lastDice&&lastDice.length===diceN?lastDice:null,sum=vals?vals.reduce((a,b)=>a+b,0):null;
   el.innerHTML=`<div class="db"><button class="dn" data-act="dcycle" aria-label="Число кубиков: ${diceN}. Нажмите, чтобы изменить">⚂ ${diceN}</button>
   <div class="dd" aria-live="polite">${(vals||Array(diceN).fill(0)).map(d=>d?dieHtml(d):'<span class="die empty" aria-hidden="true"></span>').join('')}</div>
   <span class="ds">${sum!=null?sum:''}</span>
@@ -1222,6 +1250,9 @@ setInterval(()=>{const ae=document.activeElement;if(view==='table'&&tab==='me'&&
 /* ---------- events ---------- */
 document.addEventListener('input',e=>{const el=e.target,d=el.dataset,num=v=>String(v).replace(/[^\d]/g,'');
   if(d.in){const k=d.in;
+    if(k==='gtAmt'){gt.amount=num(el.value);const bt=$('[data-act=gtgo]');if(bt)bt.textContent=gtLabel();return}
+    if(k==='gtNote'){gt.note=el.value;return}
+    if(k==='topUsd'){topup.usd=num(el.value);const u=+topup.usd||0,p=pById(topup.pid),bt=$('[data-act=topusd]');if(bt){bt.disabled=!(p&&u>0);bt.textContent=p&&u>0?`Начислить +${usd(u)} — ${p.name}`:'Выберите игрока и сумму';bt.dataset.label=`Точно? +${u} $ → ${p?p.name:''}`}return}
     if(k==='topAmt'){topup.amount=num(el.value);const a=+topup.amount||0,n=activeP().length,h=$('#topHint'),m=topup.dir<0;if(h)h.textContent=a>0?`Каждому ${m?'−':'+'}${rub(a)}, всего ${m?'спишется':'выдаст банк'} ${rub(a*n)}.`:'Введите сумму.';const bt=$('[data-act=topup]');if(bt){bt.textContent=`${m?'Списать':'Пополнить'} всем${a>0?` ${m?'−':'+'}${rub(a)}`:''}`;bt.dataset.label=`Точно? ${m?'−':'+'}${a} ₽ каждому`}return}
     if(k==='patQ'){patQ=el.value;const q=patQ.trim().toLowerCase();let n=0;document.querySelectorAll('.rli').forEach(b=>{const h=!!q&&!b.dataset.k.includes(q);b.hidden=h;if(!h)n++});const z=$('.rnone');if(z)z.hidden=n>0;return}
     if(k==='payAmt'){pay.amount=num(el.value);pay.okNeg=false}else if(k==='getAmt'){get.amount=num(el.value);get.lap=false;get.stock=0}else if(k==='payAmt2'){}else if(k==='loanAmt'){loan.amount=num(el.value);renderFxHint()}else if(k==='roulBet'){roul.bet=num(el.value);roul.res=null}else if(k==='dealText'){dealB=dealB||blankDeal();dealB.text=el.value}else if(/^d(give|take)\.(rub|usd)$/.test(k)){dealB=dealB||blankDeal();const [sd,f]=k.slice(1).split('.');dealB[sd][f]=num(el.value)}else if(k==='presetName')presetName=el.value;else if(k==='joinCode')joinCode=num(el.value);else if(k==='getNote')get.note=el.value;
@@ -1231,8 +1262,8 @@ document.addEventListener('input',e=>{const el=e.target,d=el.dataset,num=v=>Stri
     else if(k.startsWith('np.'))draftT.players[+k.slice(3)].name=el.value}
   else if(d.set){setDraft=setDraft||S();setDraft[d.set]=String(el.value).replace(/[^\d.,]/g,'').replace(',','.')}
   else if(d.spr!=null){sprDraft=sprDraft||Object.fromEntries(BOARD.groups.map(g=>[g.id,sharePrice(g.id)]));sprDraft[d.spr]=num(el.value)}
-  else if(d.dk!=null){deckDraft=deckDraft||(table.chance||[]).map(c=>({text:c.text,w:+c.w||0}));deckDraft[+d.dk].text=el.value;draftChanged('dsave')}
-  else if(d.dw!=null){deckDraft=deckDraft||(table.chance||[]).map(c=>({text:c.text,w:+c.w||0}));deckDraft[+d.dw].w=num(el.value);draftChanged('dsave')}
+  else if(d.dk!=null){deckDraft=deckDraft||chanceDeck().map(c=>({text:c.text,w:+c.w||0}));deckDraft[+d.dk].text=el.value;draftChanged('dsave')}
+  else if(d.dw!=null){deckDraft=deckDraft||chanceDeck().map(c=>({text:c.text,w:+c.w||0}));deckDraft[+d.dw].w=num(el.value);draftChanged('dsave')}
   else if(d.rb!=null||d.rs!=null||d.rw!=null){ratesDraft=ratesDraft||rates().map(x=>({buy:x.buy,sell:x.sell,w:x.w}));const i=+(d.rb??d.rs??d.rw),f=d.rb!=null?'buy':d.rs!=null?'sell':'w';ratesDraft[i][f]=num(el.value);draftChanged('rsave')}
   else if(d.nm!=null){namesDraft=namesDraft||players().map(p=>p.name);namesDraft[+d.nm]=el.value}});
 function renderFxHint(){clearTimeout(renderFxHint.t);renderFxHint.t=setTimeout(()=>{const a=document.activeElement,k=a&&a.dataset.in,pos=a&&a.selectionStart;render();if(k){const n=$(`[data-in=${k}]`);if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch(_){}}}},450)}
@@ -1244,7 +1275,7 @@ document.addEventListener('click',async e=>{
   const b=e.target.closest('[data-act]');if(!b||b.disabled)return;const a=b.dataset.act,v=b.dataset.v;
   if(b.dataset.label!==undefined&&b.dataset.armed!=='1'){b.dataset.armed='1';b.textContent='Точно?';setTimeout(()=>{if(b.isConnected){b.dataset.armed='';b.textContent=b.dataset.label}},2500);return}
   const me=meId();
-  if(view==='table'&&isPaused()&&!['tab','tick','lobby','open','seat','iam','resume','bsub','hf','hw','theme','unlock','export','pick','lapopen','dn','dcycle','fxside','lrounds','rk','csum','tdir','tpick','shtab'].includes(a)){toast('Игра на паузе. Нажмите «▶ Продолжить», чтобы играть дальше.');return}
+  if(view==='table'&&isPaused()&&!['tab','tick','lobby','open','seat','iam','resume','bsub','hf','hw','theme','unlock','export','pick','lapopen','dn','dcycle','fxside','lrounds','rk','csum','tdir','tpick','shtab','tmode','tpid','tusd','gtto','gtcur','gtpick','gtdir'].includes(a)){toast('Игра на паузе. Нажмите «▶ Продолжить», чтобы играть дальше.');return}
   switch(a){
     case 'tab':tab=v;view='table';window.scrollTo(0,0);break;
     case 'tick':tickOpen=!tickOpen;break;
@@ -1291,13 +1322,23 @@ document.addEventListener('click',async e=>{
     case 'forget':{const h=lget('nepbank2.hidden',[]);if(!h.includes(v))h.push(v);lset('nepbank2.hidden',h.slice(-200));
       const my=lget('nepbank2.my',null);if(Array.isArray(my)&&my.includes(v)){lset('nepbank2.my',my.filter(x=>x!==v));window.dispatchEvent(new Event('nepmy'))}
       toast('Стол убран из списка на этом устройстве.');break}
-    case 'draw':{const deck=(table.chance||[]).filter(c=>(+c.w||0)>0),tot=deck.reduce((s,c)=>s+(+c.w),0);let r=rint(tot),pick=deck[0];for(const c of deck){r-=+c.w;if(r<0){pick=c;break}}
+    case 'draw':{const deck=chanceDeck().filter(c=>(+c.w||0)>0),tot=deck.reduce((s,c)=>s+(+c.w),0);let r=rint(tot),pick=deck[0];for(const c of deck){r-=+c.w;if(r<0){pick=c;break}}
       if(await addEv({kind:'chance',pid:me,text:pick.text})){lastCard=pick.text;cardAnim=true}break}
     case 'rate':{const s=S(),list=rates().filter(x=>(+x.w||0)>0);if(!list.length){toast('В конструкторе нет курсов.');return}const tot=list.reduce((t,x)=>t+(+x.w),0);let r=rint(tot),pk=list[0];for(const x of list){r-=+x.w;if(r<0){pk=x;break}}
       if(await addEv({kind:'rate',pid:me,buy:+pk.buy,sell:+pk.sell})){if(s.fxMode!=='always')lset('nepbank2.fx.'+tid,Date.now()+(+s.fxMinutes||5)*60000);toast(`Курс: купить по ${pk.buy} ₽, продать по ${pk.sell} ₽. Биржа открыта.`)}fxRub=fxUsd?String((+fxUsd)*(fxSide==='buy'?+pk.buy:+pk.sell)):'';break}
     case 'bsub':bsub=v;break;
     case 'join':{const c=(joinCode||'').trim();if(!/^\d{4}$/.test(c)){toast('Введите код из четырёх цифр.');return}b.disabled=true;let id=null;try{id=await store.findCode(c)}catch(_){}b.disabled=false;if(!id){toast('Стол с таким кодом не найден. Проверьте код и интернет.');return}joinCode='';openTable(id);if(!meId())view='seat';render();return}
-    case 'tdir':topup.dir=+v;break;
+    case 'gtto':gt.to=v;break;
+    case 'gtcur':gt.cur=v;gt.amount='';break;
+    case 'gtpick':gt.amount=v;break;
+    case 'gtdir':gt.dir=gt.dir<0?1:-1;break;
+    case 'gtgo':{const a=+gt.amount||0;if(!gt.to||a<=0){toast('Выберите получателя и сумму.');return}const to=gt.to==='all'?activeP().map(p=>p.id):[gt.to];if(!to.length||to.some(x=>!pById(x)||isOut(x)))return;
+      if(await addEv({kind:'topup',cur:gt.cur,amount:a*gt.dir,to,all:gt.to==='all'?1:0,note:gt.note.trim().slice(0,60),pid:me})){gt.amount='';gt.note='';gt.dir=1}break}
+    case 'tdir':topup.dir=+v;topup.mode='all';break;
+    case 'tmode':topup.mode=v;break;
+    case 'tpid':topup.pid=v;break;
+    case 'tusd':topup.usd=v;break;
+    case 'topusd':{const u=+topup.usd||0,p=pById(topup.pid);if(!p||u<=0||isOut(p.id)){toast('Выберите игрока и сумму.');return}if(await addEv({kind:'topup',cur:'usd',amount:u,to:[p.id],note:'Шанс',pid:me||undefined})){toast(`Начислено ${usd(u)} — ${p.name}`);topup.usd='';topup.pid=''}break}
     case 'tpick':topup.amount=v;break;
     case 'topup':{const a=+topup.amount||0;if(a<=0){toast('Введите сумму.');return}const to=activeP().map(p=>p.id);if(!to.length)return;
       if(await addEv({kind:'topup',amount:a*topup.dir,to,pid:me||undefined})){toast(`${topup.dir<0?'Списано':'Пополнено'}: ${to.length} × ${rub(a)}`);topup.amount=''}break}
@@ -1307,6 +1348,7 @@ document.addEventListener('click',async e=>{
     case 'lap':{const st=state(),lc=lapCalc(st,me);if(await addEv({kind:'pay',from:'bank',to:me,amount:lc.total,lap:true,note:`Круг ${lc.k}: ставка ${lc.base}${lc.sharesTot?` + акции ${lc.sharesTot}`:''}`,pid:me}))await repayLoans(me);break}
     case 'buyp':{const c=cellById(v);if(!c||state().own[v]){toast('Это поле уже куплено.');break}await addEv({kind:'buy',cell:v,price:c.price,pid:me});break}
     case 'build':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o||o.pid!==me||o.level>=maxLevel(c))break;if(!fullSyn(st,c)){toast(`Сначала соберите синдикат «${(GRP(c.group)||{name:''}).name}» — все его патенты.`);break}if(o.level===c.maxStores&&!allStores(st,c)){toast(`Торговый дом — после того, как на всех полях синдиката построены все магазины (${c.maxStores}).`);break}await addEv({kind:'build',cell:v,cost:c.develop,lvl:o.level+1,pid:me,syn:1});break}
+    case 'patsell':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o||o.pid!==me)break;if(grpBuilt(st,c)){toast(`Сначала продайте все постройки синдиката «${(GRP(c.group)||{name:''}).name}».`);break}await addEv({kind:'patsell',cell:v,price:patSellPrice(c),pid:me});break}
     case 'unbuild':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o||o.pid!==me||o.level<=0)break;await addEv({kind:'unbuild',cell:v,refund:Math.round(c.develop*(+S().sellBuildPct||0)/100),pid:me});break}
     case 'rentsel':{rentSel=v;render();setTimeout(()=>{const r=$('#rentcard');if(r)r.scrollIntoView({behavior:reduceMo?'auto':'smooth',block:'start'})},30);return}
     case 'rentclose':rentSel=null;break;
@@ -1343,7 +1385,7 @@ document.addEventListener('click',async e=>{
       const wh=$('#rwh');if(!wh||reduceMo){finish();return}
       roulSpin=true;b.disabled=true;wh.style.transition='transform 2.4s cubic-bezier(.15,.7,.2,1)';requestAnimationFrame(()=>{wh.style.transform=`rotate(${roulRot}deg)`});setTimeout(finish,2550);return}
     case 'announce':{const rows=finalRows();await addEv({kind:'final',pid:me||'',rank:rows.map(r=>({id:r.p.id,cap:Math.round(r.cap)}))});toast('Итоги объявлены всем игрокам.');break}
-    case 'savepreset':{const name=(presetName||'').trim();if(!name){toast('Введите название набора.');return}try{await store.addPreset({name:name.slice(0,40),created:Date.now(),settings:S(),rates:rates(),chance:table.chance||[],sharePrices:table.sharePrices||null});presetName='';toast(`Набор «${name}» сохранён.`)}catch(_){toast('Не удалось сохранить набор.')}break}
+    case 'savepreset':{const name=(presetName||'').trim();if(!name){toast('Введите название набора.');return}try{await store.addPreset({name:name.slice(0,40),created:Date.now(),settings:S(),rates:rates(),chance:chanceDeck(),sharePrices:table.sharePrices||null});presetName='';toast(`Набор «${name}» сохранён.`)}catch(_){toast('Не удалось сохранить набор.')}break}
     case 'export':{const dl=window.claude&&window.claude.use?await window.claude.use('downloads'):null;
       const q=x=>'"'+String(x).replace(/"/g,'""')+'"',rows=[['Время','Событие','Отменено']].concat(evs.filter(e=>e.kind!=='react'&&e.kind!=='join'&&e.kind!=='claim'&&e.kind!=='emo').map(e=>[new Date(e.ts).toLocaleString('ru-RU'),describe(e),ledger().und.has(e.id)?'да':'']));
       const name=(table.name||'стол').replace(/[^\wа-яё\- ]/gi,'').trim()||'стол';
@@ -1367,8 +1409,9 @@ document.addEventListener('click',async e=>{
     case 'saveset':{if(!setDraft)return;const s={v3:true};for(const k of Object.keys(DEFSET))s[k]=k==='fxMode'?setDraft.fxMode:BOOLSET.has(k)?!!setDraft[k]:Math.max(0,+String(setDraft[k]).replace(',','.')||0);
       if(s.rateMin>s.rateMax){toast('Нижняя граница курса больше верхней.');return}
       try{await store.updateTable(tid,{settings:s});setDraft=null;toast('Настройки сохранены.')}catch(_){toast('Не удалось сохранить.')}break}
-    case 'dadd':{deckDraft=deckDraft||(table.chance||[]).map(c=>({text:c.text,w:+c.w||0}));if(deckDraft.length>=50){toast('В колоде максимум 50 карточек.');return}deckDraft.push({text:'',w:1});render();const t=$(`[data-dk="${deckDraft.length-1}"]`);if(t){t.scrollIntoView({block:'center',behavior:'smooth'});t.focus()}return}
-    case 'ddel':deckDraft=deckDraft||(table.chance||[]).map(c=>({text:c.text,w:+c.w||0}));deckDraft.splice(+v,1);break;
+    case 'dadd':{deckDraft=deckDraft||chanceDeck().map(c=>({text:c.text,w:+c.w||0}));if(deckDraft.length>=50){toast('В колоде максимум 50 карточек.');return}deckDraft.push({text:'',w:1});render();const t=$(`[data-dk="${deckDraft.length-1}"]`);if(t){t.scrollIntoView({block:'center',behavior:'smooth'});t.focus()}return}
+    case 'ddef':deckDraft=DECK.map(t=>({text:t,w:1}));toast('Стандартная колода подставлена. Нажмите «Сохранить колоду».');break;
+    case 'ddel':deckDraft=deckDraft||chanceDeck().map(c=>({text:c.text,w:+c.w||0}));deckDraft.splice(+v,1);break;
     case 'dreset':deckDraft=null;break;
     case 'dsave':{const d=deckDraft.map(c=>({text:String(c.text||'').trim().slice(0,200),w:Math.max(0,+c.w||0)})).filter(c=>c.text);
       try{await store.updateTable(tid,{chance:d});deckDraft=null;toast('Колода сохранена — она уже у всех игроков.')}catch(_){toast('Не удалось сохранить колоду.')}break}
