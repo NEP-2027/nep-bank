@@ -536,6 +536,18 @@ header{flex-wrap:wrap}
 .emobar{max-width:640px;margin:0 auto 8px;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
 .emobar:empty{display:none}
 .emobar .ebx{margin-top:0}
+.rlist{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.rli{appearance:none;display:grid;grid-template-columns:10px minmax(0,1fr) auto auto;align-items:center;gap:8px;width:100%;text-align:left;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;border-radius:10px;padding:8px 10px;min-height:48px;cursor:pointer}
+.rli .sw{width:10px;height:28px;border-radius:3px;display:block}
+.rli .rln{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.rli .rlo{display:flex;align-items:center;gap:4px;font-size:13px;white-space:nowrap}.rli .rlo .spr{width:18px}
+.rli .rla{color:var(--red,#C8372D);white-space:nowrap}
+.rentcard{outline:2px solid var(--red,#C8372D);outline-offset:-2px}
+.rli[hidden],.rnone[hidden]{display:none!important}
+#rentcard{scroll-margin-top:96px}
+.rcw{display:flex;gap:14px;align-items:center;margin:8px 0 14px}
+.rcp{flex:none;width:120px}.rci{min-width:0;flex:1}
+.rco{display:flex;align-items:center;gap:6px;font-size:17px;margin:6px 0}.rco .spr{width:24px}
 </style>
 </head>
 <body>
@@ -952,6 +964,7 @@ function pcCard(c,o,full){const g=c.type==='patent'?GRP(c.group):null;
   <div class="st">${c.rent.stores.map((v,i)=>`<div class="${lv===i+1?'hl':''}">${i+1} ${i?'магазина':'магазин'} ${v}</div>`).join('')}<div class="${lv>c.maxStores?'hl':''}">Торговый дом ${c.rent.tradeHouse}</div></div></div>
   <div class="pcd">Развитие ${c.develop}</div></div>`}
 function ownerTag(st,id){const o=st.own[id];if(!o)return '<span class="muted small">в банке</span>';const p=pById(o.pid);return `<span class="own">${p?spr(p):''}${esc(who(o.pid))}</span>`}
+let rentSel=null,patQ='';
 function vPat(){const me=pById(meId()),st=state(),s=S(),mine=me?Object.keys(st.own).filter(id=>st.own[id].pid===me.id):[];
   const inv=me?invest(st,me.id):null,refund=c=>Math.round(c.develop*(+s.sellBuildPct||0)/100);
   const myHtml=mine.length?BOARD.groups.concat([{id:'__util',name:'Коммунальные'}]).map(g=>{const ids=BCELLS.filter(c=>(g.id==='__util'?c.type==='utility':c.group===g.id)&&mine.includes(c.id)).map(c=>c.id);if(!ids.length)return '';
@@ -962,11 +975,26 @@ function vPat(){const me=pById(meId()),st=state(),s=S(),mine=me?Object.keys(st.o
   const rowHtml=c=>{const o=st.own[c.id],rn=rentNow(st,c),mineC=o&&me&&o.pid===me.id;
     return `<div class="glr"><span class="gln">${c.code?c.code+' ':''}${esc(c.name)}${c.type==='utility'?` · выплата ${c.payment}`:''}</span><span class="glp">${rub(c.price)}</span>
     <span class="glo">${ownerTag(st,c.id)}${o?` <span class="lvl">${rn.label} · рента ${rub(rn.amount)}</span>`:''}</span>
-    ${!o&&me&&!readOnly?`<button class="btn sm" data-act="buyp" data-v="${c.id}">Купить</button>`:o&&me&&!mineC&&!readOnly?`<button class="btn sm red" data-act="rentpay" data-v="${c.id}">Оплатить ${rub(rn.amount)}</button>`:'<span></span>'}</div>`};
+    ${!o&&me&&!readOnly?`<button class="btn sm" data-act="buyp" data-v="${c.id}">Купить</button>`:o&&me&&!mineC&&!readOnly?`<button class="btn sm red" data-act="rentsel" data-v="${c.id}">Оплатить ${rub(rn.amount)}</button>`:'<span></span>'}</div>`};
   const grp=BOARD.groups.map(g=>{const cs=BCELLS.filter(c=>c.group===g.id),cap=synCap(st,g.id),f=cs.length&&fullSyn(st,cs[0]);
     return `<div class="gl" style="--c:${g.color};--b:${g.band};--gi:${g.ink}"><div class="glh"><b>${esc(g.name)}</b><span>${f?`<span class="syn-badge">Синдикат: ${esc(who(st.own[cs[0].id].pid))}</span> `:''}капитализация ${rub(cap)}</span></div>${cs.map(rowHtml).join('')}</div>`}).join('');
   const utils=BCELLS.filter(c=>c.type==='utility');
-  return `${me?`<section class="sheet"><h2>Мои патенты</h2><p class="muted small">Вложено в имущество: <b>${rub(inv.total)}</b> — патенты ${rub(inv.pat)}, постройки ${rub(inv.bld)}${inv.util?`, Вода и Энергия ${rub(inv.util)}`:''}${inv.sh?`, акции ${rub(inv.sh)}`:''}.</p>${myHtml}</section>`:'<section class="sheet"><p class="note">Выберите себя за столом, чтобы покупать и развивать патенты.</p></section>'}
+  const others=me?BCELLS.filter(c=>st.own[c.id]&&st.own[c.id].pid!==me.id):[];
+  const sel=rentSel&&st.own[rentSel]&&me&&st.own[rentSel].pid!==me.id?cellById(rentSel):null;
+  let rentHtml='';
+  if(me&&!readOnly&&!isOut(me.id)){
+    if(sel){const o=st.own[sel.id],rn=rentNow(st,sel),ow=pById(o.pid),g=sel.type==='patent'&&fullSyn(st,sel);
+      rentHtml=`<section class="sheet rentcard" id="rentcard"><h2>Оплата ренты</h2><div class="rcw"><div class="rcp">${pcCard(sel,o,g)}</div><div class="rci">
+        <div class="muted small">${sel.code?sel.code+' · ':''}${esc(sel.name)}</div><div class="rco">${ow?spr(ow):''}<b>${esc(ow?ow.name:'?')}</b></div>
+        <div class="muted small">Статус: <b>${esc(rn.label)}</b></div><div class="big down" style="margin-top:6px">${rub(rn.amount)}</div></div></div>
+        <button class="btn red wide" data-act="rentpay" data-v="${sel.id}" data-label="Точно? ${rub(rn.amount)} → ${esc(ow?ow.name:'')}">Оплатить ${rub(rn.amount)} — ${esc(ow?ow.name:'')}</button>
+        <button class="btn ghost wide" data-act="rentclose" style="margin-top:8px">Отмена</button></section>`}
+    else rentHtml=`<section class="sheet"><h2>Встали на чужое поле?</h2><p class="muted small">Найдите поле и оплатите ренту владельцу. Сумма считается по статусу: поле, синдикат, магазины или торговый дом.</p>
+      ${others.length?`<label class="field"><span>Название или номер поля</span><input data-in="patQ" placeholder="Например: Серебро или 1-1" autocomplete="off" value="${esc(patQ)}"></label>
+      <div class="rlist">${others.map(c=>{const o=st.own[c.id],rn=rentNow(st,c),ow=pById(o.pid),k=(c.name+' '+(c.code||'')+' '+(ow?ow.name:'')).toLowerCase();
+        return `<button class="rli" data-act="rentsel" data-v="${c.id}" data-k="${esc(k)}"${patQ&&!k.includes(patQ.toLowerCase())?' hidden':''}><i class="sw" style="background:${c.type==='patent'?GRP(c.group).color:'#808080'}"></i><span class="rln">${c.code?`<span class="muted">${c.code}</span> `:''}${esc(c.name)}</span><span class="rlo">${ow?spr(ow):''}${esc(ow?ow.name:'')}</span><b class="rla">${rub(rn.amount)}</b></button>`}).join('')}<p class="muted small rnone" hidden>Ничего не найдено.</p></div>`
+      :'<p class="muted small">Пока ни одно поле не куплено другими игроками.</p>'}</section>`}
+  return `${rentHtml}${me?`<section class="sheet"><h2>Мои патенты</h2><p class="muted small">Вложено в имущество: <b>${rub(inv.total)}</b> — патенты ${rub(inv.pat)}, постройки ${rub(inv.bld)}${inv.util?`, Вода и Энергия ${rub(inv.util)}`:''}${inv.sh?`, акции ${rub(inv.sh)}`:''}.</p>${myHtml}</section>`:'<section class="sheet"><p class="note">Выберите себя за столом, чтобы покупать и развивать патенты.</p></section>'}
   <section class="sheet"><h2>Все поля</h2><p class="muted small">Владелец, статус и текущая рента каждого поля. Встали на чужое поле — оплатите ренту владельцу кнопкой «Оплатить»: сумма считается по статусу — поле, синдикат, магазины или торговый дом.</p>${grp}
   <div class="gl" style="--c:#808080;--b:#CCCCCC;--gi:#333"><div class="glh"><b>Коммунальные</b><span>не развиваются</span></div>${utils.map(rowHtml).join('')}</div></section>`}
 function shSellPrice(g){return Math.ceil(sharePrice(g)*(+S().sellSharePct||0)/100-1e-9)}
@@ -1152,6 +1180,7 @@ setInterval(()=>{const ae=document.activeElement;if(view==='table'&&tab==='me'&&
 /* ---------- events ---------- */
 document.addEventListener('input',e=>{const el=e.target,d=el.dataset,num=v=>String(v).replace(/[^\d]/g,'');
   if(d.in){const k=d.in;
+    if(k==='patQ'){patQ=el.value;const q=patQ.trim().toLowerCase();let n=0;document.querySelectorAll('.rli').forEach(b=>{const h=!!q&&!b.dataset.k.includes(q);b.hidden=h;if(!h)n++});const z=$('.rnone');if(z)z.hidden=n>0;return}
     if(k==='payAmt'){pay.amount=num(el.value);pay.okNeg=false}else if(k==='getAmt'){get.amount=num(el.value);get.lap=false;get.stock=0}else if(k==='payAmt2'){}else if(k==='loanAmt'){loan.amount=num(el.value);renderFxHint()}else if(k==='roulBet'){roul.bet=num(el.value);roul.res=null}else if(k==='dealText'){dealB=dealB||blankDeal();dealB.text=el.value}else if(/^d(give|take)\.(rub|usd)$/.test(k)){dealB=dealB||blankDeal();const [sd,f]=k.slice(1).split('.');dealB[sd][f]=num(el.value)}else if(k==='presetName')presetName=el.value;else if(k==='joinCode')joinCode=num(el.value);else if(k==='getNote')get.note=el.value;
     else if(k==='fxUsd'){fxUsd=num(el.value);const p=fxSide==='buy'?buyPrice():sellPrice();fxRub=fxUsd?String((+fxUsd)*p):'';const o=$('[data-in=fxRub]');if(o)o.value=fxRub;renderFxHint()}
     else if(k==='fxRub'){fxRub=num(el.value);const p=fxSide==='buy'?buyPrice():sellPrice();fxUsd=fxRub&&p?String(Math.floor((+fxRub)/p)):'';const o=$('[data-in=fxUsd]');if(o)o.value=fxUsd;renderFxHint()}
@@ -1232,7 +1261,9 @@ document.addEventListener('click',async e=>{
     case 'buyp':{const c=cellById(v);if(!c||state().own[v]){toast('Это поле уже куплено.');break}await addEv({kind:'buy',cell:v,price:c.price,pid:me});break}
     case 'build':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o||o.pid!==me||o.level>=maxLevel(c))break;await addEv({kind:'build',cell:v,cost:c.develop,lvl:o.level+1,pid:me});break}
     case 'unbuild':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o||o.pid!==me||o.level<=0)break;await addEv({kind:'unbuild',cell:v,refund:Math.round(c.develop*(+S().sellBuildPct||0)/100),pid:me});break}
-    case 'rentpay':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o){toast('У этого поля нет владельца.');break}if(o.pid===me)break;const rn=rentNow(st,c);await addEv({kind:'pay',from:me,to:o.pid,amount:rn.amount,note:`Рента «${c.name}»: ${rn.label}`,rent:v,pid:me});break}
+    case 'rentsel':{rentSel=v;render();setTimeout(()=>{const r=$('#rentcard');if(r)r.scrollIntoView({behavior:reduceMo?'auto':'smooth',block:'start'})},30);return}
+    case 'rentclose':rentSel=null;break;
+    case 'rentpay':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o){toast('У этого поля нет владельца.');break}if(o.pid===me)break;const rn=rentNow(st,c);if(await addEv({kind:'pay',from:me,to:o.pid,amount:rn.amount,note:`Рента «${c.name}»: ${rn.label}`,rent:v,pid:me})){rentSel=null;patQ=''}break}
     case 'buysh':{const st=state();if(issued(st,v)>=(+S().shareLimit||10)){toast('Все акции этого синдиката уже проданы.');break}await addEv({kind:'share',group:v,price:sharePrice(v),pid:me});break}
     case 'sellsh':{const st=state();if(!((st.shares[v]||{})[me]>0)){toast('У вас нет акций этого синдиката.');break}await addEv({kind:'shsell',group:v,price:shSellPrice(v),pid:me});break}
     case 'taxpay':{const t=taxCalc(state(),me);await addEv({kind:'pay',from:me,to:'bank',amount:t.total,note:`Налог: ${S().taxBase} + ${S().taxPct}% от вложений ${t.inv.total}`,tax:true,pid:me});break}
