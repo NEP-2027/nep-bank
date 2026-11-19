@@ -606,7 +606,7 @@ const lset=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(_){}};
 const hm=ts=>new Date(ts).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
 function dieHtml(d){const P={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]}[d]||[];
   return `<span class="die" role="img" aria-label="Кубик: ${d}">${[...Array(9)].map((_,k)=>`<i class="${P.includes(k)?(d===1?'r':''):'o'}"></i>`).join('')}</span>`}
-const DEFSET={startUsd:10,fxMode:'cell',fxMinutes:5,passStart:250,loanRate:10,taxBase:50,taxPct:3,sharePct:2,shareLimit:10,idxOn:true,idxStep:50,idxEvery:5,sellBuildPct:50,sellSharePct:50};
+const DEFSET={startUsd:10,fxMode:'cell',fxMinutes:5,passStart:250,loanRate:10,taxBase:50,taxPct:3,sharePct:3,shareLimit:10,idxOn:true,idxStep:50,idxEvery:5,sellBuildPct:50,sellSharePct:50};
 const VERSION='2.1';
 document.body.classList.toggle('m3',lget('nepbank2.theme','m3')==='m3');
 const CID='c'+Math.random().toString(36).slice(2,10);
@@ -717,7 +717,7 @@ const pById=id=>players().find(p=>p.id===id);
 const isOut=id=>!!(id&&table&&state().out[id]);
 const activeP=()=>players().filter(p=>!isOut(p.id));
 const who=id=>id==='bank'?'Банк':(pById(id)?.name||'—');
-const S=()=>Object.assign({},DEFSET,(table&&table.settings)||{});
+const S=()=>{const o=Object.assign({},DEFSET,(table&&table.settings)||{});/* старое значение по умолчанию 2% → новое 3%, пока банк не сохранил своё */if(table&&table.settings&&!table.settings.v3&&+table.settings.sharePct===2)o.sharePct=3;return o};
 const OLDRATES='40/36,44/40,46/42,48/44,50/46,52/48,54/50,56/52,60/55,65/60';
 const rates=()=>{const r=table&&Array.isArray(table.rates)&&table.rates.length?table.rates:null;if(!r)return DEFRATES;
   /* столы со старыми стандартными курсами (40–65) переходят на новые стандартные; свои курсы стола не трогаем */
@@ -770,7 +770,7 @@ function applyEv(st,e){const b=st.b;
     case 'fx':{if(!b[e.pid])return false;const u=+e.usd||0,r=+e.rub||0;if(e.side==='buy'){b[e.pid].usd+=u;b[e.pid].rub-=r}else{b[e.pid].usd-=u;b[e.pid].rub+=r}return true}
     case 'loan':{if(!b[e.pid])return false;b[e.pid].rub+=+e.amount||0;st.loans[e.id]={id:e.id,pid:e.pid,total:+e.total||0,per:+e.per||0,rounds:+e.rounds||1,paid:0,paidN:0};return true}
     case 'buy':{const c=cellById(e.cell);if(!c||st.own[e.cell]||!b[e.pid])return false;st.own[e.cell]={pid:e.pid,level:0};b[e.pid].rub-=+e.price||0;return true}
-    case 'build':{const o=st.own[e.cell],c=cellById(e.cell);if(!o||o.pid!==e.pid||!c||o.level>=maxLevel(c))return false;o.level++;b[e.pid].rub-=+e.cost||0;return true}
+    case 'build':{const o=st.own[e.cell],c=cellById(e.cell);if(!o||o.pid!==e.pid||!c||o.level>=maxLevel(c))return false;if(e.syn&&!fullSyn(st,c))return false;if(e.syn&&o.level===c.maxStores&&!allStores(st,c))return false;o.level++;b[e.pid].rub-=+e.cost||0;return true}
     case 'unbuild':{const o=st.own[e.cell];if(!o||o.pid!==e.pid||o.level<=0)return false;o.level--;b[e.pid].rub+=+e.refund||0;return true}
     case 'share':{if(!b[e.pid]||issued(st,e.group)>=(+S().shareLimit||10))return false;const sh=st.shares[e.group]=st.shares[e.group]||{};sh[e.pid]=(sh[e.pid]||0)+1;b[e.pid].rub-=+e.price||0;return true}
     case 'claim':{if(!b[e.pid]||!e.dev)return false;const cur=st.seats[e.pid];if(cur&&cur!==e.dev)return false;if(Object.entries(st.seats).some(([p,d])=>d===e.dev&&p!==e.pid))return false;st.seats[e.pid]=e.dev;return true}
@@ -897,6 +897,7 @@ function animHtml(o){
 function animFor(e,me){if(e.kind==='emo'){if(e.pid!==me&&(e.to==='all'||e.to===me)){playEmo(e.e,`${who(e.pid)}${e.to==='all'?' — всем':''}`);try{if(lget('nepbank2.sound',true)&&navigator.vibrate)navigator.vibrate([30,40,30])}catch(_){}}return}
   if(!me)return;
   if(e.pid===me&&['buy','build','share'].includes(e.kind)){const c=e.cell?cellById(e.cell):null,amt=e.kind==='buy'?e.price:e.kind==='build'?e.cost:e.price;playAnim({type:'out',amount:amt,sub:e.kind==='buy'?`Патент «${c?c.name:''}»`:e.kind==='build'?`Постройка в «${c?c.name:''}»`:`Акция «${(GRP(e.group)||{name:''}).name}»`});return}
+  if(e.kind==='topup'&&Array.isArray(e.to)&&e.to.includes(me)){const a=+e.amount||0;if(a)playAnim({type:a>0?'in':'out',amount:Math.abs(a),sub:`${a>0?'Пополнение от банка':'Списание банком'} — всем игрокам${e.pid?` (${who(e.pid)})`:''}`});return}
   if(e.pid===me&&e.kind==='fx'){playAnim({type:'fx',side:e.side,usd:e.usd,rub:e.rub,price:e.price});return}
   if(e.pid===me&&e.kind==='unbuild'){playAnim({type:'in',amount:e.refund,sub:'Продажа постройки'});return}
   if(e.kind==='deal'&&e.to===me){toast(`${who(e.pid)} предлагает сделку — откройте «Счёт»`);feedback('in');return}
@@ -968,6 +969,7 @@ function vMe(){const me=pById(meId());if(!me)return vSeat();
 /* ===== v2 views ===== */
 let lapOpen=false,dealB=null,sprDraft=null;
 function blankDeal(){return {give:{patents:[],shares:{},loans:[],rub:'',usd:''},take:{patents:[],shares:{},loans:[],rub:'',usd:''},text:''}}
+function allStores(st,c){return !!c&&c.type==='patent'&&BCELLS.filter(x=>x.group===c.group).every(x=>st.own[x.id]&&st.own[x.id].level>=x.maxStores)}
 function fullSyn(st,c){if(!c||c.type!=='patent')return false;const o=st.own[c.id];if(!o)return false;return BCELLS.filter(x=>x.group===c.group).every(x=>st.own[x.id]&&st.own[x.id].pid===o.pid)}
 function rentNow(st,c){const o=st.own[c.id];if(!o)return null;if(c.type==='utility')return {amount:c.payment,label:'выплата'};
   const lv=o.level;if(lv>c.maxStores)return {amount:c.rent.tradeHouse,label:'торговый дом'};if(lv>0)return {amount:c.rent.stores[lv-1],label:`${lv} ${lv===1?'магазин':'магазина'}`};
@@ -990,7 +992,7 @@ function vPat(){const me=pById(meId()),st=state(),s=S(),mine=me?Object.keys(st.o
     const full=g.id!=='__util'&&fullSyn(st,cellById(ids[0])),tot=BCELLS.filter(c=>c.group===g.id).length;
     return `<div class="mg"><div class="mgh" style="--c:${g.color||'#808080'}"><i class="sw" style="background:${g.color||'#808080'}"></i><b>${esc(g.name)}</b>${g.id==='__util'?'':full?'<span class="syn-badge">Синдикат собран</span>':`<span class="muted small">${ids.length} из ${tot}</span>`}</div><div class="pcgrid">${ids.map(id=>{const c=cellById(id),o=st.own[id],ml=maxLevel(c),rn=rentNow(st,c);
     return `<figure>${pcCard(c,o,full)}<figcaption><b>${levelName(c,o.level)}</b>${rn?` · рента ${rub(rn.amount)}`:''}${c.type==='patent'?`<br>вложено ${rub(c.price+o.level*c.develop)}`:''}</figcaption>
-    ${c.type==='patent'&&!readOnly?`<div class="pcact"><button class="btn sm red" data-act="build" data-v="${id}"${o.level>=ml?' disabled':''}>${o.level>=ml?'Развито полностью':o.level===c.maxStores?`Торговый дом ${rub(c.develop)}`:`Магазин ${rub(c.develop)}`}</button>${o.level>0?`<button class="btn sm ghost" data-act="unbuild" data-v="${id}" data-label="Продать постройку +${refund(c)} ₽">Продать постройку +${refund(c)} ₽</button>`:''}</div>`:''}</figure>`}).join('')}</div></div>`}).join(''):'<p class="muted">У вас пока нет патентов. Купите поле, на которое встала ваша фишка, — ниже список всех полей.</p>';
+    ${c.type==='patent'&&!readOnly?`<div class="pcact">${!full&&o.level<ml?`<button class="btn sm" disabled title="Магазины открываются после сбора синдиката">🔒 Магазин — нужен синдикат</button>`:o.level===c.maxStores&&!allStores(st,c)?`<button class="btn sm" disabled title="Торговый дом открывается, когда на всех полях синдиката построены все магазины">🔒 ТД — сначала все магазины синдиката</button>`:`<button class="btn sm red" data-act="build" data-v="${id}"${o.level>=ml?' disabled':''}>${o.level>=ml?'Развито полностью':o.level===c.maxStores?`Торговый дом ${rub(c.develop)}`:`Магазин ${rub(c.develop)}`}</button>`}${o.level>0?`<button class="btn sm ghost" data-act="unbuild" data-v="${id}" data-label="Продать постройку +${refund(c)} ₽">Продать постройку +${refund(c)} ₽</button>`:''}</div>`:''}</figure>`}).join('')}</div></div>`}).join(''):'<p class="muted">У вас пока нет патентов. Купите поле, на которое встала ваша фишка, — ниже список всех полей.</p>';
   const rowHtml=c=>{const o=st.own[c.id],rn=rentNow(st,c),mineC=o&&me&&o.pid===me.id;
     return `<div class="glr"><span class="gln">${c.code?c.code+' ':''}${esc(c.name)}${c.type==='utility'?` · выплата ${c.payment}`:''}</span><span class="glp">${rub(c.price)}</span>
     <span class="glo">${ownerTag(st,c.id)}${o?` <span class="lvl">${rn.label} · рента ${rub(rn.amount)}</span>`:''}</span>
@@ -1263,7 +1265,7 @@ document.addEventListener('click',async e=>{
       if(new Set(names.map(n=>n.toLowerCase())).size!==names.length){toast('Имена повторяются — сделайте их разными, иначе в ленте не понять, кто есть кто.');return}
       const meta={name:(d.name||'Стол').trim().slice(0,60),created:Date.now(),startRub:+d.rub||0,pin:d.pin||'',
         players:names.map((n,i)=>({id:'p'+i,name:n.slice(0,24),ch:d.players[i].ch%CHARS.length,color:PCOLORS[i]})),
-        settings:Object.assign({},DEFSET,{startUsd:+d.usd||0}),chance:DECK.map(t=>({text:t,w:1})),rates:DEFRATES.map(x=>Object.assign({},x)),v:2};
+        settings:Object.assign({},DEFSET,{startUsd:+d.usd||0,v3:true}),chance:DECK.map(t=>({text:t,w:1})),rates:DEFRATES.map(x=>Object.assign({},x)),v:2};
       {const pr=presets.find(x=>x.id===d.preset);if(pr){meta.settings=Object.assign({},DEFSET,pr.settings||{},{startUsd:+d.usd||0});if(Array.isArray(pr.rates)&&pr.rates.length)meta.rates=pr.rates;if(Array.isArray(pr.chance)&&pr.chance.length)meta.chance=pr.chance;if(pr.sharePrices)meta.sharePrices=pr.sharePrices}}
       b.disabled=true;try{const id=await store.createTable(meta);openTable(id);view='seat'}catch(err){b.disabled=false;if(err&&err.code==='invalid_argument'){readOnly=true;toast('Нет прав на создание стола.')}else toast('Не удалось создать стол. Попробуйте ещё раз.')}
       render();return}
@@ -1304,7 +1306,7 @@ document.addEventListener('click',async e=>{
     case 'lapopen':lapOpen=!lapOpen;break;
     case 'lap':{const st=state(),lc=lapCalc(st,me);if(await addEv({kind:'pay',from:'bank',to:me,amount:lc.total,lap:true,note:`Круг ${lc.k}: ставка ${lc.base}${lc.sharesTot?` + акции ${lc.sharesTot}`:''}`,pid:me}))await repayLoans(me);break}
     case 'buyp':{const c=cellById(v);if(!c||state().own[v]){toast('Это поле уже куплено.');break}await addEv({kind:'buy',cell:v,price:c.price,pid:me});break}
-    case 'build':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o||o.pid!==me||o.level>=maxLevel(c))break;await addEv({kind:'build',cell:v,cost:c.develop,lvl:o.level+1,pid:me});break}
+    case 'build':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o||o.pid!==me||o.level>=maxLevel(c))break;if(!fullSyn(st,c)){toast(`Сначала соберите синдикат «${(GRP(c.group)||{name:''}).name}» — все его патенты.`);break}if(o.level===c.maxStores&&!allStores(st,c)){toast(`Торговый дом — после того, как на всех полях синдиката построены все магазины (${c.maxStores}).`);break}await addEv({kind:'build',cell:v,cost:c.develop,lvl:o.level+1,pid:me,syn:1});break}
     case 'unbuild':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o||o.pid!==me||o.level<=0)break;await addEv({kind:'unbuild',cell:v,refund:Math.round(c.develop*(+S().sellBuildPct||0)/100),pid:me});break}
     case 'rentsel':{rentSel=v;render();setTimeout(()=>{const r=$('#rentcard');if(r)r.scrollIntoView({behavior:reduceMo?'auto':'smooth',block:'start'})},30);return}
     case 'rentclose':rentSel=null;break;
@@ -1320,7 +1322,7 @@ document.addEventListener('click',async e=>{
       if(!sideText(give)&&!sideText(take)){toast('Добавьте в сделку хотя бы что-нибудь.');return}
       if(await addEv({kind:'deal',pid:me,to,give,take,text:(d.text||'').trim().slice(0,80)})){toast('Предложение отправлено.');dealB=blankDeal();sel.dealTo=null}break}
     case 'dacc':{const st=state(),o=st.offers[v];if(!o)break;if(!sideOk(st,o.pid,o.give)||!sideOk(st,o.to,o.take)){toast('Сделка уже невозможна: части имущества нет у участников.');break}await addEv({kind:'dealOk',of:v,pid:me});break}
-    case 'saveecon':{const s0=setDraft||S(),s1={};for(const k of Object.keys(DEFSET))s1[k]=k==='fxMode'?s0.fxMode:BOOLSET.has(k)?!!s0[k]:Math.max(0,+String(s0[k]).replace(',','.')||0);
+    case 'saveecon':{const s0=setDraft||S(),s1={v3:true};for(const k of Object.keys(DEFSET))s1[k]=k==='fxMode'?s0.fxMode:BOOLSET.has(k)?!!s0[k]:Math.max(0,+String(s0[k]).replace(',','.')||0);
       const patch={settings:s1};if(sprDraft)patch.sharePrices=Object.fromEntries(Object.entries(sprDraft).map(([g,v])=>[g,Math.max(0,+v||0)]));
       try{await store.updateTable(tid,patch);setDraft=null;sprDraft=null;toast('Правила сохранены.')}catch(_){toast('Не удалось сохранить правила.')}break}
 
@@ -1362,7 +1364,7 @@ document.addEventListener('click',async e=>{
     case 'sundo':case 'undo':{const ev=evs.find(x=>x.id===v);if(ev)await addEv({kind:'undo',of:ev.id,pid:me||''});break}
     case 'savenames':{if(!namesDraft&&!charsDraft)return;const names=(namesDraft||players().map(p=>p.name)).map((n,i)=>(n||'').trim()||'Игрок '+(i+1));if(new Set(names.map(n=>n.toLowerCase())).size!==names.length){toast('Имена повторяются.');return}
       try{await store.updateTable(tid,{players:players().map((p,i)=>Object.assign({},p,{name:names[i].slice(0,24),ch:charsDraft?charsDraft[i]:p.ch}))});namesDraft=null;charsDraft=null;toast('Игроки сохранены.')}catch(_){toast('Не удалось сохранить.')}break}
-    case 'saveset':{if(!setDraft)return;const s={};for(const k of Object.keys(DEFSET))s[k]=k==='fxMode'?setDraft.fxMode:BOOLSET.has(k)?!!setDraft[k]:Math.max(0,+String(setDraft[k]).replace(',','.')||0);
+    case 'saveset':{if(!setDraft)return;const s={v3:true};for(const k of Object.keys(DEFSET))s[k]=k==='fxMode'?setDraft.fxMode:BOOLSET.has(k)?!!setDraft[k]:Math.max(0,+String(setDraft[k]).replace(',','.')||0);
       if(s.rateMin>s.rateMax){toast('Нижняя граница курса больше верхней.');return}
       try{await store.updateTable(tid,{settings:s});setDraft=null;toast('Настройки сохранены.')}catch(_){toast('Не удалось сохранить.')}break}
     case 'dadd':{deckDraft=deckDraft||(table.chance||[]).map(c=>({text:c.text,w:+c.w||0}));if(deckDraft.length>=50){toast('В колоде максимум 50 карточек.');return}deckDraft.push({text:'',w:1});render();const t=$(`[data-dk="${deckDraft.length-1}"]`);if(t){t.scrollIntoView({block:'center',behavior:'smooth'});t.focus()}return}
