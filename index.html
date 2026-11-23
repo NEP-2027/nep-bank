@@ -13,7 +13,7 @@
 <script>window.FB_CONFIG={"apiKey": "AIzaSyDZEbOGrReKETsYTUOeaX6kdh3GPytvj14", "authDomain": "nepbank-5500b.firebaseapp.com", "projectId": "nepbank-5500b", "storageBucket": "nepbank-5500b.firebasestorage.app", "messagingSenderId": "1033378858589", "appId": "1:1033378858589:web:40fb2ea6c442c47110afb4"};</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Oswald:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Barlow+Condensed:wght@300;400;600;700&family=Ruslan+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#FEF7FF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#141218" media="(prefers-color-scheme: dark)">
 <style>
@@ -27,27 +27,27 @@
 :root[data-theme="dark"]{--table:#101E1A;--table2:#0B1512;--paper:#27221C;--surface:#302921;--ink:#F0E5CF;--muted:#B5A790;--line:#4D4236;--red:#E8604F;--green:#5DB57F;--on-table:#F0E5CF;--on-ink:#1E1A15;color-scheme:dark}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;color:var(--on-table);background-color:var(--table);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 1px,transparent 1px 26px),repeating-linear-gradient(-45deg,rgba(0,0,0,.13) 0 1px,transparent 1px 26px);font:400 15px/1.45 'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+body{margin:0;color:var(--on-table);background-color:var(--table);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 1px,transparent 1px 26px),repeating-linear-gradient(-45deg,rgba(0,0,0,.13) 0 1px,transparent 1px 26px);font:400 15px/1.45 'Bahnschrift','Barlow',system-ui,-apple-system,'Segoe UI','Bahnschrift','Barlow',sans-serif}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--table)}
 header{display:flex;align-items:center;gap:10px;padding:12px 16px 6px;max-width:640px;margin:0 auto}
-.logo{font:400 24px/1 'Ruslan Display',Oswald,serif;color:#E8604F;text-shadow:2px 2px 0 rgba(0,0,0,.4)}
-.logo small{display:block;font:500 12px/1.2 Oswald,sans-serif;letter-spacing:.08em;color:var(--on-table);opacity:.8;margin-top:4px;text-shadow:none}
+.logo{font:400 24px/1 'Bahnschrift Condensed','Barlow Condensed','Bahnschrift SemiCondensed','Barlow Semi Condensed',serif;color:#E8604F;text-shadow:2px 2px 0 rgba(0,0,0,.4)}
+.logo small{display:block;font:500 12px/1.2 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.08em;color:var(--on-table);opacity:.8;margin-top:4px;text-shadow:none}
 .hright{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
-.tname{appearance:none;border:1.5px solid rgba(244,236,216,.4);background:transparent;color:var(--on-table);font:500 14px/1 Oswald,sans-serif;letter-spacing:.03em;padding:8px 10px;border-radius:3px;cursor:pointer;max-width:52vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tname{appearance:none;border:1.5px solid rgba(244,236,216,.4);background:transparent;color:var(--on-table);font:500 14px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.03em;padding:8px 10px;border-radius:3px;cursor:pointer;max-width:52vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sync{font-size:11px;opacity:.85;display:flex;align-items:center;gap:5px}
 .sync i{width:7px;height:7px;border-radius:50%;background:#7BD88F;display:inline-block}
 .sync.off i{background:#E8B04F}
 main{max-width:640px;margin:0 auto;padding:6px 12px calc(92px + env(safe-area-inset-bottom,0px))}
 .sheet{background:var(--paper);color:var(--ink);padding:16px 16px 12px;border-radius:4px;box-shadow:0 12px 26px rgba(0,0,0,.35);margin-bottom:14px}
-h2{font:600 21px/1.15 Oswald,sans-serif;letter-spacing:.02em;margin:0 0 8px}
-h3{font:600 16px/1.2 Oswald,sans-serif;margin:0 0 6px}
+h2{font:600 21px/1.15 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.02em;margin:0 0 8px}
+h3{font:600 16px/1.2 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;margin:0 0 6px}
 p{margin:0 0 8px}
 .muted{color:var(--muted)}
 .small{font-size:13px}
 .note{border-left:4px solid var(--gold);padding:8px 10px;background:var(--surface);font-size:14px;margin:0 0 10px}
-.lbl{font:500 13px/1 Oswald,sans-serif;letter-spacing:.04em;color:var(--muted);margin:12px 0 6px;text-transform:uppercase}
+.lbl{font:500 13px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.04em;color:var(--muted);margin:12px 0 6px;text-transform:uppercase}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.btn{appearance:none;font:500 16px/1.1 Oswald,sans-serif;letter-spacing:.03em;padding:11px 16px;border:2px solid var(--ink);background:var(--ink);color:var(--on-ink);border-radius:3px;cursor:pointer;min-height:44px;box-shadow:3px 3px 0 rgba(0,0,0,.3)}
+.btn{appearance:none;font:500 16px/1.1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.03em;padding:11px 16px;border:2px solid var(--ink);background:var(--ink);color:var(--on-ink);border-radius:3px;cursor:pointer;min-height:44px;box-shadow:3px 3px 0 rgba(0,0,0,.3)}
 .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(0,0,0,.3)}
 .btn.red{background:var(--red);color:#fff}
 .btn.ghost{background:transparent;color:var(--ink);box-shadow:none}
@@ -58,21 +58,21 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid 
 input,select{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:3px;width:100%;min-width:0}
 .field{display:grid;gap:4px;margin-top:10px}
 .field>span{font-size:12px;color:var(--muted)}
-.amt{font:600 26px/1 Oswald,sans-serif;font-variant-numeric:tabular-nums;padding:10px 12px}
+.amt{font:600 26px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;font-variant-numeric:tabular-nums;padding:10px 12px}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.chip{appearance:none;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:500 14px/1 'IBM Plex Sans',sans-serif;padding:8px 10px;border-radius:999px;cursor:pointer;min-height:36px}
+.chip{appearance:none;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:500 14px/1 'Bahnschrift','Barlow',sans-serif;padding:8px 10px;border-radius:999px;cursor:pointer;min-height:36px}
 .chip.on{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
 .spr{display:inline-block;width:20px;aspect-ratio:3/4;flex:none}
 .spr svg{display:block;width:100%;height:100%}
 .pick{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:none}
-.pchip{appearance:none;flex:none;display:flex;align-items:center;gap:6px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:500 15px/1 Oswald,sans-serif;letter-spacing:.02em;padding:6px 12px 6px 8px;border-radius:4px;cursor:pointer;min-height:44px}
+.pchip{appearance:none;flex:none;display:flex;align-items:center;gap:6px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:500 15px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.02em;padding:6px 12px 6px 8px;border-radius:4px;cursor:pointer;min-height:44px}
 .pchip.on{border-color:var(--ink);background:var(--ink);color:var(--on-ink)}
-.bankico{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--gold);color:#2A221C;font:700 13px/1 Oswald,sans-serif}
+.bankico{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--gold);color:#2A221C;font:700 13px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif}
 .accts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .acct{position:relative;display:grid;grid-template-columns:34px 1fr;gap:2px 10px;align-items:center;padding:10px;border:1.5px solid var(--line);border-left:6px solid var(--pc);background:var(--surface);border-radius:3px}
 .acct .spr{width:34px;grid-row:1/3}
-.acct b{font:600 15px/1.1 Oswald,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.acct .m{font:600 22px/1.1 Oswald,sans-serif;font-variant-numeric:tabular-nums}
+.acct b{font:600 15px/1.1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acct .m{font:600 22px/1.1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;font-variant-numeric:tabular-nums}
 .acct .m.neg{color:var(--red)}
 .acct .me{position:absolute;top:6px;right:6px;appearance:none;border:1px solid var(--line);background:transparent;color:var(--muted);font-size:11px;padding:2px 6px;border-radius:999px;cursor:pointer}
 .acct .me.on{background:var(--gold);border-color:var(--gold);color:#2A221C}
@@ -81,35 +81,35 @@ input,select{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid va
 .feed .t{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
 .feed .who{display:flex;align-items:center;gap:4px;font-weight:500;flex-wrap:wrap}
 .feed .who .spr{width:16px}
-.feed .a{font:600 17px/1 Oswald,sans-serif;font-variant-numeric:tabular-nums;text-align:right}
+.feed .a{font:600 17px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;font-variant-numeric:tabular-nums;text-align:right}
 .feed .n{grid-column:2/4;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:8px;align-items:center}
 .feed li.rev .who,.feed li.rev .a{text-decoration:line-through;opacity:.55}
 .undo{appearance:none;border:0;background:none;color:var(--red);font-size:13px;cursor:pointer;padding:4px 0;white-space:nowrap}
 .step{display:flex;align-items:center;gap:10px}
-.step button{width:40px;height:40px;font:600 20px/1 Oswald,sans-serif;border:2px solid var(--ink);background:var(--surface);color:var(--ink);border-radius:3px;cursor:pointer}
-.step b{font:600 22px/1 Oswald,sans-serif;min-width:26px;text-align:center}
+.step button{width:40px;height:40px;font:600 20px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;border:2px solid var(--ink);background:var(--surface);color:var(--ink);border-radius:3px;cursor:pointer}
+.step b{font:600 22px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;min-width:26px;text-align:center}
 .grp{margin-top:12px;border:1.5px solid var(--line);border-radius:3px;overflow:hidden;background:var(--surface)}
-.gband{background:var(--g);color:#fff;font:600 13px/1 Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;text-shadow:1px 1px 0 rgba(0,0,0,.25)}
+.gband{background:var(--g);color:#fff;font:600 13px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;text-shadow:1px 1px 0 rgba(0,0,0,.25)}
 .cellrow{appearance:none;width:100%;display:flex;align-items:center;gap:10px;border:0;border-top:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;text-align:left;padding:10px;cursor:pointer;min-height:48px}
 .cellrow:first-of-type{border-top:0}
 .cellrow .ic{font-size:22px;width:28px;text-align:center}
-.cellrow .nm{flex:1;font:600 16px/1.1 Oswald,sans-serif;letter-spacing:.02em}
-.cellrow .pr{font:600 16px/1 Oswald,sans-serif;color:var(--red)}
+.cellrow .nm{flex:1;font:600 16px/1.1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.02em}
+.cellrow .pr{font:600 16px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;color:var(--red)}
 .cellrow.on{background:color-mix(in srgb,var(--gold) 22%,transparent)}
 .detail{padding:4px 10px 12px;border-top:1px solid var(--line);background:var(--paper)}
 .lv{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .lv button{appearance:none;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:3px;padding:8px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:52px}
 .lv button span{font-size:11px;color:var(--muted)}
-.lv button b{font:600 18px/1 Oswald,sans-serif}
+.lv button b{font:600 18px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif}
 .lv button.on{background:var(--ink);border-color:var(--ink);color:var(--on-ink)}
 .lv button.on span{color:var(--on-ink);opacity:.8}
 .sums{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
-.sums button{appearance:none;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:600 18px/1 Oswald,sans-serif;border-radius:3px;min-height:44px;cursor:pointer}
+.sums button{appearance:none;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:600 18px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;border-radius:3px;min-height:44px;cursor:pointer}
 .sums button.on{background:var(--red);border-color:var(--red);color:#fff}
 .card.pop{animation:roll .45s ease-out}
 .card{margin-top:12px;border:2px solid var(--ink);border-radius:6px;background:#FFF9EC;color:#2A221C;padding:16px;position:relative;box-shadow:0 4px 0 #2A221C}
-.card .num{position:absolute;top:-14px;left:14px;background:#C8372D;color:#fff;font:700 18px/1 Oswald,sans-serif;padding:6px 10px;border-radius:3px;border:2px solid #2A221C}
-.card .tx{font:600 22px/1.2 Oswald,sans-serif;letter-spacing:.01em;margin:8px 0 4px}
+.card .num{position:absolute;top:-14px;left:14px;background:#C8372D;color:#fff;font:700 18px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;padding:6px 10px;border-radius:3px;border:2px solid #2A221C}
+.card .tx{font:600 22px/1.2 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.01em;margin:8px 0 4px}
 .card .muted{color:#7A6B5A}
 .faces{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
 .faces button{appearance:none;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:4px;padding:6px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
@@ -123,16 +123,16 @@ input,select{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid va
 .dice.roll .die{animation:roll .5s ease-out}
 @keyframes roll{0%{transform:rotate(-200deg) scale(.6);opacity:.3}70%{transform:rotate(12deg) scale(1.08)}100%{transform:none}}
 @media (prefers-reduced-motion:reduce){.dice.roll .die{animation:none}}
-.big{font:700 44px/1 Oswald,sans-serif;text-align:center;font-variant-numeric:tabular-nums}
+.big{font:700 44px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;text-align:center;font-variant-numeric:tabular-nums}
 .big.up{color:var(--green)}.big.down{color:var(--red)}
 .center{text-align:center}
 .seg{display:flex;border:2px solid var(--ink);border-radius:4px;overflow:hidden}
-.seg button{flex:1;appearance:none;border:0;background:var(--surface);color:var(--ink);font:500 16px/1 Oswald,sans-serif;padding:10px;cursor:pointer;min-height:44px}
+.seg button{flex:1;appearance:none;border:0;background:var(--surface);color:var(--ink);font:500 16px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;padding:10px;cursor:pointer;min-height:44px}
 .seg button+button{border-left:2px solid var(--ink)}
 .seg button.on{background:var(--ink);color:var(--on-ink)}
 .tlist{display:grid;gap:8px}
 .tbl{appearance:none;width:100%;display:flex;align-items:center;gap:10px;text-align:left;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:3px;padding:12px;cursor:pointer;font:inherit}
-.tbl .nm{flex:1;font:600 17px/1.15 Oswald,sans-serif}
+.tbl .nm{flex:1;font:600 17px/1.15 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif}
 .tbl .sprs{display:flex}
 .tbl .sprs .spr{width:18px;margin-left:-3px}
 .prow{display:grid;grid-template-columns:28px minmax(0,1fr) auto auto;gap:8px;align-items:center;margin-top:8px}
@@ -140,13 +140,13 @@ input,select{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid va
 .prow select{width:auto}
 nav.bar{position:fixed;left:0;right:0;bottom:0;z-index:8;background:var(--table2);border-top:3px solid var(--gold);padding-bottom:env(safe-area-inset-bottom,0px)}
 nav.bar div{display:flex;max-width:640px;margin:0 auto}
-nav.bar button{flex:1;appearance:none;border:0;background:transparent;color:var(--on-table);opacity:.75;font:500 14px/1 Oswald,sans-serif;letter-spacing:.03em;padding:10px 2px 12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;min-height:56px}
-nav.bar button .g{font:600 19px/1 Oswald,sans-serif}
+nav.bar button{flex:1;appearance:none;border:0;background:transparent;color:var(--on-table);opacity:.75;font:500 14px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.03em;padding:10px 2px 12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;min-height:56px}
+nav.bar button .g{font:600 19px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif}
 nav.bar button.on{opacity:1;color:#fff;background:linear-gradient(var(--red),var(--red)) top/100% 3px no-repeat}
 .toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:9;background:var(--ink);color:var(--on-ink);padding:10px 14px;border-radius:4px;box-shadow:0 8px 20px rgba(0,0,0,.4);font-size:14px;max-width:min(92vw,520px)}
 .toast[hidden]{display:none}
 .hist{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:10px}
-.hist span{font:500 14px/1 Oswald,sans-serif;padding:6px 8px;border:1px solid var(--line);border-radius:3px;background:var(--surface)}
+.hist span{font:500 14px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;padding:6px 8px;border:1px solid var(--line);border-radius:3px;background:var(--surface)}
 
 .ticker{max-width:640px;margin:0 auto 10px;padding:0 12px}
 .tk{appearance:none;width:100%;display:flex;align-items:center;gap:8px;text-align:left;border:0;border-left:4px solid var(--gold);background:rgba(0,0,0,.28);color:var(--on-table);font:inherit;font-size:14px;padding:9px 10px;border-radius:3px;cursor:pointer;min-height:42px}
@@ -163,10 +163,10 @@ nav.bar button.on{opacity:1;color:#fff;background:linear-gradient(var(--red),var
 .seg.sub{margin-top:10px;overflow-x:auto}
 .seg.sub button{font-size:14px;padding:8px 6px;white-space:nowrap;flex:1 0 auto}
 .rrow{display:grid;grid-template-columns:26px 1fr 1fr 64px 40px;gap:6px;align-items:end;margin-top:6px}
-.rrow .no{font:600 16px/1 Oswald,sans-serif;color:var(--muted);padding-bottom:12px}
+.rrow .no{font:600 16px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;color:var(--muted);padding-bottom:12px}
 .rrow input{padding:8px}
 .ccard{border:1.5px solid var(--line);background:var(--surface);border-radius:4px;padding:10px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start}
-.ccard .no{grid-column:1/3;font:600 13px/1 Oswald,sans-serif;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+.ccard .no{grid-column:1/3;font:600 13px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
 .ccard textarea{font:inherit;font-size:15px;padding:8px 10px;border:1.5px solid var(--line);background:#FFF9EC;color:#2A221C;border-radius:3px;width:100%;resize:vertical;min-height:52px}
 .ccard .side{display:grid;gap:6px;justify-items:center}
 .ccard .side input{width:64px;text-align:center;padding:8px}
@@ -181,20 +181,20 @@ nav.bar button.on{opacity:1;color:#fff;background:linear-gradient(var(--red),var
 .tkl .tm{opacity:.7;font-variant-numeric:tabular-nums;flex:none}
 .wallet{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center}
 .wallet .spr{width:46px;grid-row:1/4}
-.wallet .nm{font:600 20px/1.1 Oswald,sans-serif}
-.wallet .rub{font:700 36px/1 Oswald,sans-serif;font-variant-numeric:tabular-nums}
-.wallet .usd{font:600 20px/1 Oswald,sans-serif;color:var(--green);font-variant-numeric:tabular-nums}
+.wallet .nm{font:600 20px/1.1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif}
+.wallet .rub{font:700 36px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;font-variant-numeric:tabular-nums}
+.wallet .usd{font:600 20px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;color:var(--green);font-variant-numeric:tabular-nums}
 .neg{color:var(--red)!important}
 .rate{display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center}
 .rate div{border:1.5px solid var(--line);background:var(--surface);border-radius:3px;padding:10px 6px}
 .rate span{display:block;font-size:12px;color:var(--muted)}
-.rate b{font:700 28px/1.1 Oswald,sans-serif;font-variant-numeric:tabular-nums}
+.rate b{font:700 28px/1.1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;font-variant-numeric:tabular-nums}
 .open{font-size:13px;margin-top:8px;padding:8px 10px;border-radius:3px;background:color-mix(in srgb,var(--green) 16%,transparent);color:var(--ink)}
 .closed{font-size:13px;margin-top:8px;padding:8px 10px;border-radius:3px;background:var(--surface);color:var(--muted)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.seat{appearance:none;width:100%;display:flex;align-items:center;gap:12px;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:4px;padding:12px;cursor:pointer;font:600 19px/1.1 Oswald,sans-serif;margin-top:8px;text-align:left}
+.seat{appearance:none;width:100%;display:flex;align-items:center;gap:12px;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:4px;padding:12px;cursor:pointer;font:600 19px/1.1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;margin-top:8px;text-align:left}
 .seat .spr{width:30px}
-.mechip{appearance:none;display:flex;align-items:center;gap:6px;border:1.5px solid rgba(244,236,216,.4);background:transparent;color:var(--on-table);font:500 14px/1 Oswald,sans-serif;padding:5px 8px;border-radius:3px;cursor:pointer}
+.mechip{appearance:none;display:flex;align-items:center;gap:6px;border:1.5px solid rgba(244,236,216,.4);background:transparent;color:var(--on-table);font:500 14px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;padding:5px 8px;border-radius:3px;cursor:pointer}
 .mechip .spr{width:16px}
 .btbl{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
 .btbl th{text-align:left;font-weight:600;color:var(--muted);font-size:12px;padding:5px 6px;border-bottom:2px solid var(--ink)}
@@ -211,17 +211,17 @@ nav.bar button.on{opacity:1;color:#fff;background:linear-gradient(var(--red),var
 .dcard input{padding:8px}
 .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .pin{display:flex;gap:8px;margin-top:10px}
-.pin input{font:600 22px/1 Oswald,sans-serif;letter-spacing:.3em;text-align:center;max-width:160px}
+.pin input{font:600 22px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.3em;text-align:center;max-width:160px}
 
 .ov{position:fixed;inset:0;z-index:20;pointer-events:none;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle,rgba(10,16,14,.62),rgba(10,16,14,.18) 72%);animation:ovin .25s ease-out,ovout .4s ease-in 1.9s forwards}
 @keyframes ovin{from{opacity:0}}
 @keyframes ovout{to{opacity:0}}
 .ov .lab{position:relative;z-index:2;text-align:center;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.65);display:flex;flex-direction:column;align-items:center}
-.ov .ovbig{font:700 54px/1 Oswald,sans-serif;font-variant-numeric:tabular-nums;animation:pop .55s cubic-bezier(.2,1.6,.4,1) .15s both}
+.ov .ovbig{font:700 54px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;font-variant-numeric:tabular-nums;animation:pop .55s cubic-bezier(.2,1.6,.4,1) .15s both}
 .ov .ovbig.in{color:#8BEBA6}.ov .ovbig.out{color:#FF9A88}.ov .ovbig.sm{font-size:40px}
-.ov .sub{font:500 18px/1.3 Oswald,sans-serif;letter-spacing:.02em;margin-top:10px;max-width:84vw;animation:pop .5s ease-out .3s both}
+.ov .sub{font:500 18px/1.3 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.02em;margin-top:10px;max-width:84vw;animation:pop .5s ease-out .3s both}
 @keyframes pop{0%{transform:scale(.3);opacity:0}100%{transform:none;opacity:1}}
-.coin{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFEDB0,#E0A526 55%,#9A6A10);border:2px solid #6B4A0A;display:grid;place-items:center;font:700 21px/1 Oswald,sans-serif;color:#6B4A0A;box-shadow:0 3px 0 #6B4A0A}
+.coin{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFEDB0,#E0A526 55%,#9A6A10);border:2px solid #6B4A0A;display:grid;place-items:center;font:700 21px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;color:#6B4A0A;box-shadow:0 3px 0 #6B4A0A}
 .coin.usd{background:radial-gradient(circle at 35% 30%,#DDF7CF,#5DB57F 55%,#2E6B45);border-color:#1F4A2F;color:#1F4A2F;box-shadow:0 3px 0 #1F4A2F}
 .ov.out .coin{animation:cout 1.4s cubic-bezier(.3,.6,.4,1) var(--d) both}
 .ov.in .coin{animation:cin 1.3s cubic-bezier(.5,0,.6,1.3) var(--d) both}
@@ -237,8 +237,8 @@ nav.bar button.on{opacity:1;color:#fff;background:linear-gradient(var(--red),var
 .ov .dbox .die{--ds:66px;animation:tumble .95s cubic-bezier(.2,.9,.3,1.2) both}
 @keyframes tumble{0%{transform:translateY(-55vh) rotate(-540deg)}70%{transform:translateY(10px) rotate(12deg)}100%{transform:none}}
 .ov .ccov{width:min(80vw,330px);min-height:170px;background:#FFF9EC;color:#2A221C;border:3px solid #2A221C;border-radius:10px;box-shadow:0 8px 0 #2A221C;padding:20px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-shadow:none;animation:flip .75s ease-out both}
-.ov .ccov b{font:700 15px/1 Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#C8372D}
-.ov .ccov span{font:600 23px/1.2 Oswald,sans-serif}
+.ov .ccov b{font:700 15px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#C8372D}
+.ov .ccov span{font:600 23px/1.2 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif}
 @keyframes flip{0%{transform:perspective(700px) rotateY(100deg) scale(.6);opacity:0}100%{transform:none;opacity:1}}
 .ov.rate .ovbig:nth-child(2){animation-delay:.35s}
 @media (prefers-reduced-motion:reduce){.ov,.ov *{animation-duration:.01s!important;animation-delay:0s!important}.ov .coin{display:none}}
@@ -248,8 +248,8 @@ nav.bar button.on{opacity:1;color:#fff;background:linear-gradient(var(--red),var
 .rxb{appearance:none;border:1px solid rgba(244,236,216,.3);background:transparent;color:var(--on-table);border-radius:999px;padding:3px 7px;font-size:13px;cursor:pointer;min-height:28px}
 .rxb.on{background:rgba(215,154,43,.35);border-color:var(--gold)}
 .offer{border:2px solid var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--surface));border-radius:4px;padding:12px;margin-top:10px}
-.offer b{font:600 17px/1.2 Oswald,sans-serif}
-.ver{font:500 11px/1 Oswald,sans-serif;opacity:.7;margin-left:6px}
+.offer b{font:600 17px/1.2 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif}
+.ver{font:500 11px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;opacity:.7;margin-left:6px}
 
 /* ===== Android (Material 3) theme ===== */
 :root{--m-primary:#6750A4;--m-on-primary:#FFFFFF;--m-primary-c:#EADDFF;--m-on-primary-c:#21005D;--m-sec-c:#E8DEF8;--m-on-sec-c:#1D192B;--m-error:#B3261E;--m-success:#146C2E;
@@ -260,15 +260,15 @@ nav.bar button.on{opacity:1;color:#fff;background:linear-gradient(var(--red),var
   --m-surface:#141218;--m-scl0:#0F0D13;--m-scl:#1D1B20;--m-sc:#211F26;--m-sch:#2B2930;--m-schh:#36343B;--m-on-surface:#E6E0E9;--m-osv:#CAC4D0;--m-outline:#938F99;--m-outline-v:#49454F;--m-inv:#E6E0E9;--m-inv-on:#322F35}
 .ms{display:none;font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;white-space:nowrap;direction:ltr;-webkit-font-smoothing:antialiased;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;width:24px;overflow:hidden}
 body.m3{--table:var(--m-surface);--table2:var(--m-sc);--paper:var(--m-scl);--surface:var(--m-scl0);--ink:var(--m-on-surface);--on-ink:var(--m-surface);--muted:var(--m-osv);--line:var(--m-outline-v);--red:var(--m-primary);--green:var(--m-success);--gold:var(--m-primary);--on-table:var(--m-on-surface);
-  background-image:none;font-family:Roboto,system-ui,-apple-system,'Segoe UI',sans-serif;letter-spacing:.25px}
+  background-image:none;font-family:'Bahnschrift','Barlow',system-ui,-apple-system,'Segoe UI',sans-serif;letter-spacing:.25px}
 body.m3 *{font-family:inherit}
 body.m3 .ms{display:inline-block;font-family:'Material Symbols Outlined'}
 body.m3 .rt{display:none}
 body.m3 header{padding:14px 16px 8px}
-body.m3 .logo{font:400 22px/1.2 Roboto,sans-serif;color:var(--m-on-surface);text-shadow:none;letter-spacing:0}
-body.m3 .logo small{font:500 12px/1.3 Roboto,sans-serif;color:var(--m-osv);letter-spacing:.4px;opacity:1;margin-top:2px}
-body.m3 .ver{opacity:1;color:var(--m-primary);font-family:Roboto}
-body.m3 .tname,body.m3 .mechip{border:1px solid var(--m-outline-v);border-radius:8px;color:var(--m-on-surface);font:500 14px/1 Roboto,sans-serif;letter-spacing:.1px;padding:8px 12px;min-height:32px}
+body.m3 .logo{font:400 22px/1.2 'Bahnschrift','Barlow',sans-serif;color:var(--m-on-surface);text-shadow:none;letter-spacing:0}
+body.m3 .logo small{font:500 12px/1.3 'Bahnschrift','Barlow',sans-serif;color:var(--m-osv);letter-spacing:.4px;opacity:1;margin-top:2px}
+body.m3 .ver{opacity:1;color:var(--m-primary);font-family:'Bahnschrift','Barlow',sans-serif}
+body.m3 .tname,body.m3 .mechip{border:1px solid var(--m-outline-v);border-radius:8px;color:var(--m-on-surface);font:500 14px/1 'Bahnschrift','Barlow',sans-serif;letter-spacing:.1px;padding:8px 12px;min-height:32px}
 body.m3 .sync{color:var(--m-osv);opacity:1}
 body.m3 .tk{background:var(--m-sec-c);color:var(--m-on-sec-c);border-left:0;border-radius:12px;padding:12px 14px;min-height:48px}
 body.m3 .tk .dot{background:var(--m-primary)}
@@ -279,26 +279,26 @@ body.m3 .tkl li{border-bottom-color:var(--m-outline-v);border-bottom-style:solid
 body.m3 .rxb{border-color:var(--m-outline-v);color:var(--m-on-surface);border-radius:8px}
 body.m3 .rxb.on{background:var(--m-sec-c);border-color:transparent}
 body.m3 .sheet{background:var(--m-scl);border-radius:16px;box-shadow:none;padding:16px;margin-bottom:12px}
-body.m3 h2{font:400 22px/1.27 Roboto,sans-serif;letter-spacing:0;margin-bottom:10px}
-body.m3 h3{font:500 16px/1.5 Roboto,sans-serif;letter-spacing:.15px}
-body.m3 .lbl{text-transform:none;font:500 14px/1.4 Roboto,sans-serif;letter-spacing:.1px;color:var(--m-osv);margin:14px 0 8px}
+body.m3 h2{font:400 22px/1.27 'Bahnschrift','Barlow',sans-serif;letter-spacing:0;margin-bottom:10px}
+body.m3 h3{font:500 16px/1.5 'Bahnschrift','Barlow',sans-serif;letter-spacing:.15px}
+body.m3 .lbl{text-transform:none;font:500 14px/1.4 'Bahnschrift','Barlow',sans-serif;letter-spacing:.1px;color:var(--m-osv);margin:14px 0 8px}
 body.m3 .muted{color:var(--m-osv)}
 body.m3 .note{border-left:0;border-radius:12px;background:var(--m-sch);color:var(--m-on-surface);padding:12px 14px}
-body.m3 .btn{border:0;border-radius:20px;min-height:40px;padding:10px 24px;font:500 14px/1.4 Roboto,sans-serif;letter-spacing:.1px;box-shadow:none;background:var(--m-sec-c);color:var(--m-on-sec-c)}
+body.m3 .btn{border:0;border-radius:20px;min-height:40px;padding:10px 24px;font:500 14px/1.4 'Bahnschrift','Barlow',sans-serif;letter-spacing:.1px;box-shadow:none;background:var(--m-sec-c);color:var(--m-on-sec-c)}
 body.m3 .btn:active{transform:none;filter:brightness(.94)}
 body.m3 .btn.red{background:var(--m-primary);color:var(--m-on-primary)}
 body.m3 .btn.ghost{background:transparent;border:1px solid var(--m-outline);color:var(--m-primary)}
 body.m3 .btn.wide{min-height:48px;border-radius:24px;margin-top:14px}
 body.m3 .btn.sm{min-height:32px;padding:6px 14px;border-radius:16px}
 body.m3 .btn:disabled{opacity:.38}
-body.m3 input,body.m3 select,body.m3 textarea{border:1px solid var(--m-outline);border-radius:4px;background:transparent;color:var(--m-on-surface);font-family:Roboto,sans-serif;letter-spacing:.5px}
+body.m3 input,body.m3 select,body.m3 textarea{border:1px solid var(--m-outline);border-radius:4px;background:transparent;color:var(--m-on-surface);font-family:'Bahnschrift','Barlow',sans-serif;letter-spacing:.5px}
 body.m3 input:focus,body.m3 select:focus,body.m3 textarea:focus{outline:none;border-color:var(--m-primary);box-shadow:inset 0 0 0 1px var(--m-primary)}
 body.m3 .field>span{font-size:12px;color:var(--m-osv);letter-spacing:.4px}
-body.m3 .amt{font:400 28px/1.2 Roboto,sans-serif;letter-spacing:0}
-body.m3 .chip{border-radius:8px;border:1px solid var(--m-outline);background:transparent;color:var(--m-osv);font:500 14px/1 Roboto,sans-serif;letter-spacing:.1px;min-height:32px;padding:6px 14px}
+body.m3 .amt{font:400 28px/1.2 'Bahnschrift','Barlow',sans-serif;letter-spacing:0}
+body.m3 .chip{border-radius:8px;border:1px solid var(--m-outline);background:transparent;color:var(--m-osv);font:500 14px/1 'Bahnschrift','Barlow',sans-serif;letter-spacing:.1px;min-height:32px;padding:6px 14px}
 body.m3 .chip.on{background:var(--m-sec-c);border-color:transparent;color:var(--m-on-sec-c)}
 body.m3 .chip.on::before{content:"✓ "}
-body.m3 .pchip{border-radius:8px;border:1px solid var(--m-outline);background:transparent;color:var(--m-on-surface);font:500 14px/1 Roboto,sans-serif;letter-spacing:.1px;min-height:40px;padding:4px 14px 4px 4px}
+body.m3 .pchip{border-radius:8px;border:1px solid var(--m-outline);background:transparent;color:var(--m-on-surface);font:500 14px/1 'Bahnschrift','Barlow',sans-serif;letter-spacing:.1px;min-height:40px;padding:4px 14px 4px 4px}
 body.m3 .pchip.on{background:var(--m-sec-c);border-color:transparent;color:var(--m-on-sec-c)}
 body.m3 .spr{aspect-ratio:1;border-radius:50%;background:var(--m-primary-c);padding:0;display:inline-grid;place-items:center;vertical-align:middle}
 body.m3 .spr svg{width:60%;height:80%}
@@ -306,9 +306,9 @@ body.m3 .mechip .spr{width:24px}
 body.m3 .prow{grid-template-columns:40px minmax(0,1fr) auto auto}
 body.m3 .prow .spr{width:40px}
 body.m3 .pchip .spr{width:30px}
-body.m3 .bankico{width:30px;height:30px;background:var(--m-primary);color:var(--m-on-primary);font:500 15px/1 Roboto,sans-serif}
+body.m3 .bankico{width:30px;height:30px;background:var(--m-primary);color:var(--m-on-primary);font:500 15px/1 'Bahnschrift','Barlow',sans-serif}
 body.m3 .seg{border:1px solid var(--m-outline);border-radius:20px;overflow:hidden}
-body.m3 .seg button{background:transparent;color:var(--m-on-surface);font:500 14px/1.2 Roboto,sans-serif;letter-spacing:.1px;min-height:40px}
+body.m3 .seg button{background:transparent;color:var(--m-on-surface);font:500 14px/1.2 'Bahnschrift','Barlow',sans-serif;letter-spacing:.1px;min-height:40px}
 body.m3 .seg button+button{border-left:1px solid var(--m-outline)}
 body.m3 .seg button.on{background:var(--m-sec-c);color:var(--m-on-sec-c)}
 body.m3 .seg button.on::before{content:"✓ "}
@@ -318,51 +318,51 @@ body.m3 .seg.sub button+button{border-left:1px solid var(--m-outline)}
 body.m3 .seg.sub button.on{border-color:transparent}
 body.m3 .wallet{grid-template-columns:auto 1fr;gap:2px 16px}
 body.m3 .wallet .spr{width:64px}
-body.m3 .wallet .nm{font:500 16px/1.4 Roboto,sans-serif;letter-spacing:.15px}
-body.m3 .wallet .rub{font:400 45px/1.1 Roboto,sans-serif;letter-spacing:0}
-body.m3 .wallet .usd{font:400 22px/1.3 Roboto,sans-serif;color:var(--m-success)}
+body.m3 .wallet .nm{font:500 16px/1.4 'Bahnschrift','Barlow',sans-serif;letter-spacing:.15px}
+body.m3 .wallet .rub{font:400 45px/1.1 'Bahnschrift','Barlow',sans-serif;letter-spacing:0}
+body.m3 .wallet .usd{font:400 22px/1.3 'Bahnschrift','Barlow',sans-serif;color:var(--m-success)}
 body.m3 .neg{color:var(--m-error)!important}
 body.m3 .rate div{border:0;border-radius:12px;background:var(--m-sch)}
 body.m3 .rate span{color:var(--m-osv);font-size:12px}
-body.m3 .rate b{font:400 32px/1.25 Roboto,sans-serif}
+body.m3 .rate b{font:400 32px/1.25 'Bahnschrift','Barlow',sans-serif}
 body.m3 .open{background:var(--m-primary-c);color:var(--m-on-primary-c);border-radius:8px}
 body.m3 .closed{background:var(--m-sch);border-radius:8px}
 body.m3 .card{border:0;border-radius:16px;background:var(--m-scl0);color:var(--m-on-surface);box-shadow:0 1px 3px rgba(0,0,0,.3),0 4px 8px 3px rgba(0,0,0,.15)}
-body.m3 .card .num{background:var(--m-primary);color:var(--m-on-primary);border:0;border-radius:8px;font:500 14px/1 Roboto,sans-serif;padding:8px 12px;top:-16px}
-body.m3 .card .tx{font:400 22px/1.3 Roboto,sans-serif;letter-spacing:0}
-body.m3 .big{font:400 45px/1.1 Roboto,sans-serif;letter-spacing:0}
+body.m3 .card .num{background:var(--m-primary);color:var(--m-on-primary);border:0;border-radius:8px;font:500 14px/1 'Bahnschrift','Barlow',sans-serif;padding:8px 12px;top:-16px}
+body.m3 .card .tx{font:400 22px/1.3 'Bahnschrift','Barlow',sans-serif;letter-spacing:0}
+body.m3 .big{font:400 45px/1.1 'Bahnschrift','Barlow',sans-serif;letter-spacing:0}
 body.m3 .big.down{color:var(--m-error)}
 body.m3 .die{border:1px solid var(--m-outline-v);border-radius:22%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.3),0 2px 6px 2px rgba(0,0,0,.12)}
 body.m3 .die i{background:#1D1B20}
 body.m3 .die i.r{background:#B3261E}
 body.m3 .die i.o{visibility:hidden}
 body.m3 .acct{border:1px solid var(--m-outline-v);border-left:1px solid var(--m-outline-v);border-radius:12px;background:var(--m-scl0)}
-body.m3 .acct b{font:500 14px/1.3 Roboto,sans-serif}
-body.m3 .acct .m{font:400 22px/1.3 Roboto,sans-serif}
+body.m3 .acct b{font:500 14px/1.3 'Bahnschrift','Barlow',sans-serif}
+body.m3 .acct .m{font:400 22px/1.3 'Bahnschrift','Barlow',sans-serif}
 body.m3 .tbl,body.m3 .seat{border:1px solid var(--m-outline-v);border-radius:12px;background:var(--m-scl0)}
-body.m3 .tbl .nm,body.m3 .seat{font:500 16px/1.4 Roboto,sans-serif;letter-spacing:.15px}
+body.m3 .tbl .nm,body.m3 .seat{font:500 16px/1.4 'Bahnschrift','Barlow',sans-serif;letter-spacing:.15px}
 body.m3 .btbl th{border-bottom:1px solid var(--m-outline-v);font-weight:500}
 body.m3 .btbl td{border-bottom-color:var(--m-outline-v)}
 body.m3 .hl li{border-bottom:1px solid var(--m-outline-v)}
 body.m3 .undo,body.m3 .linkbtn{color:var(--m-primary);font-weight:500;text-decoration:none}
-body.m3 .step button{border:1px solid var(--m-outline);border-radius:50%;background:transparent;color:var(--m-on-surface);font:400 22px/1 Roboto,sans-serif}
-body.m3 .step b{font:400 22px/1 Roboto,sans-serif}
+body.m3 .step button{border:1px solid var(--m-outline);border-radius:50%;background:transparent;color:var(--m-on-surface);font:400 22px/1 'Bahnschrift','Barlow',sans-serif}
+body.m3 .step b{font:400 22px/1 'Bahnschrift','Barlow',sans-serif}
 body.m3 .offer{border:0;border-radius:12px;background:var(--m-primary-c);color:var(--m-on-primary-c)}
-body.m3 .offer b{font:500 16px/1.4 Roboto,sans-serif}
+body.m3 .offer b{font:500 16px/1.4 'Bahnschrift','Barlow',sans-serif}
 body.m3 .ccard{border:1px solid var(--m-outline-v);border-radius:12px;background:var(--m-scl0)}
-body.m3 .ccard .no{text-transform:none;font:500 12px/1.3 Roboto,sans-serif;letter-spacing:.5px}
+body.m3 .ccard .no{text-transform:none;font:500 12px/1.3 'Bahnschrift','Barlow',sans-serif;letter-spacing:.5px}
 body.m3 .ccard textarea{background:transparent;color:var(--m-on-surface)}
 body.m3 .savebar{background:var(--m-scl);border-top:1px solid var(--m-outline-v);border-radius:0 0 16px 16px}
 body.m3 nav.bar{background:var(--m-sc);border-top:0;box-shadow:none}
-body.m3 nav.bar button{opacity:1;color:var(--m-osv);font:500 12px/1.3 Roboto,sans-serif;letter-spacing:.5px;gap:4px;padding:12px 0 16px;min-height:80px;background:none}
+body.m3 nav.bar button{opacity:1;color:var(--m-osv);font:500 12px/1.3 'Bahnschrift','Barlow',sans-serif;letter-spacing:.5px;gap:4px;padding:12px 0 16px;min-height:80px;background:none}
 body.m3 nav.bar button .g{width:64px;height:32px;border-radius:16px;display:grid;place-items:center;transition:background .2s}
 body.m3 nav.bar button.on{color:var(--m-on-surface);background:none;font-weight:700}
 body.m3 nav.bar button.on .g{background:var(--m-sec-c);color:var(--m-on-sec-c)}
 body.m3 nav.bar button.on .ms{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
 body.m3 main{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
 body.m3 .toast{left:16px;right:16px;transform:none;max-width:none;border-radius:4px;background:var(--m-inv);color:var(--m-inv-on);bottom:calc(92px + env(safe-area-inset-bottom,0px));box-shadow:0 3px 5px rgba(0,0,0,.2),0 1px 18px rgba(0,0,0,.12)}
-body.m3 .ov .ovbig,body.m3 .ov .sub{font-family:Roboto,sans-serif;font-weight:500}
-body.m3 .chk{font-family:Roboto,sans-serif}
+body.m3 .ov .ovbig,body.m3 .ov .sub{font-family:'Bahnschrift','Barlow',sans-serif;font-weight:500}
+body.m3 .chk{font-family:'Bahnschrift','Barlow',sans-serif}
 body.m3 input[type=checkbox]{accent-color:var(--m-primary)}
 /* ===== v2 ===== */
 .pcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:10px}
@@ -450,7 +450,7 @@ body.m3 nav.bar button .g{width:min(48px,88%)}
 @keyframes dland{0%{transform:scale(1.35)}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.db .die.spin,.db .die.land,.db .ds.land{animation:none}}
 body.m3 .db{background:var(--m-scl);box-shadow:0 1px 3px rgba(0,0,0,.25),0 4px 8px 3px rgba(0,0,0,.1)}
-body.m3 .db .dn{border-radius:20px;border-color:var(--m-outline);background:transparent;font-family:Roboto,sans-serif}
+body.m3 .db .dn{border-radius:20px;border-color:var(--m-outline);background:transparent;font-family:'Bahnschrift','Barlow',sans-serif}
 @media (max-width:360px){.db .die{--ds:26px}.db .btn{padding:8px 10px}}
 .rodds{display:flex;justify-content:space-between;gap:10px;margin-top:10px;font-variant-numeric:tabular-nums}
 .rodds b{white-space:nowrap}.rodds span{font-size:14px}.rodds .up{color:var(--green)}.rodds .down{color:var(--red)}
@@ -506,10 +506,111 @@ nav.bar button .ms{font-size:25px}
 nav.bar button .g{height:34px;width:min(50px,88%);border-radius:17px}
 body:not(.m3) nav.bar button .g{font-size:20px;height:auto;width:auto}
 .logo small:empty{display:none}
+.pacmo{width:1.45em;height:.95em;display:inline-block;vertical-align:-.12em;fill:#F2B705;overflow:visible}
+.pacmo .pmj1,.pacmo .pmj2{transform-box:view-box;transform-origin:506.98px 197.52px}
+.pacmo .pmj1{transform:rotate(-40deg)}.pacmo .pmj2{transform:rotate(40deg)}
+.em .pacmo .pmd circle:last-child{display:none}
+.emb .pacmo .pmj1{animation:pmc1 .3s ease-in-out infinite}
+.emb .pacmo .pmj2{animation:pmc2 .3s ease-in-out infinite}
+.emb .pacmo .pmd{animation:pmdm .6s linear infinite}
+.emb .pacmo .pmd1{animation:pmdf .6s linear infinite}
+@keyframes pmc1{0%,100%{transform:rotate(-40deg)}50%{transform:rotate(-3deg)}}
+@keyframes pmc2{0%,100%{transform:rotate(40deg)}50%{transform:rotate(3deg)}}
+@keyframes pmdm{from{transform:translateX(0)}to{transform:translateX(-110px)}}
+@keyframes pmdf{0%,55%{opacity:1}70%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.emb .pacmo *{animation:none!important}}
+
+.help textarea{width:100%;min-height:58px;resize:vertical;font:inherit;font-size:15px;line-height:1.4;padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);box-sizing:border-box}
+.hans{margin-top:12px;padding:12px 14px;border-radius:14px;background:var(--table2,rgba(0,0,0,.05));white-space:pre-wrap;font-size:15px;line-height:1.5}
+.help .btn.ghost.sm{margin-top:8px}
+.hfaq{border-top:1px solid var(--line);padding:10px 0}
+.hfaq:first-of-type{border-top:0}
+.hfaq summary{cursor:pointer;font-weight:600;font-size:15px;list-style-position:outside}
+.hfaq p{margin:6px 0 0;font-size:14px;line-height:1.45}
+.hopen h2::after{content:' ⚠️'}
+
+.ntf{position:fixed;inset:0;z-index:32;pointer-events:none;display:grid;place-items:center;padding:16px}
+.ntf.big::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.28);animation:ntfade 2.4s ease both}
+.ntf .ntc{position:relative;background:var(--surface,#fff);color:var(--ink,#1a1a1a);border-radius:22px;padding:16px 18px 14px;width:min(82vw,320px);text-align:center;box-shadow:0 18px 50px rgba(0,0,0,.35);border-top:8px solid var(--c);animation:ntin .38s cubic-bezier(.2,1.4,.4,1) both,ntout .3s ease 2.05s forwards}
+.ntk{display:inline-block;background:var(--b);color:var(--gi);padding:5px 12px;border-radius:999px;font:700 12px/1 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;letter-spacing:.12em}
+.ntt{font:700 24px/1.15 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;margin:10px 0 8px;text-transform:uppercase;letter-spacing:.02em}
+.ntv{display:flex;justify-content:center;align-items:flex-end;margin:4px 0 12px;min-height:60px}
+.ntv .ntcard{width:96px;animation:ntcard .45s cubic-bezier(.2,1.3,.4,1) both;animation-delay:calc(.12s + var(--i)*.08s)}
+.ntv.fan .ntcard{width:74px;margin:0 -9px;transform:rotate(var(--r));transform-origin:50% 120%}
+.ntv .pc{border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.ntemo{font-size:68px;line-height:1.1;margin:2px 0 8px;animation:ntcard .5s cubic-bezier(.2,1.5,.4,1) .1s both}
+.ntw{display:flex;gap:8px;justify-content:center;align-items:center;font-weight:600;font-size:15px}
+.ntw .spr{width:26px}
+.ntf.small{place-items:start center;padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
+.ntp{display:flex;gap:8px;align-items:center;max-width:min(92vw,420px);background:var(--ink,#1a1a1a);color:var(--surface,#fff);padding:10px 16px;border-radius:999px;font-weight:600;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.3);animation:ntdown .3s ease both,ntup .3s ease 1.6s forwards}
+.nti{font-size:18px}
+@keyframes ntin{from{opacity:0;transform:scale(.7) translateY(24px)}}
+@keyframes ntout{to{opacity:0;transform:scale(.94)}}
+@keyframes ntfade{0%{opacity:0}12%,85%{opacity:1}100%{opacity:0}}
+@keyframes ntcard{from{opacity:0;transform:translateY(30px) rotate(0) scale(.6)}}
+@keyframes ntdown{from{opacity:0;transform:translateY(-24px)}}
+@keyframes ntup{to{opacity:0;transform:translateY(-16px)}}
+.ntf.rm *,.ntf.rm::before{animation-name:ntfade!important}
+
+/* ===== Оригинал (тёмно-серый, по макету поля v6) ===== */
+body.pole{--m-primary:#E6E6E6;--m-on-primary:#1A1A1A;--m-primary-c:#5A5A5A;--m-on-primary-c:#F2F2F2;--m-sec-c:#575757;--m-on-sec-c:#F2F2F2;--m-error:#F0899A;--m-success:#8CCFB2;
+  --m-surface:#1F1F1F;--m-scl0:#424242;--m-scl:#424242;--m-sc:#3A3A3A;--m-sch:#4D4D4D;--m-schh:#575757;--m-on-surface:#F2F2F2;--m-osv:#BDBDBD;--m-outline:#8C8C8C;--m-outline-v:#5C5C5C;--m-inv:#E6E6E6;--m-inv-on:#1A1A1A;
+  --on-table:#F2F2F2;color-scheme:dark;background:#1F1F1F;font-family:'Bahnschrift','Barlow',system-ui,sans-serif}
+body.pole header .logo{color:#E6E6E6}
+body.pole header .logo small,body.pole .ver{color:#9E9E9E}
+body.pole .sync{color:#BDBDBD}
+body.pole h2{font:700 21px/1.2 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em;color:#FFFFFF}
+body.pole h3{font-family:'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;font-weight:700}
+body.pole .lbl{font:700 13px/1.4 'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#BDBDBD}
+body.pole .sheet{border-radius:22px;box-shadow:none;border:1px solid #4D4D4D}
+body.pole .btn{font-family:'Bahnschrift SemiCondensed','Barlow Semi Condensed',sans-serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+body.pole .btn.red{background:#E6E6E6;color:#1A1A1A}
+body.pole .btn.ghost{background:transparent;border:1.5px solid #BDBDBD;color:#F2F2F2}
+body.pole .wallet .rub,body.pole .big,body.pole .amt,body.pole .rate b{font-family:'Bahnschrift','Barlow',sans-serif;font-weight:700;color:#FFFFFF}
+body.pole .hmenu{background:#424242;border-color:#5C5C5C;color:#F2F2F2}
+body.pole .tk{background:#3A3A3A;color:#F2F2F2}
+body.pole .tk .dot{background:#E6E6E6}
+body.pole .tkl{background:#424242;color:#F2F2F2}
+body.pole #splash{background:#1F1F1F;color:#E6E6E6}
+body.pole nav.bar{background:#171717}
+body.pole nav.bar button{color:#9E9E9E}
+body.pole nav.bar button.on{color:#FFFFFF}
+body.pole nav.bar button.on .g{background:#E6E6E6;color:#1A1A1A}
+body.pole .db,body.pole #emobar>*{background:#3A3A3A}
+body.pole .themebtn,body.pole #hpanel .tname,body.pole #hpanel .mechip,body.pole #hpanel .pausebtn{background:#424242;color:#F2F2F2;border-color:#5C5C5C}
+body.pole #hpanel .bankbtn{background:#E6E6E6;color:#1A1A1A;border-color:transparent}
+body.pole .seg button.on{background:#E6E6E6;color:#1A1A1A}
+
+.ptrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:8px 0 4px}
+.ptcard .pcgrid{margin-bottom:8px}
+.lgsvg{display:block;height:28px;width:auto;fill:currentColor;filter:drop-shadow(2px 2px 0 rgba(0,0,0,.4))}
+body.m3 .lgsvg{height:26px;filter:none}
+#splash{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background-color:var(--table);color:#E8604F;cursor:pointer;animation:spout .35s ease 2.05s forwards}
+body.m3 #splash{background:var(--m-surface);color:var(--m-primary,#6750A4)}
+#splash .spsvg{width:min(68vw,340px);height:auto;fill:currentColor;overflow:visible}
+body:not(.m3) #splash .spsvg{filter:drop-shadow(4px 4px 0 rgba(0,0,0,.35))}
+#splash .spn{opacity:0;animation:spn .45s cubic-bezier(.2,.8,.2,1) .05s forwards}
+#splash .sppac{transform-box:view-box;transform-origin:506.98px 197.52px;transform:scale(.4);opacity:0;animation:sppac .4s cubic-bezier(.3,1.5,.5,1) .2s forwards}
+#splash .spj1,#splash .spj2{transform-box:view-box;transform-origin:506.98px 197.52px}
+#splash .spj1{transform:rotate(-45deg);animation:chomp1 .27s ease-in-out .55s 3}
+#splash .spj2{transform:rotate(45deg);animation:chomp2 .27s ease-in-out .55s 3}
+#splash .spdots{animation:spdots .85s linear .5s forwards}
+#splash .spd1{animation:spd1 .85s linear .5s forwards}
+#splash .spp{opacity:0;animation:spp .4s cubic-bezier(.2,.8,.2,1) 1.3s forwards}
+@keyframes spn{from{opacity:0;transform:translateX(-120px)}to{opacity:1;transform:none}}
+@keyframes sppac{to{opacity:1;transform:scale(1)}}
+@keyframes chomp1{50%{transform:rotate(-4deg)}}
+@keyframes chomp2{50%{transform:rotate(4deg)}}
+@keyframes spdots{to{transform:translateX(-220px)}}
+@keyframes spd1{0%,68%{opacity:1}76%,100%{opacity:0}}
+@keyframes spp{from{opacity:0;transform:translateX(120px)}to{opacity:1;transform:none}}
+@keyframes spout{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){#splash *{animation:none!important;opacity:1!important;transform:none!important}#splash .spd1{opacity:0!important}#splash .spdots{transform:translateX(-220px)!important}#splash .spj1{transform:rotate(-45deg)!important}#splash .spj2{transform:rotate(45deg)!important}#splash{animation-delay:.6s}}
+
 .hcol{flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 #hleft:empty{display:none}
 .themebtn{appearance:none;border:1.5px dashed var(--line);background:transparent;color:inherit;font:inherit;font-size:12px;border-radius:999px;min-height:32px;padding:0 10px;cursor:pointer;white-space:nowrap}
-.themebtn::before{content:'🎨 '}
+#hpanel .themebtn::before{content:none}
 header{flex-wrap:wrap}
 .hmenu{appearance:none;display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;font-weight:600;border-radius:999px;min-height:40px;padding:0 12px 0 10px;cursor:pointer}
 .hmenu .spr,.hmenu svg,.hmenu img,.hmenu canvas{max-height:24px}
@@ -521,7 +622,17 @@ header{flex-wrap:wrap}
 .hrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-top:8px;animation:hdrop .18s ease-out}
 @keyframes hdrop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .hsync{margin-top:6px}
-#hpanel .hrow{gap:5px}
+#hpanel .hrow .hico{appearance:none;position:relative;width:32px;height:32px;min-height:32px;padding:0;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font-size:15px;line-height:1;display:inline-grid;place-items:center;cursor:pointer;flex:none}
+#hpanel .hrow .hico.on{outline:2px solid currentColor}
+#hpanel .hrow .hico.dim{opacity:.75}
+#hpanel .hrow .hico .hicb{position:absolute;top:-3px;right:-3px;min-width:14px;height:14px;border-radius:7px;background:var(--red,#C8372D);color:#fff;font:700 10px/14px sans-serif;font-style:normal}
+#hpanel .hrow .pausebtn{margin-left:auto}
+body.pole #hpanel .hrow .hico{background:#424242;color:#F2F2F2;border-color:#5C5C5C}
+#hpanel .hrow{gap:5px;flex-wrap:nowrap}
+#hpanel .hrow .themebtn{width:32px;height:32px;padding:0!important;border-radius:999px;display:inline-grid;place-items:center;font-size:15px;flex:none}
+#hpanel .hrow>*{flex-shrink:0}
+#hpanel .hrow .mechip{flex-shrink:1;min-width:0}
+@media (max-width:374px){#hpanel .hrow .mechip .mcn{display:none}#hpanel .hrow{gap:4px}}
 #hpanel .hrow .tname{max-width:24vw;padding:6px 8px;font-size:13px}
 #hpanel .hrow .themebtn{padding:0 8px;min-height:32px}
 #hpanel .hrow .mechip{padding:4px 8px;font-size:13px;min-height:32px;gap:4px}
@@ -531,7 +642,7 @@ header{flex-wrap:wrap}
 #hpanel .hrow .bankbtn .ms,#hpanel .hrow .bankbtn .rt{display:none}
 #hpanel .hrow .bankbtn{padding:0 10px}
 #hpanel .hrow .mechip{max-width:28vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-#hpanel .hrow .themebtn::before{content:'🎨';margin-right:3px}
+
 .emobar{max-width:640px;margin:0 auto 8px;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
 .emobar:empty{display:none}
 .emobar .ebx{margin-top:0}
@@ -567,7 +678,7 @@ header{flex-wrap:wrap}
 .chip .spr{width:18px;vertical-align:middle}
 .hcode{margin-top:10px;padding:12px 14px;border-radius:14px;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);animation:hdrop .18s ease-out}
 .hcode .hcn{font-weight:600;font-size:14px}.hcode .hcl{font-size:12px;opacity:.75;margin-top:6px;text-transform:uppercase;letter-spacing:.08em}
-.hcode .hcc{font:700 40px/1.1 Oswald,Roboto,sans-serif;letter-spacing:.25em;font-variant-numeric:tabular-nums;margin:2px 0 4px}
+.hcode .hcc{font:700 40px/1.1 'Bahnschrift SemiCondensed','Barlow Semi Condensed','Bahnschrift','Barlow',sans-serif;letter-spacing:.25em;font-variant-numeric:tabular-nums;margin:2px 0 4px}
 .hcode .hcb{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 #hpanel .hrow .tname.on{outline:2px solid currentColor}
 .seg button .rch{display:block;font-size:10px;opacity:.75;font-weight:400;line-height:1.1}
@@ -591,7 +702,7 @@ body:not(.m3) nav.bar svg.ms{display:none}
 </head>
 <body>
 <header>
-  <div class="hcol"><div class="logo">НЭП<small><span class="ver">v2.1</span></small></div><div id="hleft"></div></div>
+  <div class="hcol"><div class="logo"><svg class="lgsvg" viewBox="0 0 984.33 395.05" role="img" aria-label="НЭП"><path d="M0 65.84l243.61 121.81 0 -111.93c0,-5.43 4.44,-9.88 9.88,-9.88 5.43,0 9.88,4.45 9.88,9.88l0 121.81 0 6.58 0 125.1 -243.61 -121.81 0 111.93c0,5.43 -4.44,9.88 -9.88,9.88 -5.43,0 -9.88,-4.45 -9.88,-9.88l0 -121.81 0 -6.58 0 -125.1z"/><path d="M309.46 197.52A197.52 197.52 0 0 1 704.50 197.52L506.98 197.52Z" transform="rotate(-45 506.98 197.52)"/><path d="M704.50 197.52A197.52 197.52 0 0 1 309.46 197.52L506.98 197.52Z" transform="rotate(45 506.98 197.52)"/><circle cx="646.65" cy="197.52" r="32.92"/><path fill-rule="evenodd" d="M852.65 289.7l19.75 0c61.52,0 111.93,-50.41 111.93,-111.93 0,-61.52 -50.41,-111.93 -111.93,-111.93l-19.75 0 -92.18 0 -39.51 0 0 263.37 131.68 0 0 -39.51zm0 -204.11l0 184.36 19.75 0c50.62,0 92.18,-41.56 92.18,-92.18 0,-50.62 -41.56,-92.18 -92.18,-92.18l-19.75 0z"/></svg><small><span class="ver">v2.1</span></small></div><div id="hleft"></div></div>
   <div class="hright" id="hright"></div>
   <div id="hpanel"></div>
 </header>
@@ -602,8 +713,8 @@ body:not(.m3) nav.bar svg.ms{display:none}
 <nav class="bar" id="bar" hidden></nav>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script>
-const DECK=["Двигайся вперёд на поле Начало", "Двигайся вперёд на поле Акция", "Двигайся назад на поле Акция", "Двигайся вперёд на поле Налоги", "Двигайся назад на поле Налоги", "Двигайся назад на поле Аренда кубика", "Двигайся на поле Курс валюты", "Двигайся на поле Курс валюты, 2 попытки", "Двигайся на поле Торги и Ссуды", "Посети Биржу, используй дополнительную попытку", "Ходи вперёд, произвольный стоп", "Ходи назад, произвольный стоп", "Посети любое поле 1-й линии и выполни действие поля", "Посети любое поле 2-й линии и выполни действие поля", "Посети любое поле 3-й линии и выполни действие поля", "Посети любое поле 4-й линии и выполни действие поля", "Можешь купить любой свободный патент", "Можешь купить до 2 акций синдиката 1-й линии", "Можешь купить до 2 акций синдиката 2-й линии", "Можешь купить до 2 акций синдиката 3-й линии", "Можешь купить до 2 акций синдиката 4-й линии", "+5 долларов", "+10 долларов", "Дивиденды: получи доход по своим акциям ещё раз, как за круг", "Выигрыш в лотерею: +200 ₽", "День рождения: каждый игрок дарит тебе по 50 ₽", "Внеочередная налоговая проверка: заплати налог прямо сейчас", "Рулетка против банка", "Пропуск следующего хода", "Гран-при: +500 ₽", "Штраф за превышение скорости: заплати банку 100 ₽", "Срочный ремонт: заплати банку 100 ₽", "Пеня по налогам: заплати банку 50 ₽"];
-const OLDDECK=["Отчисления в банк 300 ₽\nХоди назад два раза\nХоди назад, скорость 2х\nРулетка против банка, ставка 1:1\nДвигайся вперёд на поле Начало\nДвигайся назад на поле Акция\nОбслуживание ТД, 100 ₽ каждый\nБез убытков до конца круга\nХоди назад, произвольный стоп\nСсуда-рассрочка до 5 кругов\nХоди вперёд, произвольный стоп\nДвигайся назад на поле Налоги\nДвигайся на поле Курс валюты\nДвигайся назад на поле Аренда кубика\nПроизвольное направление и стоп, 1 ход\nПострой до 2 ТД, оплата 1/2 от суммы\nТорговый дом за счёт банка\nРулетка против банка, ставка 1:2\nХоди вперёд, произвольный стоп, 2 хода\nДвигайся вперёд на поле Аренда кубика\nПострой 2 ТД за счёт банка\nДвигайся на поле Курс валюты, 2 попытки\nРулетка против банка, ставка 1:5", "Рулетка против банка\nДвигайся вперёд на поле Начало\nДвигайся назад на поле Акция\nХоди назад, произвольный стоп\nХоди вперёд, произвольный стоп\nДвигайся назад на поле Налоги\nДвигайся на поле Курс валюты\nДвигайся назад на поле Аренда кубика\nДвигайся на поле Курс валюты, 2 попытки\nПосети любое поле 1-й линии и выполни действие поля\nПосети любое поле 2-й линии и выполни действие поля\nПосети любое поле 3-й линии и выполни действие поля\nПосети любое поле 4-й линии и выполни действие поля\n+5 долларов\n+10 долларов", "Двигайся вперёд на поле Начало\nДвигайся вперёд на поле Акция\nДвигайся назад на поле Акция\nДвигайся вперёд на поле Налоги\nДвигайся назад на поле Налоги\nДвигайся назад на поле Аренда кубика\nДвигайся на поле Курс валюты\nДвигайся на поле Курс валюты, 2 попытки\nДвигайся на поле Торги и Ссуды\nПосети Биржу, используй дополнительную попытку\nХоди вперёд, произвольный стоп\nХоди назад, произвольный стоп\nПосети любое поле 1-й линии и выполни действие поля\nПосети любое поле 2-й линии и выполни действие поля\nПосети любое поле 3-й линии и выполни действие поля\nПосети любое поле 4-й линии и выполни действие поля\nМожешь купить любой свободный патент\nМожешь купить до 2 акций синдиката 1-й линии\nМожешь купить до 2 акций синдиката 2-й линии\nМожешь купить до 2 акций синдиката 3-й линии\nМожешь купить до 2 акций синдиката 4-й линии\n+5 долларов\n+10 долларов\nДивиденды: получи доход по своим акциям ещё раз, как за круг\nВыигрыш в лотерею: +200 ₽\nДень рождения: каждый игрок дарит тебе по 50 ₽\nВнеочередная налоговая проверка: заплати налог прямо сейчас\nРулетка против банка", "Двигайся вперёд на поле Начало\nДвигайся вперёд на поле Акция\nДвигайся назад на поле Акция\nДвигайся вперёд на поле Налоги\nДвигайся назад на поле Налоги\nДвигайся назад на поле Аренда кубика\nДвигайся на поле Курс валюты\nДвигайся на поле Курс валюты, 2 попытки\nДвигайся на поле Торги и Ссуды\nПосети Биржу, используй дополнительную попытку\nХоди вперёд, произвольный стоп\nХоди назад, произвольный стоп\nПосети любое поле 1-й линии и выполни действие поля\nПосети любое поле 2-й линии и выполни действие поля\nПосети любое поле 3-й линии и выполни действие поля\nПосети любое поле 4-й линии и выполни действие поля\nМожешь купить любой свободный патент\nМожешь купить до 2 акций синдиката 1-й линии\nМожешь купить до 2 акций синдиката 2-й линии\nМожешь купить до 2 акций синдиката 3-й линии\nМожешь купить до 2 акций синдиката 4-й линии\n+5 долларов\n+10 долларов\nДивиденды: получи доход по своим акциям ещё раз, как за круг\nВыигрыш в лотерею: +200 ₽\nДень рождения: каждый игрок дарит тебе по 50 ₽\nВнеочередная налоговая проверка: заплати налог прямо сейчас\nРулетка против банка\nПропуск следующего хода", "Двигайся вперёд на поле Начало\nДвигайся вперёд на поле Акция\nДвигайся назад на поле Акция\nДвигайся вперёд на поле Налоги\nДвигайся назад на поле Налоги\nДвигайся назад на поле Аренда кубика\nДвигайся на поле Курс валюты\nДвигайся на поле Курс валюты, 2 попытки\nДвигайся на поле Торги и Ссуды\nПосети Биржу, используй дополнительную попытку\nХоди вперёд, произвольный стоп\nХоди назад, произвольный стоп\nПосети любое поле 1-й линии и выполни действие поля\nПосети любое поле 2-й линии и выполни действие поля\nПосети любое поле 3-й линии и выполни действие поля\nПосети любое поле 4-й линии и выполни действие поля\nМожешь купить любой свободный патент\nМожешь купить до 2 акций синдиката 1-й линии\nМожешь купить до 2 акций синдиката 2-й линии\nМожешь купить до 2 акций синдиката 3-й линии\nМожешь купить до 2 акций синдиката 4-й линии\n+5 долларов\n+10 долларов\nДивиденды: получи доход по своим акциям ещё раз, как за круг\nВыигрыш в лотерею: +200 ₽\nДень рождения: каждый игрок дарит тебе по 50 ₽\nВнеочередная налоговая проверка: заплати налог прямо сейчас\nРулетка против банка\nПропуск следующего хода\nГран-при: +500 ₽"];
+const DECK=["Двигайся вперёд на поле Начало", "Двигайся назад на поле Начало", "Двигайся вперёд на поле Акция", "Двигайся назад на поле Акция", "Двигайся вперёд на поле Налоги", "Двигайся назад на поле Налоги", "Двигайся вперёд на поле Аренда кубика", "Двигайся назад на поле Аренда кубика", "Двигайся вперёд на поле Курс валюты", "Двигайся назад на поле Курс валюты", "Двигайся вперёд на поле Курс валюты, 2 попытки", "Двигайся назад на поле Курс валюты, 2 попытки", "Двигайся вперёд на поле Торги / Ссуда", "Двигайся назад на поле Торги / Ссуда", "Двигайся вперёд на поле Телепорт", "Двигайся назад на поле Телепорт", "Двигайся вперёд на ближайшее поле ЖКХ", "Двигайся назад на ближайшее поле ЖКХ", "Двигайся на поле Шанс впереди и тяни ещё одну карточку", "Посети Биржу, используй дополнительную попытку", "Ходи вперёд, произвольный стоп", "Ходи назад, произвольный стоп", "Посети любое поле 1-й линии и выполни действие поля", "Посети любое поле 2-й линии и выполни действие поля", "Посети любое поле 3-й линии и выполни действие поля", "Посети любое поле 4-й линии и выполни действие поля", "Можешь купить любой свободный патент", "Можешь купить до 2 акций синдиката 1-й линии", "Можешь купить до 2 акций синдиката 2-й линии", "Можешь купить до 2 акций синдиката 3-й линии", "Можешь купить до 2 акций синдиката 4-й линии", "+5 долларов", "+10 долларов", "Дивиденды: получи доход по своим акциям ещё раз, как за круг", "Выигрыш в лотерею: +200 ₽", "День рождения: каждый игрок дарит тебе по 50 ₽", "Внеочередная налоговая проверка: заплати налог прямо сейчас", "Рулетка против банка", "Пропуск следующего хода", "Гран-при: +500 ₽", "Штраф за превышение скорости: заплати банку 100 ₽", "Срочный ремонт: заплати банку 100 ₽", "Пеня по налогам: заплати банку 50 ₽", "Авария в ЖКХ: каждый владелец клетки ЖКХ платит банку по 50 ₽ за каждую свою клетку", "Субсидия: если у тебя есть клетка ЖКХ, получи от банка 100 ₽", "Аудит: заплати банку 25 ₽ за каждый свой магазин и 100 ₽ за каждый Торговый дом", "Можешь провести одну операцию по развитию своего синдиката, не вставая на его поле", "Можешь провести две операции по развитию своего синдиката, не вставая на его поле", "Льгота застройщику: следующий магазин построй за полцены — банк вернёт половину", "Обвал на бирже: продай одну свою акцию банку по цене покупки"];
+const OLDDECK=["Отчисления в банк 300 ₽\nХоди назад два раза\nХоди назад, скорость 2х\nРулетка против банка, ставка 1:1\nДвигайся вперёд на поле Начало\nДвигайся назад на поле Акция\nОбслуживание ТД, 100 ₽ каждый\nБез убытков до конца круга\nХоди назад, произвольный стоп\nСсуда-рассрочка до 5 кругов\nХоди вперёд, произвольный стоп\nДвигайся назад на поле Налоги\nДвигайся на поле Курс валюты\nДвигайся назад на поле Аренда кубика\nПроизвольное направление и стоп, 1 ход\nПострой до 2 ТД, оплата 1/2 от суммы\nТорговый дом за счёт банка\nРулетка против банка, ставка 1:2\nХоди вперёд, произвольный стоп, 2 хода\nДвигайся вперёд на поле Аренда кубика\nПострой 2 ТД за счёт банка\nДвигайся на поле Курс валюты, 2 попытки\nРулетка против банка, ставка 1:5", "Рулетка против банка\nДвигайся вперёд на поле Начало\nДвигайся назад на поле Акция\nХоди назад, произвольный стоп\nХоди вперёд, произвольный стоп\nДвигайся назад на поле Налоги\nДвигайся на поле Курс валюты\nДвигайся назад на поле Аренда кубика\nДвигайся на поле Курс валюты, 2 попытки\nПосети любое поле 1-й линии и выполни действие поля\nПосети любое поле 2-й линии и выполни действие поля\nПосети любое поле 3-й линии и выполни действие поля\nПосети любое поле 4-й линии и выполни действие поля\n+5 долларов\n+10 долларов", "Двигайся вперёд на поле Начало\nДвигайся вперёд на поле Акция\nДвигайся назад на поле Акция\nДвигайся вперёд на поле Налоги\nДвигайся назад на поле Налоги\nДвигайся назад на поле Аренда кубика\nДвигайся на поле Курс валюты\nДвигайся на поле Курс валюты, 2 попытки\nДвигайся на поле Торги и Ссуды\nПосети Биржу, используй дополнительную попытку\nХоди вперёд, произвольный стоп\nХоди назад, произвольный стоп\nПосети любое поле 1-й линии и выполни действие поля\nПосети любое поле 2-й линии и выполни действие поля\nПосети любое поле 3-й линии и выполни действие поля\nПосети любое поле 4-й линии и выполни действие поля\nМожешь купить любой свободный патент\nМожешь купить до 2 акций синдиката 1-й линии\nМожешь купить до 2 акций синдиката 2-й линии\nМожешь купить до 2 акций синдиката 3-й линии\nМожешь купить до 2 акций синдиката 4-й линии\n+5 долларов\n+10 долларов\nДивиденды: получи доход по своим акциям ещё раз, как за круг\nВыигрыш в лотерею: +200 ₽\nДень рождения: каждый игрок дарит тебе по 50 ₽\nВнеочередная налоговая проверка: заплати налог прямо сейчас\nРулетка против банка", "Двигайся вперёд на поле Начало\nДвигайся вперёд на поле Акция\nДвигайся назад на поле Акция\nДвигайся вперёд на поле Налоги\nДвигайся назад на поле Налоги\nДвигайся назад на поле Аренда кубика\nДвигайся на поле Курс валюты\nДвигайся на поле Курс валюты, 2 попытки\nДвигайся на поле Торги и Ссуды\nПосети Биржу, используй дополнительную попытку\nХоди вперёд, произвольный стоп\nХоди назад, произвольный стоп\nПосети любое поле 1-й линии и выполни действие поля\nПосети любое поле 2-й линии и выполни действие поля\nПосети любое поле 3-й линии и выполни действие поля\nПосети любое поле 4-й линии и выполни действие поля\nМожешь купить любой свободный патент\nМожешь купить до 2 акций синдиката 1-й линии\nМожешь купить до 2 акций синдиката 2-й линии\nМожешь купить до 2 акций синдиката 3-й линии\nМожешь купить до 2 акций синдиката 4-й линии\n+5 долларов\n+10 долларов\nДивиденды: получи доход по своим акциям ещё раз, как за круг\nВыигрыш в лотерею: +200 ₽\nДень рождения: каждый игрок дарит тебе по 50 ₽\nВнеочередная налоговая проверка: заплати налог прямо сейчас\nРулетка против банка\nПропуск следующего хода", "Двигайся вперёд на поле Начало\nДвигайся вперёд на поле Акция\nДвигайся назад на поле Акция\nДвигайся вперёд на поле Налоги\nДвигайся назад на поле Налоги\nДвигайся назад на поле Аренда кубика\nДвигайся на поле Курс валюты\nДвигайся на поле Курс валюты, 2 попытки\nДвигайся на поле Торги и Ссуды\nПосети Биржу, используй дополнительную попытку\nХоди вперёд, произвольный стоп\nХоди назад, произвольный стоп\nПосети любое поле 1-й линии и выполни действие поля\nПосети любое поле 2-й линии и выполни действие поля\nПосети любое поле 3-й линии и выполни действие поля\nПосети любое поле 4-й линии и выполни действие поля\nМожешь купить любой свободный патент\nМожешь купить до 2 акций синдиката 1-й линии\nМожешь купить до 2 акций синдиката 2-й линии\nМожешь купить до 2 акций синдиката 3-й линии\nМожешь купить до 2 акций синдиката 4-й линии\n+5 долларов\n+10 долларов\nДивиденды: получи доход по своим акциям ещё раз, как за круг\nВыигрыш в лотерею: +200 ₽\nДень рождения: каждый игрок дарит тебе по 50 ₽\nВнеочередная налоговая проверка: заплати налог прямо сейчас\nРулетка против банка\nПропуск следующего хода\nГран-при: +500 ₽", "Двигайся вперёд на поле Начало\nДвигайся вперёд на поле Акция\nДвигайся назад на поле Акция\nДвигайся вперёд на поле Налоги\nДвигайся назад на поле Налоги\nДвигайся назад на поле Аренда кубика\nДвигайся на поле Курс валюты\nДвигайся на поле Курс валюты, 2 попытки\nДвигайся на поле Торги и Ссуды\nПосети Биржу, используй дополнительную попытку\nХоди вперёд, произвольный стоп\nХоди назад, произвольный стоп\nПосети любое поле 1-й линии и выполни действие поля\nПосети любое поле 2-й линии и выполни действие поля\nПосети любое поле 3-й линии и выполни действие поля\nПосети любое поле 4-й линии и выполни действие поля\nМожешь купить любой свободный патент\nМожешь купить до 2 акций синдиката 1-й линии\nМожешь купить до 2 акций синдиката 2-й линии\nМожешь купить до 2 акций синдиката 3-й линии\nМожешь купить до 2 акций синдиката 4-й линии\n+5 долларов\n+10 долларов\nДивиденды: получи доход по своим акциям ещё раз, как за круг\nВыигрыш в лотерею: +200 ₽\nДень рождения: каждый игрок дарит тебе по 50 ₽\nВнеочередная налоговая проверка: заплати налог прямо сейчас\nРулетка против банка\nПропуск следующего хода\nГран-при: +500 ₽\nШтраф за превышение скорости: заплати банку 100 ₽\nСрочный ремонт: заплати банку 100 ₽\nПеня по налогам: заплати банку 50 ₽", "Двигайся вперёд на поле Начало\nДвигайся назад на поле Начало\nДвигайся вперёд на поле Акция\nДвигайся назад на поле Акция\nДвигайся вперёд на поле Налоги\nДвигайся назад на поле Налоги\nДвигайся вперёд на поле Аренда кубика\nДвигайся назад на поле Аренда кубика\nДвигайся вперёд на поле Курс валюты\nДвигайся назад на поле Курс валюты\nДвигайся вперёд на поле Курс валюты, 2 попытки\nДвигайся назад на поле Курс валюты, 2 попытки\nДвигайся вперёд на поле Торги / Ссуда\nДвигайся назад на поле Торги / Ссуда\nДвигайся вперёд на поле Телепорт\nДвигайся назад на поле Телепорт\nДвигайся вперёд на ближайшее поле ЖКХ\nДвигайся назад на ближайшее поле ЖКХ\nДвигайся на поле Шанс впереди и тяни ещё одну карточку\nПосети Биржу, используй дополнительную попытку\nХоди вперёд, произвольный стоп\nХоди назад, произвольный стоп\nПосети любое поле 1-й линии и выполни действие поля\nПосети любое поле 2-й линии и выполни действие поля\nПосети любое поле 3-й линии и выполни действие поля\nПосети любое поле 4-й линии и выполни действие поля\nМожешь купить любой свободный патент\nМожешь купить до 2 акций синдиката 1-й линии\nМожешь купить до 2 акций синдиката 2-й линии\nМожешь купить до 2 акций синдиката 3-й линии\nМожешь купить до 2 акций синдиката 4-й линии\n+5 долларов\n+10 долларов\nДивиденды: получи доход по своим акциям ещё раз, как за круг\nВыигрыш в лотерею: +200 ₽\nДень рождения: каждый игрок дарит тебе по 50 ₽\nВнеочередная налоговая проверка: заплати налог прямо сейчас\nРулетка против банка\nПропуск следующего хода\nГран-при: +500 ₽\nШтраф за превышение скорости: заплати банку 100 ₽\nСрочный ремонт: заплати банку 100 ₽\nПеня по налогам: заплати банку 50 ₽\nАвария в ЖКХ: каждый владелец клетки ЖКХ платит банку по 50 ₽ за каждую свою клетку\nСубсидия: если у тебя есть клетка ЖКХ, получи от банка 100 ₽\nАудит: заплати банку 25 ₽ за каждый свой магазин и 100 ₽ за каждый Торговый дом\nЛьгота застройщику: следующий магазин построй за полцены — банк вернёт половину\nОбвал на бирже: продай одну свою акцию банку по цене покупки"];
 const PCOLORS=['#C0392B','#2F7D63','#C08A1E','#3B5BA9','#8A4A8C','#5F7A86'];
 const PAL={K:'#1B1B1B',S:'#F4BE8C',W:'#FFFFFF',H:'#7A4320',G:'#8C8C8C',D:'#3A3B44',R:'#E03A3A',U:'#2C4FA8',B:'#8B5A2B',P:'#F2A0B5',L:'#9ED4F2',Y:'#F5D04A',V:'#FFF1A8',A:'#6BCB5A'};
 const CHAR_NAMES=['Джентльмен','Девочка','Гангстер','Мальчик','Малыш','Ковбой','Бабушка','Кролик','Автомобиль','Пришелец'];
@@ -635,7 +746,7 @@ function dieHtml(d){const P={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6
   return `<span class="die" role="img" aria-label="Кубик: ${d}">${[...Array(9)].map((_,k)=>`<i class="${P.includes(k)?(d===1?'r':''):'o'}"></i>`).join('')}</span>`}
 const DEFSET={startUsd:10,fxMode:'cell',fxMinutes:5,passStart:250,loanRate:10,taxBase:50,taxPct:3,sharePct:3,shareLimit:10,idxOn:true,idxStep:50,idxEvery:5,sellBuildPct:50,sellSharePct:50};
 const VERSION='2.1';
-const BUILD='20261119-165943';
+const BUILD='20261124-011304';
 const ICONS={account_balance_wallet:'M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z',
 storefront:'M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z',
 trending_up:'M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z',
@@ -643,7 +754,10 @@ currency_exchange:'M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.
 style:'M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM7.5 18c-.83 0-1.5-.67-1.5-1.5S6.67 15 7.5 15s1.5.67 1.5 1.5S8.33 18 7.5 18zm0-9C6.67 9 6 8.33 6 7.5S6.67 6 7.5 6 9 6.67 9 7.5 8.33 9 7.5 9zm4.5 4.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5 4.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm0-9c-.83 0-1.5-.67-1.5-1.5S15.67 6 16.5 6s1.5.67 1.5 1.5S17.33 9 16.5 9z',
 account_balance:'M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zm-4.5-9L2 6v2h19V6l-9.5-5z'};
 const ico=n=>`<svg class="ms" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="${ICONS[n]||''}"/></svg>`;
-document.body.classList.toggle('m3',lget('nepbank2.theme','m3')==='m3');
+function applyTheme(v){v=['retro','m3','pole'].includes(v)?v:'m3';document.body.classList.toggle('m3',v!=='retro');document.body.classList.toggle('pole',v==='pole');try{document.querySelectorAll('meta[name=theme-color]').forEach(m=>{if(!m.dataset.o)m.dataset.o=m.content;m.content=v==='pole'?'#1F1F1F':m.dataset.o})}catch(_){}return v}
+const THEMES={retro:'Ретро',m3:'Android',pole:'Оригинал'},THNEXT={retro:'m3',m3:'pole',pole:'retro'};
+function curTheme(){return document.body.classList.contains('pole')?'pole':document.body.classList.contains('m3')?'m3':'retro'}
+applyTheme(lget('nepbank2.theme','m3'));
 const CID='c'+Math.random().toString(36).slice(2,10);
 const DEV=(()=>{try{let d=localStorage.getItem('nepbank2.dev');if(!d){d='d'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('nepbank2.dev',d)}return d}catch(_){return CID}})();
 const DEFRATES=[[10,9],[15,13],[20,18],[25,22],[30,27],[35,31],[40,36],[45,40],[50,45]].map(([buy,sell])=>({buy,sell,w:1}));
@@ -722,6 +836,7 @@ setTimeout(async()=>{
   try{db=window.claude&&window.claude.use?await window.claude.use('db'):null}catch(_){db=null}
   if(db){store=dbStore(db);online=true;try{const u=await window.claude.use('user');if(u){const w=await u.can('data.write');if(w===false)readOnly=true}}catch(_){}}
   else store=localStore();}
+  try{if(document.fonts&&document.fonts.load)await Promise.race([Promise.all(['400 15px Barlow','500 15px Barlow','600 16px "Barlow Semi Condensed"','500 14px "Barlow Semi Condensed"','600 14px "Barlow Condensed"'].map(f=>document.fonts.load(f,'НЭПабв1'))),new Promise(r=>setTimeout(r,1500))])}catch(_){}
   view='lobby';watchLoad();let first=true;
   if(store.kind==='fb'){first=false;const last=lget('nepbank2.last',null);if(last&&lget('nepbank2.my',[]).includes(last)){openTable(last)}}
   try{store.watchPresets(l=>{presets=l||[];if(view==='new')render()},()=>{})}catch(_){}
@@ -731,13 +846,15 @@ setTimeout(async()=>{
   render();
 },0);
 
-function openTable(id){if(typeof addMy==='function')addMy(id);try{const h=lget('nepbank2.hidden',[]);if(h.includes(id))lset('nepbank2.hidden',h.filter(x=>x!==id))}catch(_){}unsubs.forEach(f=>f());unsubs=[];if(evUnsub){evUnsub();evUnsub=null}evSince=-1;tid=id;table=null;evs=[];seen=new Set();openedAt=Date.now();lastTop=null;bankOpen=false;setDraft=deckDraft=namesDraft=ratesDraft=charsDraft=sprDraft=null;dealB=null;lapOpen=false;tkKey='';lastCard=null;lastDice=null;
+const SPLASH_SVG='<svg class="spsvg" viewBox="0 0 984.33 395.05" aria-hidden="true"><path class="spn" d="M0 65.84l243.61 121.81 0 -111.93c0,-5.43 4.44,-9.88 9.88,-9.88 5.43,0 9.88,4.45 9.88,9.88l0 121.81 0 6.58 0 125.1 -243.61 -121.81 0 111.93c0,5.43 -4.44,9.88 -9.88,9.88 -5.43,0 -9.88,-4.45 -9.88,-9.88l0 -121.81 0 -6.58 0 -125.1z"/><g class="spdots"><circle class="spd1" cx="756.65" cy="197.52" r="32.92"/><circle class="spd2" cx="866.65" cy="197.52" r="32.92"/></g><g class="sppac"><path class="spj1" d="M309.46 197.52A197.52 197.52 0 0 1 704.50 197.52L506.98 197.52Z"/><path class="spj2" d="M704.50 197.52A197.52 197.52 0 0 1 309.46 197.52L506.98 197.52Z"/></g><path class="spp" fill-rule="evenodd" d="M852.65 289.7l19.75 0c61.52,0 111.93,-50.41 111.93,-111.93 0,-61.52 -50.41,-111.93 -111.93,-111.93l-19.75 0 -92.18 0 -39.51 0 0 263.37 131.68 0 0 -39.51zm0 -204.11l0 184.36 19.75 0c50.62,0 92.18,-41.56 92.18,-92.18 0,-50.62 -41.56,-92.18 -92.18,-92.18l-19.75 0z"/></svg>';
+function splash(){try{const old=document.getElementById('splash');if(old)old.remove();const d=document.createElement('div');d.id='splash';d.setAttribute('role','presentation');d.innerHTML=SPLASH_SVG;const end=()=>{if(d.isConnected)d.remove()};d.addEventListener('click',end);d.addEventListener('animationend',e=>{if(e.target===d)end()});setTimeout(end,3200);document.body.appendChild(d)}catch(_){}}
+function openTable(id){if(typeof addMy==='function')addMy(id);splash();try{const h=lget('nepbank2.hidden',[]);if(h.includes(id))lset('nepbank2.hidden',h.filter(x=>x!==id))}catch(_){}unsubs.forEach(f=>f());unsubs=[];if(evUnsub){evUnsub();evUnsub=null}evSince=-1;tid=id;table=null;evs=[];seen=new Set();openedAt=Date.now();lastTop=null;bankOpen=false;setDraft=deckDraft=namesDraft=ratesDraft=charsDraft=sprDraft=null;dealB=null;lapOpen=false;tkKey='';lastCard=null;lastDice=null;ntfQ=[];
   lset('nepbank2.last',id);view='table';tab='me';watchLoad();
   unsubs.push(store.watchTable(id,(t,meta)=>{table=t;gotData(meta);{const cs=(t&&t.cp&&t.cp.ts)||0;if(t&&cs!==evSince){evSince=cs;subEv()}}if(!t&&meta&&!meta.fromCache){view='lobby';tid=null}render()},onErr));
   render()}
 function subEv(){if(evUnsub)evUnsub();const id=tid;evUnsub=store.watchEv(id,evSince,(list,meta)=>{if(id!==tid)return;gotData(meta);const me=meId();
-  list.forEach(e=>{if(!seen.has(e.id)){seen.add(e.id);if(e.ts>openedAt)animFor(e,me)}});
-  evs=list;render();if(!meta||!meta.fromCache)maybeCompact()},onErr)}
+  const nw=[];list.forEach(e=>{if(!seen.has(e.id)){seen.add(e.id);if(e.ts>openedAt){animFor(e,me);nw.push(e)}}});
+  evs=list;render();try{notifyEvents(nw,me)}catch(_){}if(!meta||!meta.fromCache)maybeCompact()},onErr)}
 async function maybeCompact(){if(compacting||readOnly||!table||evs.length<700)return;compacting=true;
   try{if(!(await store.lease(tid)))return;const folded=evs.slice(0,evs.length-300),cutTs=folded[folded.length-1].ts;if(cutTs<=((table.cp&&table.cp.ts)||0))return;
     const und=new Set(evs.filter(e=>e.kind==='undo').map(e=>e.of)),st=baseState();let rate=(table.cp&&table.cp.rate)||null;
@@ -763,10 +880,10 @@ function curRate(){for(let i=evs.length-1;i>=0;i--)if(evs[i].kind==='rate')retur
 const buyPrice=()=>(curRate()||{buy:0}).buy;
 const sellPrice=()=>(curRate()||{sell:0}).sell;
 /* ===== v2: картотека, имущество, акции, налог, пауза ===== */
-const BOARD={"groups": [{"id": "posuda", "name": "Посуда", "color": "#FF7979", "band": "#FFB8B8", "patents": 2, "maxStores": 3, "develop": 50, "ink": "#BA5858"}, {"id": "fastfood", "name": "Фастфуд", "color": "#CF7C59", "band": "#E9C2B0", "patents": 2, "maxStores": 3, "develop": 75, "ink": "#A76548"}, {"id": "hotel", "name": "Отель", "color": "#FBB843", "band": "#FBE0AE", "patents": 2, "maxStores": 3, "develop": 100, "ink": "#B78631"}, {"id": "mebel", "name": "Мебель", "color": "#7EC1C4", "band": "#C2E2E3", "patents": 3, "maxStores": 3, "develop": 150, "ink": "#669D9E"}, {"id": "bakery", "name": "Пекарня", "color": "#73A1FD", "band": "#B4CEFD", "patents": 3, "maxStores": 3, "develop": 200, "ink": "#5576B9"}, {"id": "kombinat", "name": "Комбинат", "color": "#9688D0", "band": "#C8C1E6", "patents": 4, "maxStores": 2, "develop": 300, "ink": "#6E6397"}, {"id": "moda", "name": "Дом моды", "color": "#61988D", "band": "#BBD3CE", "patents": 3, "maxStores": 2, "develop": 350, "ink": "#4E7B72"}, {"id": "skachki", "name": "Скачки", "color": "#CE4D6C", "band": "#ECBBC7", "patents": 3, "maxStores": 1, "develop": 450, "ink": "#A73E57"}, {"id": "lux", "name": "Роскошь", "color": "#8B6771", "band": "#C8B6BB", "patents": 2, "maxStores": 1, "develop": 500, "ink": "#664C53"}], "cells": [{"pos": 1, "type": "patent", "id": "p1-1", "name": "Серебро", "code": "1-1", "price": 50, "rent": {"field": 50, "syndicate": 100, "stores": [150, 220, 290], "tradeHouse": 400}, "develop": 50, "group": "posuda", "maxStores": 3}, {"pos": 2, "type": "patent", "id": "p1-2", "name": "Фарфор", "code": "1-2", "price": 60, "rent": {"field": 60, "syndicate": 120, "stores": [160, 230, 295], "tradeHouse": 420}, "develop": 50, "group": "posuda", "maxStores": 3}, {"pos": 4, "type": "patent", "id": "p2-1", "name": "Кофе", "code": "2-1", "price": 70, "rent": {"field": 70, "syndicate": 140, "stores": [190, 235, 320], "tradeHouse": 450}, "develop": 75, "group": "fastfood", "maxStores": 3}, {"pos": 5, "type": "patent", "id": "p2-2", "name": "Бургер", "code": "2-2", "price": 75, "rent": {"field": 75, "syndicate": 150, "stores": [195, 240, 330], "tradeHouse": 500}, "develop": 75, "group": "fastfood", "maxStores": 3}, {"pos": 7, "type": "patent", "id": "p3-1", "name": "Метрополь", "code": "3-1", "price": 80, "rent": {"field": 80, "syndicate": 160, "stores": [210, 285, 350], "tradeHouse": 550}, "develop": 100, "group": "hotel", "maxStores": 3}, {"pos": 8, "type": "patent", "id": "p3-2", "name": "Астория", "code": "3-2", "price": 90, "rent": {"field": 90, "syndicate": 180, "stores": [220, 290, 375], "tradeHouse": 600}, "develop": 100, "group": "hotel", "maxStores": 3}, {"pos": 11, "type": "patent", "id": "p4-1", "name": "Стол", "code": "4-1", "price": 100, "rent": {"field": 80, "syndicate": 150, "stores": [200, 300, 395], "tradeHouse": 650}, "develop": 150, "group": "mebel", "maxStores": 3}, {"pos": 12, "type": "utility", "name": "Вода", "price": 400, "payment": 200, "developable": false, "id": "utility12"}, {"pos": 13, "type": "patent", "id": "p4-2", "name": "Кресло", "code": "4-2", "price": 110, "rent": {"field": 85, "syndicate": 155, "stores": [210, 320, 405], "tradeHouse": 670}, "develop": 150, "group": "mebel", "maxStores": 3}, {"pos": 14, "type": "patent", "id": "p4-3", "name": "Комод", "code": "4-3", "price": 115, "rent": {"field": 90, "syndicate": 160, "stores": [220, 330, 415], "tradeHouse": 690}, "develop": 150, "group": "mebel", "maxStores": 3}, {"pos": 16, "type": "patent", "id": "p5-1", "name": "Пряник", "code": "5-1", "price": 125, "rent": {"field": 95, "syndicate": 170, "stores": [230, 340, 430], "tradeHouse": 700}, "develop": 200, "group": "bakery", "maxStores": 3}, {"pos": 17, "type": "patent", "id": "p5-2", "name": "Булка", "code": "5-2", "price": 130, "rent": {"field": 100, "syndicate": 175, "stores": [240, 350, 440], "tradeHouse": 750}, "develop": 200, "group": "bakery", "maxStores": 3}, {"pos": 19, "type": "patent", "id": "p5-3", "name": "Торт", "code": "5-3", "price": 140, "rent": {"field": 110, "syndicate": 180, "stores": [250, 360, 450], "tradeHouse": 800}, "develop": 200, "group": "bakery", "maxStores": 3}, {"pos": 21, "type": "patent", "id": "p6-1", "name": "Колбаса", "code": "6-1", "price": 150, "rent": {"field": 120, "syndicate": 190, "stores": [260, 550], "tradeHouse": 950}, "develop": 300, "group": "kombinat", "maxStores": 2}, {"pos": 22, "type": "patent", "id": "p6-2", "name": "Ананас", "code": "6-2", "price": 155, "rent": {"field": 130, "syndicate": 200, "stores": [270, 560], "tradeHouse": 970}, "develop": 300, "group": "kombinat", "maxStores": 2}, {"pos": 24, "type": "patent", "id": "p6-3", "name": "Сыр", "code": "6-3", "price": 160, "rent": {"field": 140, "syndicate": 210, "stores": [280, 570], "tradeHouse": 990}, "develop": 300, "group": "kombinat", "maxStores": 2}, {"pos": 25, "type": "patent", "id": "p6-4", "name": "Севрюга", "code": "6-4", "price": 170, "rent": {"field": 150, "syndicate": 220, "stores": [290, 580], "tradeHouse": 1000}, "develop": 300, "group": "kombinat", "maxStores": 2}, {"pos": 27, "type": "patent", "id": "p7-1", "name": "Пальто", "code": "7-1", "price": 180, "rent": {"field": 160, "syndicate": 230, "stores": [310, 600], "tradeHouse": 1100}, "develop": 350, "group": "moda", "maxStores": 2}, {"pos": 28, "type": "patent", "id": "p7-2", "name": "Шуба", "code": "7-2", "price": 185, "rent": {"field": 170, "syndicate": 240, "stores": [320, 650], "tradeHouse": 1200}, "develop": 350, "group": "moda", "maxStores": 2}, {"pos": 29, "type": "patent", "id": "p7-3", "name": "Меха", "code": "7-3", "price": 190, "rent": {"field": 180, "syndicate": 250, "stores": [330, 700], "tradeHouse": 1300}, "develop": 350, "group": "moda", "maxStores": 2}, {"pos": 31, "type": "patent", "id": "p8-1", "name": "Донская", "code": "8-1", "price": 220, "rent": {"field": 190, "syndicate": 260, "stores": [700], "tradeHouse": 1400}, "develop": 450, "group": "skachki", "maxStores": 1}, {"pos": 32, "type": "utility", "name": "Энергия", "price": 500, "payment": 250, "developable": false, "id": "utility32"}, {"pos": 33, "type": "patent", "id": "p8-2", "name": "Орловская", "code": "8-2", "price": 235, "rent": {"field": 210, "syndicate": 270, "stores": [750], "tradeHouse": 1500}, "develop": 450, "group": "skachki", "maxStores": 1}, {"pos": 35, "type": "patent", "id": "p8-3", "name": "Арабская", "code": "8-3", "price": 250, "rent": {"field": 220, "syndicate": 280, "stores": [800], "tradeHouse": 1600}, "develop": 450, "group": "skachki", "maxStores": 1}, {"pos": 37, "type": "patent", "id": "p9-1", "name": "Жемчуг", "code": "9-1", "price": 275, "rent": {"field": 275, "syndicate": 350, "stores": [975], "tradeHouse": 1750}, "develop": 500, "group": "lux", "maxStores": 1}, {"pos": 38, "type": "patent", "id": "p9-2", "name": "Кольцо", "code": "9-2", "price": 300, "rent": {"field": 300, "syndicate": 400, "stores": [1000], "tradeHouse": 2000}, "develop": 500, "group": "lux", "maxStores": 1}]};
+const BOARD={"groups": [{"id": "posuda", "name": "Посуда", "color": "#FF746E", "band": "#FFC3C2", "patents": 2, "maxStores": 3, "develop": 50, "ink": "#B7534F"}, {"id": "fastfood", "name": "Фастфуд", "color": "#A3A375", "band": "#D3D3BC", "patents": 2, "maxStores": 3, "develop": 75, "ink": "#757554"}, {"id": "hotel", "name": "Отель", "color": "#FAC314", "band": "#FBE59A", "patents": 2, "maxStores": 3, "develop": 100, "ink": "#B48C0E"}, {"id": "mebel", "name": "Мебель", "color": "#71AEB0", "band": "#C8E5E6", "patents": 3, "maxStores": 3, "develop": 150, "ink": "#517D7E"}, {"id": "bakery", "name": "Пекарня", "color": "#6CA2EF", "band": "#BAD3F7", "patents": 3, "maxStores": 3, "develop": 200, "ink": "#4D74AC"}, {"id": "kombinat", "name": "Комбинат", "color": "#A17AD5", "band": "#D7C6ED", "patents": 4, "maxStores": 2, "develop": 300, "ink": "#735799"}, {"id": "moda", "name": "Дом моды", "color": "#437C68", "band": "#AEC8BE", "patents": 3, "maxStores": 2, "develop": 350, "ink": "#30594A"}, {"id": "skachki", "name": "Ипподром", "color": "#D84D60", "band": "#F0B3BC", "patents": 3, "maxStores": 1, "develop": 450, "ink": "#9B3745"}, {"id": "lux", "name": "Роскошь", "color": "#624944", "band": "#B3A8A6", "patents": 2, "maxStores": 1, "develop": 500, "ink": "#463430"}], "utilityGroup": {"id": "zhkh", "name": "ЖКХ", "color": "#999999", "band": "#D5D6D6", "ink": "#6E6E6E", "patents": 3, "maxStores": 0, "develop": null, "shares": false, "note": "Покупается, не развивается, акций нет. Рента: поле, или синдикат, если все 3 клетки у одного владельца."}, "cells": [{"pos": 1, "type": "patent", "id": "p1-1", "name": "Серебро", "code": "1-1", "price": 50, "rent": {"field": 50, "syndicate": 100, "stores": [150, 220, 290], "tradeHouse": 400}, "develop": 50, "group": "posuda", "maxStores": 3}, {"pos": 2, "type": "patent", "id": "p1-2", "name": "Фарфор", "code": "1-2", "price": 60, "rent": {"field": 60, "syndicate": 120, "stores": [160, 230, 295], "tradeHouse": 420}, "develop": 50, "group": "posuda", "maxStores": 3}, {"pos": 4, "type": "patent", "id": "p2-1", "name": "Бургер", "code": "2-1", "price": 70, "rent": {"field": 70, "syndicate": 140, "stores": [190, 235, 320], "tradeHouse": 450}, "develop": 75, "group": "fastfood", "maxStores": 3}, {"pos": 5, "type": "patent", "id": "p2-2", "name": "Кофе", "code": "2-2", "price": 75, "rent": {"field": 75, "syndicate": 150, "stores": [195, 240, 330], "tradeHouse": 500}, "develop": 75, "group": "fastfood", "maxStores": 3}, {"pos": 7, "type": "utility", "id": "utility12", "group": "zhkh", "code": "10-1", "name": "Вода", "price": 150, "rent": {"field": 150, "syndicate": 300}, "developable": false}, {"pos": 8, "type": "patent", "id": "p3-1", "name": "Метрополь", "code": "3-1", "price": 80, "rent": {"field": 80, "syndicate": 160, "stores": [210, 285, 350], "tradeHouse": 550}, "develop": 100, "group": "hotel", "maxStores": 3}, {"pos": 9, "type": "patent", "id": "p3-2", "name": "Астория", "code": "3-2", "price": 90, "rent": {"field": 90, "syndicate": 180, "stores": [220, 290, 375], "tradeHouse": 600}, "develop": 100, "group": "hotel", "maxStores": 3}, {"pos": 11, "type": "patent", "id": "p4-1", "name": "Стол", "code": "4-1", "price": 100, "rent": {"field": 80, "syndicate": 150, "stores": [200, 300, 395], "tradeHouse": 650}, "develop": 150, "group": "mebel", "maxStores": 3}, {"pos": 13, "type": "patent", "id": "p4-2", "name": "Кресло", "code": "4-2", "price": 110, "rent": {"field": 85, "syndicate": 155, "stores": [210, 320, 405], "tradeHouse": 670}, "develop": 150, "group": "mebel", "maxStores": 3}, {"pos": 14, "type": "patent", "id": "p4-3", "name": "Комод", "code": "4-3", "price": 115, "rent": {"field": 90, "syndicate": 160, "stores": [220, 330, 415], "tradeHouse": 690}, "develop": 150, "group": "mebel", "maxStores": 3}, {"pos": 16, "type": "patent", "id": "p5-1", "name": "Пряник", "code": "5-1", "price": 125, "rent": {"field": 95, "syndicate": 170, "stores": [230, 340, 430], "tradeHouse": 700}, "develop": 200, "group": "bakery", "maxStores": 3}, {"pos": 17, "type": "utility", "id": "utility32", "group": "zhkh", "code": "10-2", "name": "Энергия", "price": 175, "rent": {"field": 175, "syndicate": 350}, "developable": false}, {"pos": 18, "type": "patent", "id": "p5-2", "name": "Булка", "code": "5-2", "price": 130, "rent": {"field": 100, "syndicate": 175, "stores": [240, 350, 440], "tradeHouse": 750}, "develop": 200, "group": "bakery", "maxStores": 3}, {"pos": 19, "type": "patent", "id": "p5-3", "name": "Торт", "code": "5-3", "price": 140, "rent": {"field": 110, "syndicate": 180, "stores": [250, 360, 450], "tradeHouse": 800}, "develop": 200, "group": "bakery", "maxStores": 3}, {"pos": 21, "type": "patent", "id": "p6-1", "name": "Колбаса", "code": "6-1", "price": 150, "rent": {"field": 120, "syndicate": 190, "stores": [260, 550], "tradeHouse": 950}, "develop": 300, "group": "kombinat", "maxStores": 2}, {"pos": 22, "type": "patent", "id": "p6-2", "name": "Сыр", "code": "6-2", "price": 155, "rent": {"field": 130, "syndicate": 200, "stores": [270, 560], "tradeHouse": 970}, "develop": 300, "group": "kombinat", "maxStores": 2}, {"pos": 24, "type": "patent", "id": "p6-3", "name": "Ананас", "code": "6-3", "price": 160, "rent": {"field": 140, "syndicate": 210, "stores": [280, 570], "tradeHouse": 990}, "develop": 300, "group": "kombinat", "maxStores": 2}, {"pos": 25, "type": "patent", "id": "p6-4", "name": "Севрюга", "code": "6-4", "price": 170, "rent": {"field": 150, "syndicate": 220, "stores": [290, 580], "tradeHouse": 1000}, "develop": 300, "group": "kombinat", "maxStores": 2}, {"pos": 27, "type": "patent", "id": "p7-1", "name": "Пальто", "code": "7-1", "price": 180, "rent": {"field": 160, "syndicate": 230, "stores": [310, 600], "tradeHouse": 1100}, "develop": 350, "group": "moda", "maxStores": 2}, {"pos": 28, "type": "patent", "id": "p7-2", "name": "Шуба", "code": "7-2", "price": 185, "rent": {"field": 170, "syndicate": 240, "stores": [320, 650], "tradeHouse": 1200}, "develop": 350, "group": "moda", "maxStores": 2}, {"pos": 29, "type": "patent", "id": "p7-3", "name": "Меха", "code": "7-3", "price": 190, "rent": {"field": 180, "syndicate": 250, "stores": [330, 700], "tradeHouse": 1300}, "develop": 350, "group": "moda", "maxStores": 2}, {"pos": 31, "type": "patent", "id": "p8-1", "name": "Донская", "code": "8-1", "price": 220, "rent": {"field": 190, "syndicate": 260, "stores": [700], "tradeHouse": 1400}, "develop": 450, "group": "skachki", "maxStores": 1}, {"pos": 33, "type": "patent", "id": "p8-2", "name": "Орловская", "code": "8-2", "price": 235, "rent": {"field": 210, "syndicate": 270, "stores": [750], "tradeHouse": 1500}, "develop": 450, "group": "skachki", "maxStores": 1}, {"pos": 34, "type": "utility", "id": "utility34", "group": "zhkh", "code": "10-3", "name": "Ремонт", "price": 200, "rent": {"field": 200, "syndicate": 400}, "developable": false}, {"pos": 35, "type": "patent", "id": "p8-3", "name": "Арабская", "code": "8-3", "price": 250, "rent": {"field": 220, "syndicate": 280, "stores": [800], "tradeHouse": 1600}, "develop": 450, "group": "skachki", "maxStores": 1}, {"pos": 37, "type": "patent", "id": "p9-1", "name": "Жемчуг", "code": "9-1", "price": 275, "rent": {"field": 275, "syndicate": 350, "stores": [975], "tradeHouse": 1750}, "develop": 500, "group": "lux", "maxStores": 1}, {"pos": 39, "type": "patent", "id": "p9-2", "name": "Кольцо", "code": "9-2", "price": 300, "rent": {"field": 300, "syndicate": 400, "stores": [1000], "tradeHouse": 2000}, "develop": 500, "group": "lux", "maxStores": 1}]};
 const BCELLS=BOARD.cells;
 const cellById=id=>BCELLS.find(c=>c.id===id);
-const GRP=id=>BOARD.groups.find(g=>g.id===id);
+const UG=BOARD.utilityGroup;const GRP=id=>id==='zhkh'?UG:BOARD.groups.find(g=>g.id===id);
 const maxLevel=c=>c&&c.type==='patent'?c.maxStores+1:0;
 const levelName=(c,l)=>!c||c.type!=='patent'?'не развивается':l<=0?'без построек':l>c.maxStores?'торговый дом':`${l} ${l===1?'магазин':'магазина'}`;
 const fmt2=v=>(+v).toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -780,7 +897,9 @@ function baseState(){const s=S(),cp=table&&table.cp,st={b:{},own:{},shares:{},la
   return st}
 function issued(st,g){return Object.values(st.shares[g]||{}).reduce((a,n)=>a+(+n||0),0)}
 function loanLeft(L){return Math.max(0,(+L.total||0)-(+L.paid||0))}
-function sideOk(st,pid,side){if(!side)return true;
+function bundle(st,c){if(!c)return [];if(c.type==='patent'&&fullSyn(st,c))return BCELLS.filter(x=>x.group===c.group).map(x=>x.id);if(c.type==='utility'&&fullUtil(st,c))return BCELLS.filter(x=>x.type==='utility').map(x=>x.id);return [c.id]}
+function wholeOk(st,ids){const set=new Set(ids);return ids.every(id=>bundle(st,cellById(id)).every(x=>set.has(x)))}
+function sideOk(st,pid,side,whole){if(!side)return true;if(whole&&!wholeOk(st,side.patents||[]))return false;
   for(const id of side.patents||[]){const o=st.own[id];if(!o||o.pid!==pid)return false}
   for(const [g,n] of Object.entries(side.shares||{})){if(((st.shares[g]||{})[pid]||0)<(+n||0))return false}
   for(const id of side.loans||[]){const L=st.loans[id];if(!L||L.pid!==pid||loanLeft(L)<=0)return false}
@@ -805,7 +924,7 @@ function applyEv(st,e){const b=st.b;
       if(e.loanId&&st.loans[e.loanId]){const L=st.loans[e.loanId];L.paid=(+L.paid||0)+a;L.paidN=(+L.paidN||0)+1}
       return true}
     case 'fx':{if(!b[e.pid])return false;const u=+e.usd||0,r=+e.rub||0;if(e.side==='buy'){b[e.pid].usd+=u;b[e.pid].rub-=r}else{b[e.pid].usd-=u;b[e.pid].rub+=r}return true}
-    case 'loan':{if(!b[e.pid])return false;b[e.pid].rub+=+e.amount||0;st.loans[e.id]={id:e.id,pid:e.pid,total:+e.total||0,per:+e.per||0,rounds:+e.rounds||1,paid:0,paidN:0};return true}
+    case 'loan':{if(!b[e.pid])return false;if(e.syn&&Object.values(st.loans).some(L=>L.pid===e.pid&&loanLeft(L)>0))return false;b[e.pid].rub+=+e.amount||0;st.loans[e.id]={id:e.id,pid:e.pid,total:+e.total||0,per:+e.per||0,rounds:+e.rounds||1,paid:0,paidN:0};return true}
     case 'buy':{const c=cellById(e.cell);if(!c||st.own[e.cell]||!b[e.pid])return false;st.own[e.cell]={pid:e.pid,level:0};b[e.pid].rub-=+e.price||0;return true}
     case 'build':{const o=st.own[e.cell],c=cellById(e.cell);if(!o||o.pid!==e.pid||!c||o.level>=maxLevel(c))return false;if(e.syn&&!fullSyn(st,c))return false;if(e.syn&&o.level===c.maxStores&&!allStores(st,c))return false;o.level++;b[e.pid].rub-=+e.cost||0;return true}
     case 'unbuild':{const o=st.own[e.cell];if(!o||o.pid!==e.pid||o.level<=0)return false;o.level--;b[e.pid].rub+=+e.refund||0;return true}
@@ -816,14 +935,20 @@ function applyEv(st,e){const b=st.b;
     case 'release':{if(!st.seats[e.of])return false;delete st.seats[e.of];return true}
     case 'topup':{const a=+e.amount||0;if(!a||!Array.isArray(e.to))return false;let n=0;for(const id of e.to)if(b[id]&&!st.out[id]){if(e.cur==='usd')b[id].usd+=a;else b[id].rub+=a;n++}return n>0}
     case 'shsell':{const sh=st.shares[e.group];if(!b[e.pid]||!sh||!(sh[e.pid]>0))return false;sh[e.pid]--;if(!sh[e.pid])delete sh[e.pid];b[e.pid].rub+=+e.price||0;if(e.cd){(st.shcd[e.pid]=st.shcd[e.pid]||{})[e.group]=st.laps[e.pid]||0}return true}
-    case 'deal':{st.offers[e.id]={id:e.id,pid:e.pid,to:e.to,give:e.give||{},take:e.take||{},text:e.text||''};return true}
+    case 'deal':{st.offers[e.id]={id:e.id,pid:e.pid,to:e.to,give:e.give||{},take:e.take||{},text:e.text||'',whole:!!e.whole};return true}
+    case 'ptrans':{const cs=Array.isArray(e.cells)?e.cells:[];if(!cs.length||!b[e.pid]||!b[e.to]||e.to===e.pid||st.out[e.to])return false;if(cs.some(id=>!st.own[id]||st.own[id].pid!==e.pid))return false;if(!wholeOk(st,cs))return false;for(const id of cs)st.own[id].pid=e.to;return true}
     case 'offerResp':{delete st.offers[e.of];return true}
     case 'dealOk':{const o=st.offers[e.of];if(!o)return false;delete st.offers[e.of];
-      if(e.pid!==o.to||!b[o.pid]||!b[o.to]||!sideOk(st,o.pid,o.give)||!sideOk(st,o.to,o.take))return false;
+      if(e.pid!==o.to||!b[o.pid]||!b[o.to]||!sideOk(st,o.pid,o.give,o.whole)||!sideOk(st,o.to,o.take,o.whole))return false;
+      if(o.whole){const has=pid=>Object.values(st.loans).filter(L=>L.pid===pid&&loanLeft(L)>0).length,mv=x=>((x&&x.loans)||[]).length;if(has(o.to)-mv(o.take)+mv(o.give)>1||has(o.pid)-mv(o.give)+mv(o.take)>1)return false}
       moveSide(st,o.pid,o.to,o.give);moveSide(st,o.to,o.pid,o.take);return true}
   }
   return true}
 let _stEvs=null,_stTab=null,_st=null;
+function chanceBag(){const deck=chanceDeck().filter(c=>(+c.w||0)>0).map(c=>({text:c.text,w:Math.round(+c.w)||1})),full=()=>Object.fromEntries(deck.map(c=>[c.text,c.w]));
+  const und=new Set(evs.filter(e=>e.kind==='undo').map(e=>e.of));let left=full(),n=0,cycle=1;
+  for(const e of evs){if(e.kind!=='chance'||und.has(e.id)||!(e.text in left))continue;if(!(left[e.text]>0)){if(Object.values(left).some(v=>v>0))continue}left[e.text]--;n++;if(!Object.values(left).some(v=>v>0)){left=full();n=0;cycle++}}
+  const total=deck.reduce((s,c)=>s+c.w,0);return {left:deck.filter(c=>left[c.text]>0).map(c=>({text:c.text,w:left[c.text]})),drawn:n,total,cycle}}
 function state(){if(_st&&_stEvs===evs&&_stTab===table)return _st;
   const und=new Set(evs.filter(e=>e.kind==='undo').map(e=>e.of)),st=baseState();st.failed=new Set();
   for(const e of evs){if(und.has(e.id))continue;if(applyEv(st,e)===false)st.failed.add(e.id)}
@@ -851,6 +976,7 @@ function describe2(e){const n=who(e.pid),c=e.cell?cellById(e.cell):null;
     case 'buy':return `${n}: покупка «${c?c.name:'?'}» за ${rub(e.price)}`;
     case 'build':return `${n}: ${c&&e.lvl>c.maxStores?'торговый дом':'магазин'} в «${c?c.name:'?'}» за ${rub(e.cost)}`;
     case 'patsell':return `${n}: продажа патента «${c?c.name:'?'}» банку, +${rub(e.price)}`;
+    case 'ptrans':{const cs=(e.cells||[]).map(cellById).filter(Boolean),g=cs.length>1?GRP(cs[0].group):null;return `${n} → ${who(e.to)}: передал ${g?`синдикат «${g.name}» (${cs.map(x=>x.name).join(', ')})`:`патент «${cs[0]?cs[0].name:'?'}»`}`}
     case 'unbuild':return `${n}: продажа постройки в «${c?c.name:'?'}», +${rub(e.refund)}`;
     case 'emo':return `${n} → ${e.to==='all'?'всем':who(e.to)}: ${e.e}`;
     case 'turn':return `➡ Ход переходит: ${who(e.to)}${e.pid&&e.pid!==st0to(e)?` (передал ${n})`:''}`;
@@ -898,24 +1024,27 @@ function picker(key,list){return `<div class="pick" role="group">${list.map(o=>`
 function renderTicker(){const el=$('#ticker');
   if(view!=='table'||!table){el.innerHTML='';tkKey='';return}
   const list=evs.filter(e=>e.kind!=='join'&&e.kind!=='claim'&&e.kind!=='emo'&&e.kind!=='turn'&&e.kind!=='react').slice(-8).reverse(),top=list[0];
-  const key=(top?top.id:'')+'|'+tickOpen+'|'+evs.length+'|'+players().map(p=>p.name).join(',');
+  if(tkTid!==table.id){tkTid=table.id;tkOpenTs=Date.now()}
+  const key=(top?top.id:'')+'|'+tickOpen+'|'+(tickOpen?list.map(e=>e.id+':'+evs.filter(r=>r.kind==='react'&&r.of===e.id).length).join(','):'')+'|'+meId()+'|'+players().map(p=>p.name).join(',');
   if(key===tkKey)return;tkKey=key;
-  const fresh=top&&lastTop&&top.id!==lastTop;lastTop=top?top.id:null;
+  const fresh=top&&lastTop&&top.id!==lastTop&&Date.now()-tkOpenTs>2500;lastTop=top?top.id:null;
   el.innerHTML=`<button class="tk${fresh?' fresh':''}${top&&top.kind==='topup'?' bonus':''}" data-act="tick" aria-expanded="${tickOpen}"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="mq">${top?esc(describe(top)):'Событий пока нет. Всё, что происходит за столом, появится здесь у всех.'}</span></span>${top?`<span class="tm">${hm(top.ts)}</span>`:''}</button>${tickOpen&&list.length?`<ul class="tkl">${list.map(e=>`<li${e.kind==='topup'?' class="bonus"':''}><span class="tm">${hm(e.ts)}</span><span class="tx">${esc(describe(e))}</span><span class="rx">${['👍','😮','😂'].map(em=>{const rs=evs.filter(r=>r.kind==='react'&&r.of===e.id&&r.emoji===em),mine=rs.some(r=>r.pid===meId());return `<button class="rxb${mine?' on':''}" data-act="react" data-v="${esc(e.id)}" data-e="${em}" aria-label="Реакция ${em}">${em}${rs.length?' '+rs.length:''}</button>`}).join('')}</span></li>`).join('')}</ul>`:''}`;
   const t=el.querySelector('.txt'),m=el.querySelector('.mq');
   if(t&&m)requestAnimationFrame(()=>{const dist=m.scrollWidth-t.clientWidth;if(dist>4){t.style.setProperty('--dist',(dist+16)+'px');t.style.setProperty('--dur',Math.max(7,(dist+16)/32+4).toFixed(1)+'s');t.classList.add('run')}});
 }
+let tkTid=null,tkOpenTs=0;
 let hopen=lget('nepbank2.hopen',false),hcode=false;
 function shortName(n){const w=String(n||'').trim().split(/\s+/).filter(Boolean);if(!w.length)return 'Стол';let r=w[0].length>2?w[0].slice(0,2):w[0];for(const x of w.slice(1))r+=/^\d+$/.test(x)?x:x[0];return r.slice(0,8)}
+function setH(el,h){if(el&&el.__h!==h){el.innerHTML=h;el.__h=h}}
 function headerRight(){const me=pById(meId()),m3=document.body.classList.contains('m3');
-  const hl=$('#hleft');if(hl)hl.innerHTML='';
+  const hl=$('#hleft');setH(hl,'');
   const off=!online||stale||dead,stxt=dead?'Нет связи':stale?'Связь не подтверждена':online?'Синхронизация':'Только это устройство';
   const s=`<span class="sync${off?' off':''}"><i></i>${stxt}</span>`;
   const hp=$('#hpanel');
   if(view==='table'&&table){
-    $('#hright').innerHTML=`<button class="hmenu${hopen?' on':''}" data-act="hmenu" aria-expanded="${hopen}" aria-controls="hpanel" title="${esc(stxt)}"><i class="hdot${off?' off':''}"></i>${isPaused()?'⏸ ':''}${me?spr(me):''}<span class="hm">Меню</span><span class="hch" aria-hidden="true">${hopen?'▴':'▾'}</span></button>`;
-    hp.innerHTML=hopen?`<div class="hrow"><button class="themebtn" data-act="theme" data-v="${m3?'retro':'m3'}" aria-label="Оформление: сейчас ${m3?'Android':'Ретро'}. Нажмите, чтобы переключить" title="Оформление">${m3?'Ретро':'Android'}</button><button class="tname${hcode?' on':''}" data-act="tcode" aria-expanded="${hcode}" aria-label="Стол ${esc(table.name)}: показать код подключения" title="${esc(table.name)}">${esc(shortName(table.name))}</button><button class="mechip" data-act="seat" aria-label="Игрок">${me?spr(me)+esc(me.name):'Кто вы?'}</button>${readOnly?'':isPaused()?'<button class="pausebtn on" data-act="resume">▶ Продолжить</button>':'<button class="pausebtn" data-act="pause" data-label="⏸ Точно?" aria-label="Пауза" title="Пауза">⏸</button>'}<button class="bankbtn${tab==='bank'?' on':''}" data-act="tab" data-v="bank" aria-current="${tab==='bank'?'page':'false'}">${ico('account_balance')}<span class="rt" aria-hidden="true">≡</span>Банк</button></div>${hcode?`<div class="hcode"><div class="hcn">Стол «${esc(table.name)}»</div>${table.code?`<div class="hcl">Код подключения</div><div class="hcc" aria-label="Код ${esc(String(table.code).split('').join(' '))}">${esc(table.code)}</div><p class="small">Остальные игроки вводят этот код на своих телефонах: «Войти по коду» в списке столов.</p><div class="hcb"><button class="btn sm red" data-act="copycode">Скопировать код</button><button class="btn sm ghost" data-act="lobby">К списку столов</button></div>`:`<p class="small">Код подключения есть в онлайн-версии приложения. Здесь стол открывается по ссылке — поделитесь ею через «Поделиться».</p><div class="hcb"><button class="btn sm ghost" data-act="lobby">К списку столов</button></div>`}</div>`:''}<div class="hsync">${s}<button class="rulesbtn${tab==='rules'?' on':''}" data-act="tab" data-v="rules">📖 Правила игры</button></div>`:'';
-  }else{$('#hright').innerHTML=s;hp.innerHTML=''}}
+    setH($('#hright'),`<button class="hmenu${hopen?' on':''}" data-act="hmenu" aria-expanded="${hopen}" aria-controls="hpanel" title="${esc(stxt)}"><i class="hdot${off?' off':''}"></i>${isPaused()?'⏸ ':''}${me?spr(me):'<span class="spr" style="visibility:hidden"></span>'}<span class="hm">Меню</span><span class="hch" aria-hidden="true">${hopen?'▴':'▾'}</span></button>`);
+    setH(hp,hopen?`<div class="hrow"><button class="themebtn" data-act="theme" data-v="${THNEXT[curTheme()]}" aria-label="Оформление: сейчас ${THEMES[curTheme()]}. Нажмите, чтобы переключить на ${THEMES[THNEXT[curTheme()]]}" title="Оформление: ${THEMES[curTheme()]}">🎨</button><button class="tname${hcode?' on':''}" data-act="tcode" aria-expanded="${hcode}" aria-label="Стол ${esc(table.name)}: показать код подключения" title="${esc(table.name)}">${esc(shortName(table.name))}</button><button class="mechip" data-act="seat" aria-label="Игрок">${me?spr(me)+`<span class="mcn">${esc(me.name)}</span>`:'Кто вы?'}</button><button class="bankbtn${tab==='bank'?' on':''}" data-act="tab" data-v="bank" aria-current="${tab==='bank'?'page':'false'}">${ico('account_balance')}<span class="rt" aria-hidden="true">≡</span>Банк</button><button class="hico${tab==='rules'?' on':''}" data-act="tab" data-v="rules" aria-label="Справка" title="Справка">❓</button><button class="hico${ntfMode()!=='all'?' dim':''}" data-act="ntf" aria-label="Оповещения: ${NTFL[ntfMode()]}" title="Оповещения: ${NTFL[ntfMode()]}. Нажмите, чтобы переключить">${ntfMode()==='off'?'🔕':'🔔'}${ntfMode()==='big'?'<i class="hicb">!</i>':''}</button>${readOnly?'':isPaused()?'<button class="pausebtn on" data-act="resume">▶ Продолжить</button>':'<button class="pausebtn" data-act="pause" data-label="⏸ Точно?" aria-label="Пауза" title="Пауза">⏸</button>'}</div>${hcode?`<div class="hcode"><div class="hcn">Стол «${esc(table.name)}»</div>${table.code?`<div class="hcl">Код подключения</div><div class="hcc" aria-label="Код ${esc(String(table.code).split('').join(' '))}">${esc(table.code)}</div><p class="small">Остальные игроки вводят этот код на своих телефонах: «Войти по коду» в списке столов.</p><div class="hcb"><button class="btn sm red" data-act="copycode">Скопировать код</button><button class="btn sm ghost" data-act="lobby">К списку столов</button></div>`:`<p class="small">Код подключения есть в онлайн-версии приложения. Здесь стол открывается по ссылке — поделитесь ею через «Поделиться».</p><div class="hcb"><button class="btn sm ghost" data-act="lobby">К списку столов</button></div>`}</div>`:''}<div class="hsync">${s}</div>`:'');
+  }else{setH($('#hright'),s);setH(hp,'')}}
 
 function calcGet(){const s=S(),a=(get.lap?+s.passStart:0)+(get.stock||0)*(+s.stockBonus),parts=[];if(get.lap)parts.push('круг');if(get.stock)parts.push(get.stock>1?`акции ×${get.stock}`:'акция');const n=parts.join(' + ');get.amount=a?String(a):'';get.note=n?n[0].toUpperCase()+n.slice(1):''}
 /* ---------- operation animations ---------- */
@@ -935,6 +1064,41 @@ function animHtml(o){
     case 'chance':return `<div class="lab"><div class="ccov"><b>Шанс</b><span>${esc(o.text)}</span></div></div>`;
     case 'rate':return `<div class="lab"><div class="ovbig in sm">Купить ${o.buy} ₽</div><div class="ovbig out sm">Продать ${o.sell} ₽</div><div class="sub">Новый курс доллара — биржа открыта</div></div>`;
   }return ''}
+
+/* ---------- оповещения для всех игроков ---------- */
+let ntfQ=[],ntfBusy=false;
+const NTFL={all:'🔔 Все',big:'🔔 Крупные',off:'🔕 Выкл'},NTFN={all:'big',big:'off',off:'all'};
+const ntfMode=()=>{const v=lget('nepbank2.notify','all');return NTFL[v]?v:'all'};
+function capOf(st,pid){const w=st.b[pid]||{rub:0,usd:0},cr=curRate();return w.rub+w.usd*(cr?cr.sell:0)+invest(st,pid).total}
+function grpOf(c){return c?GRP(c.group):null}
+function grpCells(c){return c.type==='utility'?BCELLS.filter(x=>x.type==='utility'):BCELLS.filter(x=>x.group===c.group)}
+function isFull(st,c){return c.type==='utility'?fullUtil(st,c):fullSyn(st,c)}
+function notifyEvents(list,me){const mode=ntfMode();if(mode==='off'||!list.length||!table)return;let mineNow=false;const st=state(),add=n=>{if(mode==='big'&&!n.big)return;n.mine=mineNow;const last=ntfQ[ntfQ.length-1];if(n.merge&&last&&last.merge===n.merge){last.cnt+=1;last.text=n.textFn(last.cnt);return}ntfQ.push(n)};
+  for(const e of list){if(st.und.has(e.id)||st.failed.has(e.id))continue;mineNow=e.pid===me||e.to===me;
+    if(e.kind==='buy'){const c=cellById(e.cell);if(!c)continue;const g=grpOf(c);
+      if(isFull(st,c)&&st.own[c.id]&&st.own[c.id].pid===e.pid)add({big:1,k:'СИНДИКАТ СОБРАН',t:g.name,g,cells:grpCells(c),pid:e.pid,sub:`${who(e.pid)} купил «${c.name}» и собрал весь синдикат`});
+      else add({big:1,k:'ПОКУПКА ПОЛЯ',t:c.name,g,cells:[c],pid:e.pid,sub:`${who(e.pid)} · ${rub(e.price)}`});continue}
+    if(e.kind==='build'){const c=cellById(e.cell),o=st.own[e.cell];if(!c||!o)continue;const g=grpOf(c),td=o.level>c.maxStores;
+      add({big:1,k:td?'ТОРГОВЫЙ ДОМ':`${o.level}-Й МАГАЗИН`,t:c.name,g,cells:[c],own:o,pid:e.pid,sub:`${who(e.pid)} · ${rub(e.cost)}`});continue}
+    if(e.kind==='share'){const g=GRP(e.group);if(!g)continue;const tf=n=>`${who(e.pid)} купил ${n} ${n===1?'акцию':'акции'} «${g.name}»`;add({ic:'📈',merge:e.pid+'|'+e.group+'|'+e.id.slice(0,0),cnt:1,textFn:tf,text:tf(1)});continue}
+    if(e.kind==='ptrans'){const cs=(e.cells||[]).map(cellById).filter(Boolean);if(!cs.length)continue;const g=grpOf(cs[0]);
+      if(cs.length>1)add({big:1,k:'СИНДИКАТ ПЕРЕШЁЛ',t:g.name,g,cells:cs,pid:e.to,sub:`${who(e.pid)} → ${who(e.to)}`});
+      else if(isFull(st,cs[0]))add({big:1,k:'СИНДИКАТ СОБРАН',t:g.name,g,cells:grpCells(cs[0]),pid:e.to,sub:`${who(e.to)} получил «${cs[0].name}» от ${who(e.pid)}`});
+      else add({ic:'🤝',text:`${who(e.pid)} передал «${cs[0].name}» → ${who(e.to)}`});continue}
+    if(e.kind==='dealOk'){const o=evs.find(x=>x.id===e.of);if(!o)continue;mineNow=o.pid===me||o.to===me;let shown=false;
+      for(const [side,to] of [[o.give,o.to],[o.take,o.pid]]){const ids=(side&&side.patents)||[],seenG=new Set();for(const id of ids){const c=cellById(id);if(!c)continue;const key=c.type==='utility'?'zhkh':c.group;if(seenG.has(key))continue;seenG.add(key);
+        if(isFull(st,c)&&st.own[c.id]&&st.own[c.id].pid===to){const g=grpOf(c),all=grpCells(c),moved=all.every(x=>ids.includes(x.id));add({big:1,k:moved?'СИНДИКАТ ПЕРЕШЁЛ':'СИНДИКАТ СОБРАН',t:g.name,g,cells:all,pid:to,sub:`Сделка: ${who(o.pid)} ↔ ${who(o.to)}`});shown=true}}}
+      if(!shown)add({ic:'🤝',text:`Сделка: ${who(o.pid)} ↔ ${who(o.to)}`});continue}
+    if(e.kind==='quit'){add({big:1,k:'ВЫБЫЛ ИЗ ИГРЫ',t:who(e.pid),emo:'🚪',pid:e.pid,sub:(+e.cap||0)>0?`Капитал ${rub(e.cap)} ушёл в банк`:'Имущество вернулось в банк'});continue}
+  }
+  ntfRun()}
+function ntfRun(){if(ntfBusy||!ntfQ.length)return;const n=ntfQ.shift();ntfBusy=true;if(n.mine&&animOn){ntfQ.unshift(n);setTimeout(()=>{ntfBusy=false;ntfRun()},250);return}const el=document.createElement('div');el.setAttribute('aria-live','polite');
+  if(n.big){const g=n.g||{color:'#808080',band:'#D5D6D6',ink:'#333'},p=n.pid?pById(n.pid):null,cs=n.cells||[];
+    el.className='ntf big'+(reduceMo?' rm':'');el.style.cssText=`--c:${g.color};--b:${g.band};--gi:${g.ink}`;
+    el.innerHTML=`<div class="ntc"><span class="ntk">${esc(n.k)}</span><div class="ntt">${esc(n.t)}</div>${n.emo?`<div class="ntemo">${n.emo}</div>`:`<div class="ntv${cs.length>1?' fan':''}">${cs.map((c,i)=>`<div class="ntcard" style="--r:${cs.length>1?((i-(cs.length-1)/2)*7).toFixed(1):0}deg;--i:${i}">${pcCard(c,n.own||(state().own[c.id]||null),cs.length>1)}</div>`).join('')}</div>`}<div class="ntw">${p?spr(p):''}<span>${esc(n.sub||'')}</span></div></div>`;
+    try{if(lget('nepbank2.sound',true)&&navigator.vibrate)navigator.vibrate([40,60,40])}catch(_){}}
+  else{el.className='ntf small'+(reduceMo?' rm':'');el.innerHTML=`<div class="ntp"><span class="nti">${n.ic||'🔔'}</span><span>${esc(n.text)}</span></div>`}
+  document.body.appendChild(el);const dur=n.big?2400:1900;setTimeout(()=>{el.remove();ntfBusy=false;ntfRun()},dur)}
 function animFor(e,me){if(e.kind==='turn')return;
   if(e.kind==='emo'){if(e.pid!==me&&(e.to==='all'||e.to===me)){playEmo(e.e,`${who(e.pid)}${e.to==='all'?' — всем':''}`);try{if(lget('nepbank2.sound',true)&&navigator.vibrate)navigator.vibrate([30,40,30])}catch(_){}}return}
   if(!me)return;
@@ -962,7 +1126,7 @@ function vLobby(){
   <p class="muted">Приложение ведёт банк живой партии: счета в рублях и долларах, кости, «Шанс» и биржу. Поле, фишки и карточки остаются у вас на столе.</p>
   ${online?'':'<p class="note">Нет связи с сервером, поэтому всё хранится только на этом устройстве. Проверьте интернет и перезапустите приложение.</p>'}
   ${readOnly?'<p class="note">Вы в режиме просмотра: видите столы, но создавать их и проводить операции может владелец страницы или приглашённый редактор.</p>':''}
-  ${store&&store.kind==='fb'?`<div class="lbl">Войти по коду стола</div><div class="row"><input data-in="joinCode" inputmode="numeric" maxlength="4" placeholder="Например, 4821" style="flex:1;min-width:140px"><button class="btn" data-act="join">Войти</button></div><div class="lbl">Мои столы</div>`:''}${list}${readOnly?'':'<button class="btn red wide" data-act="newtable">Новый стол</button>'}</section><section class="sheet"><div class="lbl" style="margin-top:0">Оформление</div><div class="seg"><button class="${document.body.classList.contains('m3')?'on':''}" data-act="theme" data-v="m3">Android</button><button class="${document.body.classList.contains('m3')?'':'on'}" data-act="theme" data-v="retro">Ретро</button></div></section>`}
+  ${store&&store.kind==='fb'?`<div class="lbl">Войти по коду стола</div><div class="row"><input data-in="joinCode" inputmode="numeric" maxlength="4" placeholder="Например, 4821" style="flex:1;min-width:140px"><button class="btn" data-act="join">Войти</button></div><div class="lbl">Мои столы</div>`:''}${list}${readOnly?'':'<button class="btn red wide" data-act="newtable">Новый стол</button>'}</section><section class="sheet"><div class="lbl" style="margin-top:0">Оформление</div><div class="seg">${['retro','m3','pole'].map(k=>`<button class="${curTheme()===k?'on':''}" data-act="theme" data-v="${k}">${THEMES[k]}</button>`).join('')}</div></section>`}
 function vNew(){const d=draftT;
   const rows=d.players.map((p,i)=>`<div class="prow">${spr({ch:p.ch,color:PCOLORS[i]})}<input aria-label="Имя игрока ${i+1}" data-in="np.${i}" value="${esc(p.name)}"><select aria-label="Персонаж игрока ${i+1}" data-ch="${i}" style="width:auto">${CHAR_NAMES.map((n,k)=>`<option value="${k}"${k===p.ch?' selected':''}>${n}</option>`).join('')}</select>${d.players.length>2?`<button class="btn ghost sm" data-act="rmp" data-v="${i}" aria-label="Убрать игрока">✕</button>`:'<span></span>'}</div>`).join('');
   return `<section class="sheet"><h2>Новый стол</h2>
@@ -1009,12 +1173,12 @@ function vMe(){const me=pById(meId());if(!me)return vSeat();
   <button class="btn red wide" data-act="pay">${pay.okNeg?'Всё равно заплатить':'Заплатить'}</button></section>
   ${gtHtml(me)}`}
   ${dealHtml(me)}
-  ${readOnly?'':`<section class="sheet"><h2>Ссуда</h2><p class="muted small">Банк выдаёт ссуду под ${s.loanRate}% на срок до 5 кругов. Получение денег за круг — сигнал погашения: каждый раз автоматически списывается один взнос, и через выбранное число кругов долг закрыт.</p>
+  ${readOnly?'':`<section class="sheet"><h2>Ссуда</h2><p class="muted small">Банк выдаёт ссуду под ${s.loanRate}% на срок до 5 кругов — на клетке «Торги / Ссуда» или вне очереди, если не хватает денег на ренту или налог. Одновременно — только одна ссуда. Получение денег за круг — сигнал погашения: каждый раз автоматически списывается один взнос.</p>
   ${loans.map(L=>`<p class="small">Осталось вернуть ${rub(L.left)} (внесено ${L.paidN} из ${L.rounds}). <button class="linkbtn" data-act="loanpay" data-v="${esc(L.id)}">Погасить сразу</button></p>`).join('')}
-  <label class="field"><span>Сумма ссуды, ₽</span><input class="amt" inputmode="numeric" data-in="loanAmt" value="${esc(loan.amount)}" placeholder="0"></label>
+  ${loans.length?'<p class="note small">Новую ссуду можно взять после погашения текущей.</p>':`<label class="field"><span>Сумма ссуды, ₽</span><input class="amt" inputmode="numeric" data-in="loanAmt" value="${esc(loan.amount)}" placeholder="0"></label>
   <div class="lbl">Вернуть за кругов</div><div class="seg">${[1,2,3,4,5].map(n=>`<button class="${loan.rounds===n?'on':''}" data-act="lrounds" data-v="${n}">${n}</button>`).join('')}</div>
   ${lt>0?`<p class="small" style="margin-top:8px">Вернуть ${rub(lt)} — по ${rub(Math.ceil(lt/loan.rounds))} за круг.</p>`:''}
-  <button class="btn wide" data-act="loan">Взять ссуду</button></section>`}
+  <button class="btn wide" data-act="loan">Взять ссуду</button>`}</section>`}
   <section class="sheet"><label class="chk" style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-snd${lget('nepbank2.sound',true)?' checked':''} style="width:20px;height:20px"> Звук и вибрация при денежных операциях</label></section>
   <section class="sheet"><h2>Мои события</h2>${mine.length?`<ul class="hl">${mine.map(e=>`<li class="${und.has(e.id)?'off':''}"><span class="tm">${hm(e.ts)}</span><span class="tx">${esc(describe(e))}</span>${canSelfUndo(e,me.id,und)?`<button class="undo" data-act="sundo" data-v="${esc(e.id)}">Отменить</button>`:'<span></span>'}</li>`).join('')}</ul>`:'<p class="muted">Пока пусто.</p>'}</section>
   ${readOnly?'':`<section class="sheet quitbox"><h2>Выйти из игры</h2><p class="muted small">Если вы банкрот или уходите из-за стола. Деньги и доллары обнулятся, патенты с постройками и акции вернутся в банк и снова станут свободными, ссуды и предложения сделок закроются. Отменить выход нельзя.</p><button class="btn ghost wide" data-act="quit" data-label="Выйти из игры">Выйти из игры</button></section>`}`}
@@ -1025,11 +1189,19 @@ function grpBuilt(st,c){return c.type==='patent'&&BCELLS.some(x=>x.group===c.gro
 function patSellPrice(c){return Math.ceil(c.price*(+S().sellBuildPct||50)/100-1e-9)}
 function allStores(st,c){return !!c&&c.type==='patent'&&BCELLS.filter(x=>x.group===c.group).every(x=>st.own[x.id]&&st.own[x.id].level>=x.maxStores)}
 function fullSyn(st,c){if(!c||c.type!=='patent')return false;const o=st.own[c.id];if(!o)return false;return BCELLS.filter(x=>x.group===c.group).every(x=>st.own[x.id]&&st.own[x.id].pid===o.pid)}
-function rentNow(st,c){const o=st.own[c.id];if(!o)return null;if(c.type==='utility')return {amount:c.payment,label:'выплата'};
+function fullUtil(st,c){const o=c&&st.own[c.id];return !!o&&c.type==='utility'&&BCELLS.filter(x=>x.type==='utility').every(x=>st.own[x.id]&&st.own[x.id].pid===o.pid)}
+function rentNow(st,c){const o=st.own[c.id];if(!o)return null;if(c.type==='utility')return fullUtil(st,c)?{amount:c.rent.syndicate,label:'синдикат'}:{amount:c.rent.field,label:'поле'};
   const lv=o.level;if(lv>c.maxStores)return {amount:c.rent.tradeHouse,label:'торговый дом'};if(lv>0)return {amount:c.rent.stores[lv-1],label:`${lv} ${lv===1?'магазин':'магазина'}`};
   return fullSyn(st,c)?{amount:c.rent.syndicate,label:'синдикат'}:{amount:c.rent.field,label:'поле'}}
 function pcCard(c,o,full){const g=c.type==='patent'?GRP(c.group):null;
-  if(!g)return `<div class="pc pcu" role="img" aria-label="${esc(c.name)}, цена ${c.price}, выплата ${c.payment}"><div class="u1">${c.price}</div><div class="u2">${esc(c.name)}</div><div class="u3">Выплата<br>${c.payment}</div></div>`;
+  if(c.type==='utility'){const u=UG,lv0=!!o;return `<div class="pc" style="--c:${u.color};--b:${u.band};--gi:${u.ink}" role="img" aria-label="${esc(c.name)}, ${esc(u.name)}, цена ${c.price}">
+  <div class="pcb">${[...u.name.toUpperCase()].map(ch=>`<span>${esc(ch)}</span>`).join('')}</div>
+  <span class="pcc">${c.code.replace('-','‑')}</span><div class="pcp">${c.price}</div>
+  <div class="pcn${c.name.length>8?' long':''}">${esc(c.name)}</div>
+  <div class="pcr"><div class="pole${lv0&&!full?' hl':''}">ПОЛЕ ${c.rent.field}</div><div class="syn${lv0&&full?' hl':''}">СИНДИКАТ ${c.rent.syndicate}</div>
+  <div class="st"><div>магазинов нет</div><div>акций нет</div></div></div>
+  <div class="pcd">Не развивается</div></div>`}
+  if(!g)return '';
   const lv=o?o.level:0;
   return `<div class="pc" style="--c:${g.color};--b:${g.band};--gi:${g.ink}" role="img" aria-label="${esc(c.name)}, ${esc(g.name)}, цена ${c.price}">
   <div class="pcb">${[...g.name.toUpperCase()].filter(ch=>ch!==' ').map(ch=>`<span>${esc(ch)}</span>`).join('')}</div>
@@ -1039,16 +1211,16 @@ function pcCard(c,o,full){const g=c.type==='patent'?GRP(c.group):null;
   <div class="st">${c.rent.stores.map((v,i)=>`<div class="${lv===i+1?'hl':''}">${i+1} ${i?'магазина':'магазин'} ${v}</div>`).join('')}<div class="${lv>c.maxStores?'hl':''}">Торговый дом ${c.rent.tradeHouse}</div></div></div>
   <div class="pcd">Развитие ${c.develop}</div></div>`}
 function ownerTag(st,id){const o=st.own[id];if(!o)return '<span class="muted small">в банке</span>';const p=pById(o.pid);return `<span class="own">${p?spr(p):''}${esc(who(o.pid))}</span>`}
-let rentSel=null,patQ='';
+let rentSel=null,patQ='',ptSel=null,ptTo=null;
 function vPat(){const me=pById(meId()),st=state(),s=S(),mine=me?Object.keys(st.own).filter(id=>st.own[id].pid===me.id):[];
   const inv=me?invest(st,me.id):null,refund=c=>Math.round(c.develop*(+s.sellBuildPct||0)/100);
-  const myHtml=mine.length?BOARD.groups.concat([{id:'__util',name:'Коммунальные'}]).map(g=>{const ids=BCELLS.filter(c=>(g.id==='__util'?c.type==='utility':c.group===g.id)&&mine.includes(c.id)).map(c=>c.id);if(!ids.length)return '';
-    const full=g.id!=='__util'&&fullSyn(st,cellById(ids[0])),tot=BCELLS.filter(c=>c.group===g.id).length;
-    return `<div class="mg"><div class="mgh" style="--c:${g.color||'#808080'}"><i class="sw" style="background:${g.color||'#808080'}"></i><b>${esc(g.name)}</b>${g.id==='__util'?'':full?'<span class="syn-badge">Синдикат собран</span>':`<span class="muted small">${ids.length} из ${tot}</span>`}</div><div class="pcgrid">${ids.map(id=>{const c=cellById(id),o=st.own[id],ml=maxLevel(c),rn=rentNow(st,c);
+  const myHtml=mine.length?BOARD.groups.concat([{id:'__util',name:UG.name,color:UG.color}]).map(g=>{const ids=BCELLS.filter(c=>(g.id==='__util'?c.type==='utility':c.group===g.id)&&mine.includes(c.id)).map(c=>c.id);if(!ids.length)return '';
+    const full=g.id==='__util'?fullUtil(st,cellById(ids[0])):fullSyn(st,cellById(ids[0])),tot=BCELLS.filter(c=>g.id==='__util'?c.type==='utility':c.group===g.id).length;
+    return `<div class="mg"><div class="mgh" style="--c:${g.color||'#808080'}"><i class="sw" style="background:${g.color||'#808080'}"></i><b>${esc(g.name)}</b>${full?'<span class="syn-badge">Синдикат собран</span>':`<span class="muted small">${ids.length} из ${tot}</span>`}</div>${full&&!readOnly?`<div class="ptrow"><button class="btn sm ghost" data-act="ptsel" data-v="${ids[0]}">Передать синдикат целиком</button><span class="muted small">Собранный синдикат передаётся только целиком, вместе с постройками.</span></div><p class="muted small devhint">Строить: 1 операция, когда фишка встала на это поле, — только на этой клетке. Или по карточке Шанса.</p>`:''}<div class="pcgrid">${ids.map(id=>{const c=cellById(id),o=st.own[id],ml=maxLevel(c),rn=rentNow(st,c);
     return `<figure>${pcCard(c,o,full)}<figcaption><b>${levelName(c,o.level)}</b>${rn?` · рента ${rub(rn.amount)}`:''}${c.type==='patent'?`<br>вложено ${rub(c.price+o.level*c.develop)}`:''}</figcaption>
-    ${c.type==='patent'&&!readOnly?`<div class="pcact">${!full&&o.level<ml?`<button class="btn sm" disabled title="Магазины открываются после сбора синдиката">🔒 Магазин — нужен синдикат</button>`:o.level===c.maxStores&&!allStores(st,c)?`<button class="btn sm" disabled title="Торговый дом открывается, когда на всех полях синдиката построены все магазины">🔒 ТД — сначала все магазины синдиката</button>`:`<button class="btn sm red" data-act="build" data-v="${id}"${o.level>=ml?' disabled':''}>${o.level>=ml?'Развито полностью':o.level===c.maxStores?`Торговый дом ${rub(c.develop)}`:`Магазин ${rub(c.develop)}`}</button>`}${o.level>0?`<button class="btn sm ghost" data-act="unbuild" data-v="${id}" data-label="Продать постройку +${refund(c)} ₽">Продать постройку +${refund(c)} ₽</button>`:''}${grpBuilt(st,c)?`<span class="muted small">Продать патент можно, когда на полях синдиката нет построек</span>`:`<button class="btn sm ghost" data-act="patsell" data-v="${id}" data-label="Продать патент +${rub(patSellPrice(c))}">Продать патент +${rub(patSellPrice(c))}</button>`}</div>`:c.type==='utility'&&!readOnly?`<div class="pcact"><button class="btn sm ghost" data-act="patsell" data-v="${id}" data-label="Продать банку +${rub(patSellPrice(c))}">Продать банку +${rub(patSellPrice(c))}</button></div>`:''}</figure>`}).join('')}</div></div>`}).join(''):'<p class="muted">У вас пока нет патентов. Купите поле, на которое встала ваша фишка, — ниже список всех полей.</p>';
+    ${c.type==='patent'&&!readOnly?`<div class="pcact">${!full&&o.level<ml?`<button class="btn sm" disabled title="Магазины открываются после сбора синдиката">🔒 Магазин — нужен синдикат</button>`:o.level===c.maxStores&&!allStores(st,c)?`<button class="btn sm" disabled title="Торговый дом открывается, когда на всех полях синдиката построены все магазины">🔒 ТД — сначала все магазины синдиката</button>`:`<button class="btn sm red" data-act="build" data-v="${id}"${o.level>=ml?' disabled':''}>${o.level>=ml?'Развито полностью':o.level===c.maxStores?`Торговый дом ${rub(c.develop)}`:`Магазин ${rub(c.develop)}`}</button>`}${o.level>0?`<button class="btn sm ghost" data-act="unbuild" data-v="${id}" data-label="Продать постройку +${refund(c)} ₽">Продать постройку +${refund(c)} ₽</button>`:''}${grpBuilt(st,c)?`<span class="muted small">Продать патент можно, когда на полях синдиката нет построек</span>`:`<button class="btn sm ghost" data-act="patsell" data-v="${id}" data-label="Продать патент +${rub(patSellPrice(c))}">Продать патент +${rub(patSellPrice(c))}</button>`}${full?'':`<button class="btn sm ghost" data-act="ptsel" data-v="${id}">Передать игроку</button>`}</div>`:c.type==='utility'&&!readOnly?`<div class="pcact"><button class="btn sm ghost" data-act="patsell" data-v="${id}" data-label="Продать банку +${rub(patSellPrice(c))}">Продать банку +${rub(patSellPrice(c))}</button>${full?'':`<button class="btn sm ghost" data-act="ptsel" data-v="${id}">Передать игроку</button>`}</div>`:''}</figure>`}).join('')}</div></div>`}).join(''):'<p class="muted">У вас пока нет патентов. Купите поле, на которое встала ваша фишка, — ниже список всех полей.</p>';
   const rowHtml=c=>{const o=st.own[c.id],rn=rentNow(st,c),mineC=o&&me&&o.pid===me.id;
-    return `<div class="glr"><span class="gln">${c.code?c.code+' ':''}${esc(c.name)}${c.type==='utility'?` · выплата ${c.payment}`:''}</span><span class="glp">${rub(c.price)}</span>
+    return `<div class="glr"><span class="gln">${c.code?c.code+' ':''}${esc(c.name)}</span><span class="glp">${rub(c.price)}</span>
     <span class="glo">${ownerTag(st,c.id)}${o?` <span class="lvl">${rn.label} · рента ${rub(rn.amount)}</span>`:''}</span>
     ${!o&&me&&!readOnly?`<button class="btn sm" data-act="buyp" data-v="${c.id}">Купить</button>`:o&&me&&!mineC&&!readOnly?`<button class="btn sm red" data-act="rentsel" data-v="${c.id}">Оплатить ${rub(rn.amount)}</button>`:'<span></span>'}</div>`};
   const grp=BOARD.groups.map(g=>{const cs=BCELLS.filter(c=>c.group===g.id),cap=synCap(st,g.id),f=cs.length&&fullSyn(st,cs[0]);
@@ -1058,21 +1230,29 @@ function vPat(){const me=pById(meId()),st=state(),s=S(),mine=me?Object.keys(st.o
   const sel=rentSel&&st.own[rentSel]&&me&&st.own[rentSel].pid!==me.id?cellById(rentSel):null;
   let rentHtml='';
   if(me&&!readOnly&&!isOut(me.id)){
-    if(sel){const o=st.own[sel.id],rn=rentNow(st,sel),ow=pById(o.pid),g=sel.type==='patent'&&fullSyn(st,sel);
+    if(sel){const o=st.own[sel.id],rn=rentNow(st,sel),ow=pById(o.pid),g=sel.type==='patent'?fullSyn(st,sel):fullUtil(st,sel);
       rentHtml=`<section class="sheet rentcard" id="rentcard"><h2>Оплата ренты</h2><div class="rcw"><div class="rcp">${pcCard(sel,o,g)}</div><div class="rci">
         <div class="muted small">${sel.code?sel.code+' · ':''}${esc(sel.name)}</div><div class="rco">${ow?spr(ow):''}<b>${esc(ow?ow.name:'?')}</b></div>
         <div class="muted small">Статус: <b>${esc(rn.label)}</b></div><div class="big down" style="margin-top:6px">${rub(rn.amount)}</div></div></div>
-        <button class="btn red wide" data-act="rentpay" data-v="${sel.id}" data-label="Точно? ${rub(rn.amount)} → ${esc(ow?ow.name:'')}">Оплатить ${rub(rn.amount)} — ${esc(ow?ow.name:'')}</button>
+        <button class="btn red wide" data-act="rentpay" data-v="${sel.id}">Оплатить ${rub(rn.amount)} — ${esc(ow?ow.name:'')}</button>
         <button class="btn ghost wide" data-act="rentclose" style="margin-top:8px">Отмена</button></section>`}
     else rentHtml=`<section class="sheet"><h2>Встали на чужое поле?</h2><p class="muted small">Найдите поле и оплатите ренту владельцу. Сумма считается по статусу: поле, синдикат, магазины или торговый дом.</p>
       ${others.length?`<label class="field"><span>Название или номер поля</span><input data-in="patQ" placeholder="Например: Серебро или 1-1" autocomplete="off" value="${esc(patQ)}"></label>
       <div class="rlist">${others.map(c=>{const o=st.own[c.id],rn=rentNow(st,c),ow=pById(o.pid),k=(c.name+' '+(c.code||'')+' '+(ow?ow.name:'')).toLowerCase();
-        return `<button class="rli" data-act="rentsel" data-v="${c.id}" data-k="${esc(k)}"${patQ&&!k.includes(patQ.toLowerCase())?' hidden':''}><i class="sw" style="background:${c.type==='patent'?GRP(c.group).color:'#808080'}"></i><span class="rln">${c.code?`<span class="muted">${c.code}</span> `:''}${esc(c.name)}</span><span class="rlo">${ow?spr(ow):''}${esc(ow?ow.name:'')}</span><b class="rla">${rub(rn.amount)}</b></button>`}).join('')}<p class="muted small rnone" hidden>Ничего не найдено.</p></div>`
+        return `<button class="rli" data-act="rentsel" data-v="${c.id}" data-k="${esc(k)}"${patQ&&!k.includes(patQ.toLowerCase())?' hidden':''}><i class="sw" style="background:${GRP(c.group).color}"></i><span class="rln">${c.code?`<span class="muted">${c.code}</span> `:''}${esc(c.name)}</span><span class="rlo">${ow?spr(ow):''}${esc(ow?ow.name:'')}</span><b class="rla">${rub(rn.amount)}</b></button>`}).join('')}<p class="muted small rnone" hidden>Ничего не найдено.</p></div>`
       :'<p class="muted small">Пока ни одно поле не куплено другими игроками.</p>'}</section>`}
-  return `${rentHtml}${me?`<section class="sheet"><h2>Мои патенты</h2><p class="muted small">Вложено в имущество: <b>${rub(inv.total)}</b> — патенты ${rub(inv.pat)}, постройки ${rub(inv.bld)}${inv.util?`, Вода и Энергия ${rub(inv.util)}`:''}${inv.sh?`, акции ${rub(inv.sh)}`:''}.</p>${myHtml}</section>`:'<section class="sheet"><p class="note">Выберите себя за столом, чтобы покупать и развивать патенты.</p></section>'}
+  let ptHtml='';const ptC=ptSel&&me&&st.own[ptSel]&&st.own[ptSel].pid===me.id?cellById(ptSel):null;
+  if(ptC&&!readOnly){const ids=bundle(st,ptC),cs=ids.map(cellById),gg=GRP(ptC.group),many=ids.length>1,to=ptTo&&pById(ptTo)&&ptTo!==me.id&&!isOut(ptTo)?pById(ptTo):null,cands=players().filter(p=>p.id!==me.id&&!isOut(p.id));
+    ptHtml=`<section class="sheet ptcard" id="ptcard"><h2>${many?`Передать синдикат «${esc(gg.name)}»`:'Передать патент'}</h2>
+    <div class="pcgrid">${cs.map(c=>`<figure>${pcCard(c,st.own[c.id],many)}<figcaption><b>${levelName(c,st.own[c.id].level)}</b></figcaption></figure>`).join('')}</div>
+    <p class="muted small">${many?'Синдикат собран, поэтому передаётся целиком — все поля и постройки. Так развитие и рента не ломаются.':'Патент переходит к игроку бесплатно. Если за него платят — оформите «Счёт» → «Сделка».'}</p>
+    <div class="lbl">Кому</div><div class="pick">${cands.map(p=>`<button class="pchip${to&&to.id===p.id?' on':''}" data-act="ptto" data-v="${p.id}" aria-pressed="${!!(to&&to.id===p.id)}">${spr(p)}<span>${esc(p.name)}</span></button>`).join('')||'<span class="muted small">Других игроков нет.</span>'}</div>
+    ${to?`<button class="btn red wide" style="margin-top:12px" data-act="ptgo" data-v="${ptC.id}" data-label="Точно? ${esc(many?gg.name:ptC.name)} → ${esc(to.name)}">Передать → ${esc(to.name)}</button>`:''}
+    <button class="btn ghost wide" data-act="ptclose" style="margin-top:8px">Отмена</button></section>`}
+  return `${ptHtml}${rentHtml}${me?`<section class="sheet"><h2>Мои патенты</h2><p class="muted small">Вложено в имущество: <b>${rub(inv.total)}</b> — патенты ${rub(inv.pat)}, постройки ${rub(inv.bld)}${inv.util?`, ЖКХ ${rub(inv.util)}`:''}${inv.sh?`, акции ${rub(inv.sh)}`:''}.</p>${myHtml}</section>`:'<section class="sheet"><p class="note">Выберите себя за столом, чтобы покупать и развивать патенты.</p></section>'}
   <section class="sheet"><h2>Все поля</h2><p class="muted small">Владелец, статус и текущая рента каждого поля. Встали на чужое поле — оплатите ренту владельцу кнопкой «Оплатить»: сумма считается по статусу — поле, синдикат, магазины или торговый дом.</p>${grp}
-  <div class="gl" style="--c:#808080;--b:#CCCCCC;--gi:#333"><div class="glh"><b>Коммунальные</b><span>не развиваются</span></div>${utils.map(rowHtml).join('')}</div></section>`}
-const SHCD=3;
+  <div class="gl" style="--c:${UG.color};--b:${UG.band};--gi:${UG.ink}"><div class="glh"><b>${esc(UG.name)}</b><span>${utils.length&&fullUtil(st,utils[0])?`<span class="syn-badge">Синдикат: ${esc(who(st.own[utils[0].id].pid))}</span> `:''}не развивается, акций нет</span></div>${utils.map(rowHtml).join('')}</div></section>`}
+const SHCD=2;
 function shCool(st,pid,g){const m=st.shcd&&st.shcd[pid];if(!m||m[g]==null)return 0;return Math.max(0,SHCD-((st.laps[pid]||0)-m[g]))}
 function shSellPrice(g){const st=state();return Math.ceil(sharePrice(g)+synCap(st,g)*(+S().sharePct||0)/100-1e-9)}
 function vShares(){const me=pById(meId()),st=state(),s=S(),lim=+s.shareLimit||10,lc=me?lapCalc(st,me.id):null;
@@ -1081,7 +1261,7 @@ function vShares(){const me=pById(meId()),st=state(),s=S(),lim=+s.shareLimit||10
     <div class="avl${lim-iss<=0?' none':lim-iss<=2?' low':''}">Доступно <b>${Math.max(0,lim-iss)}</b> из ${lim}<span class="avbar"><i style="width:${Math.min(100,iss/lim*100)}%"></i></span></div>
     <div class="shs"><span>Капитализация <b>${rub(cap)}</b></span><span>Доход акции за круг <b>${fmt2(per)} ₽</b></span>${my?`<span>У вас <b>${my} шт</b></span>`:''}</div>
     <div class="shho">${holders.length?holders.map(([pid,n])=>`<span class="own">${spr(pById(pid))}${esc(who(pid))} — ${n} шт</span>`).join(''):'<span class="muted small">Владельцев пока нет</span>'}</div>
-    ${me&&!readOnly?(()=>{const cl=shCool(st,me.id,g.id);return cl>0?`<button class="btn sm" disabled>⏳ Покупка через ${cl} ${cl===1?'круг':'круга'}</button>`:`<button class="btn sm${iss<lim?' red':''}" data-act="buysh" data-v="${g.id}"${iss>=lim?' disabled':''}>${iss>=lim?'Все акции проданы':`Купить акцию ${rub(pr)}`}</button>`})()+`${my&&!isOut(me.id)?` <button class="btn sm ghost" data-act="sellsh" data-v="${g.id}" data-label="Точно? Покупка закроется на 3 круга">Продать банку +${rub(shSellPrice(g.id))}</button>`:''}`:''}</div></div>`}).join('');
+    ${me&&!readOnly?(()=>{const cl=shCool(st,me.id,g.id);return cl>0?`<button class="btn sm" disabled>⏳ Покупка через ${cl} ${cl===1?'круг':'круга'}</button>`:`<button class="btn sm${iss<lim?' red':''}" data-act="buysh" data-v="${g.id}"${iss>=lim?' disabled':''}>${iss>=lim?'Все акции проданы':`Купить акцию ${rub(pr)}`}</button>`})()+`${my&&!isOut(me.id)?` <button class="btn sm ghost" data-act="sellsh" data-v="${g.id}" data-label="Точно? Покупка закроется на ${SHCD} круга">Продать банку +${rub(shSellPrice(g.id))}</button>`:''}`:''}</div></div>`}).join('');
   const rules=`<details class="shrules"><summary>Правила акций</summary><p class="muted small">Акция приносит ${String(s.sharePct).replace('.',',')}% капитализации своего синдиката при каждом вашем круге — даже если патенты синдиката у другого игрока. Капитализация — цены купленных патентов и постройки.</p><p class="rulebox small"><b>Лимит покупки.</b> За одну покупку — не больше 2 акций одного синдиката. Синдикатов в одной покупке может быть сколько угодно, но каждого — максимум 2 шт. Правило соблюдают сами игроки.</p><p class="muted small">Всего ${lim} акций на синдикат. Продать акцию банку можно по «зрелой» цене: цена покупки + ${String(s.sharePct).replace('.',',')}% текущей капитализации синдиката. Чем больше развит синдикат, тем дороже акция; после продажи она снова свободна. После продажи акции синдиката тот же игрок не может снова покупать акции этого синдиката 3 своих круга.</p></details>`;
   return `<section class="sheet"><h2>Акции</h2>${me?`<div class="seg sub" style="margin:4px 0 6px">${[['mine','Мои акции'],['all','Все синдикаты']].map(([k,l])=>`<button class="${shTab===k?'on':''}" data-act="shtab" data-v="${k}">${l}</button>`).join('')}</div>`:''}${rules}</section>
   ${me&&shTab==='mine'?myShares(st,me,s,lim,lc):`${lc?`<div class="note" style="margin:0 0 12px">Ваши акции принесут на следующем круге <b>${rub(lc.sharesTot)}</b>.</div>`:''}<section class="sheet">${rows}</section>`}`}
@@ -1092,13 +1272,13 @@ function myShares(st,me,s,lim,lc){const own=BOARD.groups.map(g=>({g,n:(st.shares
   return `<section class="sheet"><h2>Мои акции · ${tot} шт</h2><p class="muted small">Стоимость по цене покупки ${rub(val)} · на следующем круге принесут <b>${rub(lc?lc.sharesTot:0)}</b>.</p>
   <div class="myl">${own.map(({g,n})=>{const per=synCap(st,g.id)*(+s.sharePct||0)/100,iss=issued(st,g.id),av=Math.max(0,lim-iss);
     return `<div class="myr" style="--c:${g.color}"><i class="sw"></i><div class="myn"><b>${esc(g.name)}</b><span class="muted small">${n} × ${fmt2(per)} ₽ = ${fmt2(n*per)} ₽ за круг · доступно ещё ${av} из ${lim}</span></div><b class="myc">${n} шт</b>
-    ${readOnly||isOut(me.id)?'':`<div class="mya">${shCool(st,me.id,g.id)>0?`<button class="btn sm" disabled>⏳ Покупка через ${shCool(st,me.id,g.id)} кр.</button>`:`<button class="btn sm red" data-act="buysh" data-v="${g.id}"${av<=0?' disabled':''}>${av<=0?'Нет свободных':`+1 за ${rub(sharePrice(g.id))}`}</button>`}<button class="btn sm ghost" data-act="sellsh" data-v="${g.id}" data-label="Точно? Покупка закроется на 3 круга">Продать +${rub(shSellPrice(g.id))}</button></div>`}</div>`}).join('')}</div></section>
+    ${readOnly||isOut(me.id)?'':`<div class="mya">${shCool(st,me.id,g.id)>0?`<button class="btn sm" disabled>⏳ Покупка через ${shCool(st,me.id,g.id)} кр.</button>`:`<button class="btn sm red" data-act="buysh" data-v="${g.id}"${av<=0?' disabled':''}>${av<=0?'Нет свободных':`+1 за ${rub(sharePrice(g.id))}`}</button>`}<button class="btn sm ghost" data-act="sellsh" data-v="${g.id}" data-label="Точно? Покупка закроется на ${SHCD} круга">Продать +${rub(shSellPrice(g.id))}</button></div>`}</div>`}).join('')}</div></section>
   <section class="sheet"><h2>Доступность акций</h2><p class="muted small">По ${lim} акций на синдикат. Видно всем игрокам.</p><div class="avt">${BOARD.groups.map(g=>{const iss=issued(st,g.id),av=Math.max(0,lim-iss),hs=Object.entries(st.shares[g.id]||{}).filter(([,n])=>n>0);
     return `<div class="avr" style="--c:${g.color}"><i class="sw"></i><span class="avn">${esc(g.name)}</span><span class="avh">${hs.map(([pid,n])=>`${esc(who(pid))} ${n}`).join(' · ')||'—'}</span><b class="${av<=0?'down':''}">${av} из ${lim}</b></div>`}).join('')}</div></section>`}
 function taxHtml(me){const st=state(),t=taxCalc(st,me.id),inv=t.inv,pct=String(t.pct).replace('.',',');
   const L=(k,v)=>`<div class="lr"><span>${k}</span><b>${rub(v)}</b></div>`;
   return `<section class="sheet"><h2>Налог · ${rub(t.total)}</h2><p class="muted small">Встали на клетку «Налог» — оплатите здесь. Налог = ${rub(t.base)} + ${pct}% от ваших вложений.</p>
-  <details class="taxd"><summary>Как посчитано</summary><div class="lap">${L('Патенты',inv.pat)}${L('Постройки',inv.bld)}${inv.util?L('Вода и Энергия',inv.util):''}${L('Акции по цене покупки',inv.sh)}<div class="lr tot"><span>Вложения</span><b>${rub(inv.total)}</b></div></div>
+  <details class="taxd"><summary>Как посчитано</summary><div class="lap">${L('Патенты',inv.pat)}${L('Постройки',inv.bld)}${inv.util?L('ЖКХ',inv.util):''}${L('Акции по цене покупки',inv.sh)}<div class="lr tot"><span>Вложения</span><b>${rub(inv.total)}</b></div></div>
   <p class="calc">${rub(t.base)} + ${pct}% × ${rub(inv.total)} = ${rub(t.base)} + ${fmt2(t.part)} ₽ = <b>${rub(t.total)}</b></p></details>
   ${readOnly?'':`<button class="btn red wide" data-act="taxpay">Оплатить в банк ${rub(t.total)}</button>`}</section>`}
 function lapHtml(me){const st=state(),lc=lapCalc(st,me.id),loans=activeLoans(me.id),due=loans.reduce((a,L)=>a+Math.min(L.per,L.left),0);
@@ -1117,7 +1297,7 @@ function dealHtml(me){const st=state(),to=sel.dealTo&&pById(sel.dealTo)?sel.deal
     ${pats.length?`<div class="lbl">Патенты</div><div class="chips">${pats.map(id=>{const c=cellById(id),on=d.patents.includes(id);return `<button class="chip${on?' on':''}" data-act="dpat" data-side="${key}" data-v="${id}" aria-pressed="${on}">${esc(c.name)}${st.own[id].level?' · '+levelName(c,st.own[id].level):''}</button>`}).join('')}</div>`:''}
     ${shs.length?`<div class="lbl">Акции</div>${shs.map(g=>{const have=st.shares[g.id][pid],n=+d.shares[g.id]||0;return `<div class="row" style="justify-content:space-between;margin-top:6px"><span>${esc(g.name)} <span class="muted small">(есть ${have})</span></span><div class="step"><button data-act="dsh" data-side="${key}" data-g="${g.id}" data-v="-1" aria-label="Меньше"${n<=0?' disabled':''}>−</button><b>${n}</b><button data-act="dsh" data-side="${key}" data-g="${g.id}" data-v="1" aria-label="Больше"${n>=have?' disabled':''}>+</button></div></div>`}).join('')}`:''}
     ${lns.length?`<div class="lbl">Ссуды (долг переходит вместе с взносами)</div><div class="chips">${lns.map(L=>{const on=d.loans.includes(L.id);return `<button class="chip${on?' on':''}" data-act="dloan" data-side="${key}" data-v="${L.id}" aria-pressed="${on}">Долг ${rub(loanLeft(L))}</button>`}).join('')}</div>`:''}`};
-  const offerCard=(o,incoming)=>{const ok=sideOk(st,o.pid,o.give)&&sideOk(st,o.to,o.take),g=sideText(o.give),t=sideText(o.take);
+  const offerCard=(o,incoming)=>{const ok=sideOk(st,o.pid,o.give,o.whole)&&sideOk(st,o.to,o.take,o.whole),g=sideText(o.give),t=sideText(o.take);
     return `<div class="offer"><b>${incoming?`${esc(who(o.pid))} предлагает сделку`:`Ждём ответа: ${esc(who(o.to))}`}</b>${o.text?`<p class="small" style="margin-top:4px">«${esc(o.text)}»</p>`:''}
     <p style="margin:6px 0 2px">${incoming?'Вы получаете':'Вы отдаёте'}: ${esc((incoming?g:g)||'ничего')}</p><p style="margin:0 0 8px">${incoming?'Вы отдаёте':'Вы получаете'}: ${esc(t||'ничего')}</p>
     ${!ok?'<p class="small neg">Сделка уже невозможна: части имущества нет у участников.</p>':''}
@@ -1151,7 +1331,7 @@ function vChance(){const me=pById(meId()),deck=chanceDeck().filter(c=>(+c.w||0)>
   return `<section class="sheet"><h2>Шанс</h2><p class="muted small">Встали на клетку «Шанс» — тяните карточку. Карточку выполняете сами, а её текст сразу увидят все.</p>
   ${lastCard?`<div class="card${cardAnim?' pop':''}" style="margin-top:22px"><span class="num">Шанс</span><div class="tx">${esc(lastCard)}</div></div>`:''}
   ${m?`<button class="btn red wide" data-act="draw"${deck.length?'':' disabled'}>${deck.length?'Тянуть карточку':'Колода пуста'}</button>`:me?'':'<p class="note">Выберите себя за столом, чтобы тянуть карточки.</p>'}
-  <p class="muted small center" style="margin-top:8px">В колоде ${deck.length} карточек. <button class="linkbtn" data-act="goc" data-v="chance">Конструктор шансов</button></p></section>${roulHtml(m)}`}
+  <p class="muted small center" style="margin-top:8px">${(()=>{const bg=chanceBag();return `В колоде ${bg.total} карточек · осталось ${bg.total-bg.drawn} до перетасовки${bg.cycle>1?` (круг колоды ${bg.cycle})`:''}. Карточки не повторяются, пока не выйдут все.`})()} <button class="linkbtn" data-act="goc" data-v="chance">Конструктор шансов</button></p></section>${roulHtml(m)}`}
 let roulSpin=false,roulRot=0;
 const RSEG=40,RRED={1:20,2:18,3:16,4:13,5:10};
 function roulPattern(k){const n=RRED[k]||20,p=[];let acc=0;for(let i=0;i<RSEG;i++){acc+=n;if(acc>=RSEG){acc-=RSEG;p.push(1)}else p.push(0)}return p}
@@ -1247,15 +1427,17 @@ function vTable(){
   return ({me:vMe,pat:vPat,shares:vShares,dice:vDice,chance:vChance,fx:vFx,bank:vBank,rules:vRules})[tab]()}
 
 let diceRolling=false;
-const EMOS=['👍','😘','😂','😮','😢','😡','🔥'];let emoTo='all',emoLast=0;
+const EMOS=['👍','😘','😂','😮','😢','😡','🔥','NEP'];
+const PACSVG='<svg class="pacmo" viewBox="300 -5 620 405" aria-hidden="true"><g class="pmd"><circle class="pmd1" cx="756.65" cy="197.52" r="32.92"/><circle cx="866.65" cy="197.52" r="32.92"/></g><path class="pmj1" d="M309.46 197.52A197.52 197.52 0 0 1 704.50 197.52L506.98 197.52Z"/><path class="pmj2" d="M704.50 197.52A197.52 197.52 0 0 1 309.46 197.52L506.98 197.52Z"/></svg>';
+const emoHtml=x=>x==='NEP'?PACSVG:x;let emoTo='all',emoLast=0;
 document.addEventListener('change',e=>{if(e.target&&e.target.id==='emoTo')emoTo=e.target.value});
-const EMOP={'😘':['❤️','💋','😘','💕'],'🔥':['🔥','💥','🔥'],'😂':['😂','🤣','💦'],'👍':['👍','✨','⭐'],'😢':['😢','💧','💧'],'😡':['😡','💢','💨'],'😮':['😮','❗','❓']};
+const EMOP={'NEP':['🟡','✨','•','🟡'],'😘':['❤️','💋','😘','💕'],'🔥':['🔥','💥','🔥'],'😂':['😂','🤣','💦'],'👍':['👍','✨','⭐'],'😢':['😢','💧','💧'],'😡':['😡','💢','💨'],'😮':['😮','❗','❓']};
 function playEmo(x,label,small){const el=document.createElement('div');el.className='emov'+(small?' small':'');el.setAttribute('aria-hidden','true');
   const parts=EMOP[x]||[x];let h='';if(!reduceMo)for(let i=0;i<(small?6:16);i++){const p=parts[rint(parts.length)];h+=`<span class="emp" style="--x:${rint(90)+5}vw;--dx:${rint(80)-40}px;--d:${(i*.08).toFixed(2)}s;--s:${(0.7+Math.random()*0.9).toFixed(2)};--t:${(1.6+Math.random()*1.2).toFixed(2)}s">${p}</span>`}
-  el.innerHTML=h+`<div class="emc"><span class="emb e${EMOS.indexOf(x)}">${x}</span>${label?`<span class="eml">${esc(label)}</span>`:''}</div>`;
+  el.innerHTML=h+`<div class="emc"><span class="emb e${EMOS.indexOf(x)}">${emoHtml(x)}</span>${label?`<span class="eml">${esc(label)}</span>`:''}</div>`;
   document.body.appendChild(el);setTimeout(()=>el.remove(),small?1600:3200)}
 function renderEmoBar(){const el=$('#emobar');if(!el)return;if(document.activeElement&&document.activeElement.id==='emoTo')return;if(!(view==='table'&&table)){el.innerHTML='';return}const me=pById(meId());
-  el.innerHTML=`${me&&!readOnly?`<div class="ebx"><select id="emoTo" aria-label="Кому отправить">${[['all','Всем']].concat(players().filter(p=>p.id!==me.id).map(p=>[p.id,p.name])).map(([id,n])=>`<option value="${esc(id)}"${emoTo===id?' selected':''}>${esc(n)}</option>`).join('')}</select><div class="ems">${EMOS.map(x=>`<button class="em" data-act="emo" data-v="${x}" aria-label="Отправить ${x}">${x}</button>`).join('')}</div></div>`:''}`}
+  el.innerHTML=`${me&&!readOnly?`<div class="ebx"><select id="emoTo" aria-label="Кому отправить">${[['all','Всем']].concat(players().filter(p=>p.id!==me.id).map(p=>[p.id,p.name])).map(([id,n])=>`<option value="${esc(id)}"${emoTo===id?' selected':''}>${esc(n)}</option>`).join('')}</select><div class="ems">${EMOS.map(x=>`<button class="em" data-act="emo" data-v="${x}" aria-label="Отправить ${x==='NEP'?'НЭП-пакмана':x}">${emoHtml(x)}</button>`).join('')}</div></div>`:''}`}
 let newVer=false;
 async function checkUpdate(){if(BUILD==='dev'||newVer||(navigator.onLine===false))return;try{const r=await fetch('./index.html?u='+Date.now(),{cache:'no-store'});if(!r.ok)return;const t=await r.text(),m=t.match(/const BUILD='([^']+)'/);if(m&&m[1]!==BUILD){newVer=true;showUpd()}}catch(_){}}
 function showUpd(){let el=document.getElementById('updbar');if(!el){el=document.createElement('div');el.id='updbar';el.setAttribute('role','status');document.body.appendChild(el)}el.innerHTML='<span>🔄 Вышла новая версия приложения. Обновите, чтобы расчёты совпадали у всех.</span><button class="btn sm red" data-act="reload">Обновить</button>'}
@@ -1263,15 +1445,72 @@ setTimeout(checkUpdate,4000);setInterval(checkUpdate,120000);document.addEventLi
 function st0to(e){return e.from||''}
 function curTurn(st){st=st||state();const act=activeP();if(!act.length)return null;return st.turn&&act.some(p=>p.id===st.turn)?st.turn:act[0].id}
 function nextTurn(st){const act=activeP(),c=curTurn(st),i=act.findIndex(p=>p.id===c);return act.length?act[(i+1)%act.length].id:null}
-function vRules(){const s=S(),rr=rates().filter(x=>(+x.w||0)>0),bmin=rr.length?Math.min(...rr.map(x=>+x.buy)):0,bmax=rr.length?Math.max(...rr.map(x=>+x.buy)):0,f=x=>String(x).replace('.',',');
-  const sec=(t,items)=>`<section class="sheet rules"><h2>${t}</h2><ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul></section>`;
-  return `<section class="sheet"><h2>Правила НЭП 2025</h2><p class="muted small">Памятка для новичка. Цифры берутся из настроек этого стола.</p></section>`+
-  sec('Ход и круг',[`Бросьте кубики в шапке, передвиньте фишку на доске и выполните действие клетки.`,`Прошли Старт — «Счёт» → «Получить за круг»: ${rub(+s.passStart)}${s.idxOn?` и ещё +${rub(+s.idxStep)} за каждые ${s.idxEvery} своих кругов`:''}, плюс доход по акциям. Сумма округляется вверх.`])+
-  sec('Патенты',[`Свободное поле можно купить по цене с карточки («Патенты»).`,`Встали на чужое поле — платите ренту владельцу: «Патенты» → «Встали на чужое поле?». Рента зависит от статуса: поле → синдикат → магазины → торговый дом.`,`<b>Синдикат</b> — все патенты группы у одного владельца. Только он открывает покупку магазинов.`,`<b>Торговый дом</b> — после того, как на всех полях синдиката построены все магазины.`,`Постройку и патент можно продать банку за ${s.sellBuildPct}% цены. Патент — только если в его синдикате нет построек.`])+
-  sec('Акции',[`По ${s.shareLimit} акций на синдикат, цена акции = стоимость развития синдиката.`,`Акция приносит ${f(s.sharePct)}% капитализации своего синдиката за каждый ваш круг, даже если патенты у других.`,`За одну покупку — не больше 2 акций одного синдиката.`,`Продажа банку по «зрелой» цене: цена покупки + ${f(s.sharePct)}% капитализации. После продажи акции синдиката — 3 круга без покупки его акций.`])+
-  sec('Налог, ссуды, биржа',[`Налог: ${rub(+s.taxBase)} + ${f(s.taxPct)}% от ваших вложений (патенты, постройки, акции). «Счёт» → «Налог».`,`Ссуда в банке под ${s.loanRate}% на срок до 5 кругов, взнос списывается при каждом получении за круг.`,`Биржа: курс доллара выпадает случайно${rr.length?` (купить ${bmin}–${bmax} ₽)`:''}, обмен рублей и долларов по курсу.`])+
-  sec('Шанс и рулетка',[`Встали на «Шанс» — вкладка «Шанс» → «Тянуть карточку»; текст карточки видят все, выполняете её сами.`,`Деньги по карточкам — «Счёт» → «Получить от банка» (рубли или доллары, одному или всем).`,`Рулетка: выигрыш = ставка × коэффициент. Шанс: 1:1 — 50%, 1:2 — 45%, 1:3 — 40%, 1:4 — 32,5%, 1:5 — 25%.`])+
-  sec('За столом',[`Сделки между игроками — «Счёт» → «Сделка»: патенты, акции, ссуда, деньги; вторая сторона подтверждает.`,`«⏸ Пауза» в меню останавливает все операции у всех.`,`Персонаж закреплён за телефоном до конца партии.`,`«Выйти из игры» — всё имущество возвращается в банк, отменить нельзя.`])}
+/* ---------- кодекс правил и справка ---------- */
+let SAMPLE=null,helpQ='',helpAns='',helpBusy=false,helpCtl=null,helpTurns=[],helpErr='';
+setTimeout(async()=>{try{SAMPLE=window.claude&&window.claude.use?await window.claude.use('sample'):null}catch(_){SAMPLE=null}if(SAMPLE&&view==='table'&&tab==='rules')render()},0);
+function codex(){const s=S(),rr=rates().filter(x=>(+x.w||0)>0),bmin=rr.length?Math.min(...rr.map(x=>+x.buy)):0,bmax=rr.length?Math.max(...rr.map(x=>+x.buy)):0,f=x=>String(x).replace('.',','),start=+(table&&table.startRub)||2500;
+  const line=c=>c.type==='utility'?`${c.code} ${c.name} — цена ${c.price}; рента: поле ${c.rent.field}, синдикат ЖКХ ${c.rent.syndicate}; не развивается`:`${c.code} ${c.name} — цена ${c.price}; рента: поле ${c.rent.field}, синдикат ${c.rent.syndicate}, ${c.rent.stores.map((v,i)=>`${i+1} маг. ${v}`).join(', ')}, торговый дом ${c.rent.tradeHouse}; развитие ${c.develop}`;
+  const S_=(id,title,items)=>({id,title,items});
+  const sections=[
+  S_('start','Начало партии',[`Каждый игрок начинает с ${rub(start)} и ${usd(+s.startUsd||0)}.`,`Каждый выбирает персонажа; он закреплён за телефоном до конца партии. Освободить место (если игрок сменил телефон) — «Банк» → «Счета».`,`Поле, фишки и карточки лежат на столе, приложение ведёт деньги, имущество, кости, Шанс и биржу.`]),
+  S_('turn','Ход и круг',[`Бросьте кубики в шапке (2–4 кубика, кнопка ⚂ меняет число), передвиньте фишку по полю по часовой стрелке от Старта и выполните действие клетки.`,`Прошли Старт — «Счёт» → «Получить за круг»: ${rub(+s.passStart)}${s.idxOn?`, ставка растёт на ${rub(+s.idxStep)} каждые ${s.idxEvery} своих кругов`:''}, плюс доход по акциям. Сумма округляется вверх. Если есть ссуда, взнос списывается тем же нажатием.`,`Выпал дубль — бросайте ещё раз.`,`<b>Аренда кубика</b>: встали на клетку — бесплатно берёте дополнительный физический кубик. В руке может быть не больше 4 кубиков. Дополнительный кубик используется на один бросок (3 или 4 кубиками), когда решите; кубик в руке напоминает о такой возможности. Число кубиков в приложении — кнопка ⚂.`,`<b>Телепорт</b>: встали на клетку — переставьте фишку на любую клетку поля. Круг за прохождение Старта при этом не начисляется.`,`<b>Конец партии</b>: о варианте договариваются до начала — победитель по капиталу в оговорённый момент или игра до последнего оставшегося игрока. Капитал = рубли + доллары по курсу продажи + вложения (патенты, постройки, акции).`,`Поле — 40 клеток. Углы: Старт, Биржа, Телепорт, Торги / Ссуда. Линии (стороны поля) от Старта: 1-я — Посуда, Фастфуд, Отель, Вода; 2-я — Мебель, Пекарня, Энергия; 3-я — Комбинат, Дом моды; 4-я — Ипподром, Роскошь, Ремонт. На поле 4 клетки Шанс, 2 Налога, 2 Акции и 1 Аренда кубика.`]),
+  S_('pat','Патенты и рента',[`Свободное поле можно купить у банка только встав на него, по цене с карточки: «Патенты» → «Купить». Исключение — карточка Шанса «Можешь купить любой свободный патент».`,`Встали на чужое поле — платите ренту владельцу: «Патенты» → «Встали на чужое поле?» → выбрать поле → «Оплатить». Сумма считается сама по статусу поля.`,`Рента по статусу: поле (без построек) → синдикат (все патенты группы у одного владельца, без построек) → 1, 2, 3 магазина → торговый дом.`,`<b>Синдикат</b> — все патенты группы у одного владельца. Без синдиката строить нельзя.`,`Патент и постройку можно продать банку за ${s.sellBuildPct}% цены. Патент — только если на полях его синдиката нет построек.`,`<b>ЖКХ</b> (Вода 10-1, Энергия 10-2, Ремонт 10-3) — отдельная группа: не развивается, акций нет. Рента = цене поля, а если все 3 клетки у одного владельца — вдвое больше.`]),
+  S_('dev','Развитие',[`Магазины строятся только на полях собранного синдиката, по одному, по цене «Развитие» с карточки.`,`<b>Торговый дом</b> — ещё одно развитие сверх магазинов, доступно только когда на всех полях синдиката построены все магазины.`,`<b>Когда строить:</b> фишка встала на своё поле собранного синдиката — можно провести 1 операцию развития (магазин или торговый дом) только на этой клетке.`,`Карточки Шанса «одну/две операции по развитию» дают 1 или 2 операции без попадания на поле.`,`Правило «когда строить» соблюдается на доверии: кнопка в приложении не проверяет, где стоит фишка.`]),
+  S_('trade','Сделки и передача',[`<b>Торги / Ссуда</b>: встали на клетку — одна операция на выбор: либо торги патентами с любым игроком на добровольной основе (одна сделка), либо ссуда в банке — но тогда без обмена патентами.`,`Сделка в приложении — «Счёт» → «Сделка»: патенты с постройками, акции, долг по ссуде, рубли и доллары. Вторая сторона подтверждает. Приложение не проверяет, где стоит фишка, — правило клетки соблюдается на доверии.`,`Патент можно передать другому игроку бесплатно: «Патенты» → «Передать игроку».`,`Собранный синдикат передаётся и меняется в сделках только целиком, вместе с постройками. Одно поле из собранного синдиката отдельно отдать нельзя.`]),
+  S_('shares','Акции',[`Акции покупаются только когда фишка встала на клетку «Акция» (или по карточке Шанса «Можешь купить до 2 акций синдиката N-й линии»). Вкладка «Акции».`,`На каждый синдикат — ${s.shareLimit} акций. Цена акции = стоимость развития синдиката. У ЖКХ акций нет.`,`Акция приносит ${f(s.sharePct)}% капитализации своего синдиката за каждый круг владельца акции, даже если патенты у других. Капитализация = цены купленных патентов синдиката + вложения в постройки.`,`За одну покупку — не больше 2 акций одного синдиката (на доверии).`,`Продажа банку — по «зрелой» цене: цена покупки + ${f(s.sharePct)}% капитализации, с округлением вверх. После продажи акции синдиката ${SHCD} своих круга нельзя снова покупать его акции.`]),
+  S_('tax','Налог, ссуда, биржа',[`Встали на «Налог» — «Счёт» → «Налог»: ${rub(+s.taxBase)} + ${f(s.taxPct)}% от ваших вложений (патенты, постройки, акции по цене покупки). На клетке поля написано «% капитала» — в приложении считается от вложений.`,`Ссуда в банке под ${s.loanRate}% на срок до 5 кругов — по клетке «Торги / Ссуда», а также вне очереди, если не хватает денег на ренту или налог. Одновременно у игрока может быть только одна ссуда. Взнос списывается при каждом «Получить за круг»; погасить можно и сразу.`,`Биржа: встали на клетку Биржа — «Биржа» → «Узнать курс». Курс доллара выпадает случайно${rr.length?` (купить ${bmin}–${bmax} ₽, продать немного дешевле)`:''}. ${s.fxMode==='always'?'Обмен открыт всю партию.':`После этого ${s.fxMinutes} мин можно покупать и продавать доллары по курсу.`}`]),
+  S_('chance','Шанс и рулетка',[`Встали на «Шанс» — вкладка «Шанс» → «Тянуть карточку». Текст видят все, выполняете сами.`,`Карточки не повторяются: пока не выйдет вся колода, выпавшая карточка не вернётся. Потом колода тасуется заново.`,`Деньги по карточкам — «Счёт» → «Получить от банка» (рубли или доллары, себе, одному или всем); платежи банку — «Счёт» → оплата.`,`«Ближайшее поле» в карточке — ближайшая такая клетка в указанном направлении.`,`Рулетка против банка: выигрыш = ставка × коэффициент. Шанс выигрыша: 1:1 — 50%, 1:2 — 45%, 1:3 — 40%, 1:4 — 32,5%, 1:5 — 25%.`]),
+  S_('table','За столом',[`«⏸ Пауза» в меню останавливает все операции у всех; «▶ Продолжить» снимает паузу.`,`Важные события всплывают у всех игроков: покупка поля, магазин, торговый дом, собранный или переданный синдикат, выход из игры. Настройка — «Оповещения» в меню.`,`Свою операцию можно отменить в течение 10 секунд.`,`«Выйти из игры» — деньги обнуляются, патенты, постройки и акции возвращаются в банк, ссуды и сделки закрываются. Отменить нельзя; вышедший игрок только наблюдает.`]),
+  S_('board','Поле: цены и рента',BOARD.groups.map(g=>`<b>${g.name}</b> (до ${g.maxStores} маг., развитие ${g.develop}): `+BCELLS.filter(c=>c.group===g.id).map(line).join('; ')).concat([`<b>ЖКХ</b>: `+BCELLS.filter(c=>c.type==='utility').map(line).join('; ')])),
+  S_('deck','Колода Шанса',chanceDeck().filter(c=>(+c.w||0)>0).map((c,i)=>`${i+1}. ${c.text}${(+c.w||1)>1?` (×${c.w})`:''}`)),
+  S_('open','Не решено правилами — договоритесь за столом',[`Что делать, если денег не хватает даже со ссудой (продажа имущества банку, выбывание).`,`Можно ли передавать патент другому игроку («Передать игроку») вне клетки «Торги / Ссуда».`])];
+  const faq=[
+   ['Можно ли строить магазин без собранного синдиката?','Нет. Магазины и торговый дом — только на полях собранного синдиката (все патенты группы у одного владельца).'],
+   ['Когда можно строить?',`Когда фишка встала на своё поле собранного синдиката — 1 операция (магазин или торговый дом) на этой клетке. Карточка Шанса даёт 1–2 операции без попадания.`],
+   ['Сколько стоит торговый дом?','Как одно «Развитие» синдиката. Строится после того, как на всех полях синдиката стоят все магазины.'],
+   ['Как считается рента?','По статусу поля: поле → синдикат → 1/2/3 магазина → торговый дом. Приложение считает сумму само.'],
+   ['Сколько платить на ЖКХ?','Цену клетки; если все три клетки ЖКХ у одного владельца — вдвое больше.'],
+   ['Можно ли отдать одно поле из собранного синдиката?','Нет. Собранный синдикат передаётся и меняется только целиком, вместе с постройками.'],
+   ['Сколько приносит акция?',`${String(s.sharePct).replace('.',',')}% капитализации её синдиката за каждый ваш круг.`],
+   ['За сколько продать акцию?',`Банку — цена покупки + ${String(s.sharePct).replace('.',',')}% капитализации. Потом ${SHCD} своих круга нельзя покупать акции этого синдиката.`],
+   ['Сколько акций можно купить?',`Не больше 2 одного синдиката за одну покупку; всего на синдикат — ${s.shareLimit}.`],
+   ['Как считается налог?',`${rub(+s.taxBase)} + ${String(s.taxPct).replace('.',',')}% от вложений: патенты, постройки, акции по цене покупки.`],
+   ['Сколько я получаю за круг?',`${rub(+s.passStart)}${s.idxOn?` (+${rub(+s.idxStep)} каждые ${s.idxEvery} кругов)`:''} плюс доход по акциям, минус взнос по ссуде.`],
+   ['Повторяются ли карточки Шанса?','Нет, пока не выйдет вся колода. Потом она тасуется заново.'],
+   ['За сколько продать патент или постройку?',`За ${s.sellBuildPct}% цены. Патент — только если на его синдикате нет построек.`],
+   ['Что будет, если выйти из игры?','Деньги обнуляются, всё имущество возвращается в банк, отменить нельзя.'],
+   ['Что такое линия в карточках Шанса?','Сторона поля от Старта: 1-я — Посуда, Фастфуд, Отель, Вода; 2-я — Мебель, Пекарня, Энергия; 3-я — Комбинат, Дом моды; 4-я — Ипподром, Роскошь, Ремонт.'],
+   ['Когда можно купить свободное поле?','Только встав на него. Исключение — карточка Шанса «Можешь купить любой свободный патент».'],
+   ['Когда можно покупать акции?','Только встав на клетку «Акция» (или по карточке Шанса про акции N-й линии); не больше 2 акций одного синдиката за раз.'],
+   ['Что даёт клетка «Торги / Ссуда»?','Одну операцию на выбор: торги патентами с любым игроком по взаимному согласию или ссуду в банке — тогда без обмена патентами.'],
+   ['Что даёт Телепорт?','Переставьте фишку на любую клетку. Круг за Старт при этом не начисляется.'],
+   ['Как работает Аренда кубика?','Встали на клетку — бесплатно берёте дополнительный кубик (всего в руке до 4). Используете на один бросок 3 или 4 кубиками, когда решите.'],
+   ['Что даёт дубль?','Повторный бросок.'],
+   ['Как заканчивается партия?','Как договорились до начала: победитель по капиталу в оговорённый момент или игра до последнего оставшегося игрока.'],
+   ['Не хватает денег на ренту или налог — что делать?','Можно взять ссуду вне очереди: «Счёт» → «Ссуда». Одновременно — только одна ссуда; новая — после погашения текущей.'],
+   ['Как поменять доллары?','Встать на Биржу → «Биржа» → «Узнать курс», затем купить или продать по курсу.']].map(([q,a])=>({q,a}));
+  return {sections,faq}}
+function codexText(){const {sections,faq}=codex(),t=x=>String(x).replace(/<[^>]+>/g,'');
+  return sections.map(x=>`## ${x.title}\n`+x.items.map(i=>'- '+t(i)).join('\n')).join('\n\n')+'\n\n## Частые вопросы\n'+faq.map(x=>`- ${x.q} — ${t(x.a)}`).join('\n')}
+const helpKey=x=>String(x).replace(/<[^>]+>/g,'').toLowerCase().replace(/ё/g,'е');
+function helpMatch(k,q){const w=helpKey(q).split(/[^a-zа-я0-9]+/).filter(x=>x.length>=3).map(x=>x.slice(0,Math.max(3,Math.min(5,x.length-1))));return !w.length||w.every(x=>k.includes(x))}
+function vRules(){const {sections,faq}=codex(),q=helpQ.trim();
+  const ans=helpBusy||helpAns||helpErr?`<div class="hans" id="helpAns" aria-live="polite">${helpBusy&&!helpAns?'<span class="muted">Думаю…</span>':esc(helpAns)}${helpErr?`<p class="small neg">${esc(helpErr)}</p>`:''}</div>${helpBusy?'<button class="btn ghost sm" data-act="helpstop">Остановить</button>':helpAns?'<p class="muted small">Ответ по кодексу правил этого стола. Если правила молчат — договоритесь за столом.</p>':''}`:'';
+  return `<section class="sheet help"><h2>Справка</h2><p class="muted small">${SAMPLE?'Спросите о правилах своими словами — ответ даст Claude по кодексу правил этого стола. Или ищите по словам: список ниже фильтруется сразу.':'Введите слово или вопрос — ниже останутся только подходящие правила и ответы. Цифры — из настроек этого стола.'}</p>
+  <label class="field"><span>${SAMPLE?'Вопрос':'Поиск по правилам'}</span><textarea data-in="helpQ" rows="2" placeholder="${SAMPLE?'Например: можно ли строить, если я не на своём поле?':'Например: магазин, акции, налог'}">${esc(helpQ)}</textarea></label>
+  ${SAMPLE&&!readOnly?`<button class="btn red wide" data-act="helpask"${helpBusy?' disabled':''}>Спросить</button>`:''}${ans}
+  <p class="muted small hnone"${q&&!sections.some(x=>x.items.some(i=>helpMatch(helpKey(x.title+' '+i),q)))&&!faq.some(x=>helpMatch(helpKey(x.q+' '+x.a),q))?'':' hidden'}>По этим словам ничего не нашлось.</p></section>
+  <section class="sheet rules hsec" data-hs="faq"><h2>Частые вопросы</h2>${faq.map(x=>{const k=helpKey(x.q+' '+x.a);return `<details class="hfaq hi" data-k="${esc(k)}"${q&&!helpMatch(k,q)?' hidden':''}${q&&helpMatch(k,q)?' open':''}><summary>${esc(x.q)}</summary><p>${x.a}</p></details>`}).join('')}</section>`+
+  sections.map(x=>{const items=x.items.map(i=>{const k=helpKey(x.title+' '+i);return `<li class="hi" data-k="${esc(k)}"${q&&!helpMatch(k,q)?' hidden':''}>${i}</li>`}).join('');
+    return `<section class="sheet rules hsec${x.id==='open'?' hopen':''}" data-hs="${x.id}"><h2>${esc(x.title)}</h2><ul>${items}</ul></section>`}).join('')}
+async function helpAsk(){const q=helpQ.trim();if(!q){toast('Напишите вопрос.');return}if(!SAMPLE||helpBusy)return;
+  helpBusy=true;helpAns='';helpErr='';helpCtl=new AbortController();render();
+  const intro=`Ты — справочник настольной игры «НЭП 2025» (живая партия, приложение «Банк стола» ведёт деньги и имущество). Отвечай по-русски, коротко — 1–5 предложений, простым текстом без Markdown. Отвечай ТОЛЬКО по кодексу правил ниже, цифры бери из него. Если ответа в кодексе нет или вопрос из раздела «Не решено правилами», скажи: «В правилах это не определено — договоритесь за столом», и можешь предложить вариант, явно назвав его советом. Не придумывай правил. Если вопрос о том, где нажать в приложении, назови путь из кодекса.\n\nКОДЕКС ПРАВИЛ:\n${codexText()}`;
+  const turns=[{role:'user',content:intro},{role:'assistant',content:'Понял. Отвечаю только по кодексу.'},...helpTurns.slice(-6),{role:'user',content:q}];
+  try{const r=await SAMPLE(turns,{signal:helpCtl.signal,modelTier:'quick',cache:false,onText:({text})=>{helpAns=text;const el=$('#helpAns');if(el)el.textContent=text}});
+    helpAns=r.text;helpTurns.push({role:'user',content:q},{role:'assistant',content:r.text});if(r.truncated)helpErr='Ответ обрезан — спросите покороче.'}
+  catch(e){const c=e&&e.code;helpAns=(e&&e.text)||'';if(c==='cancelled'){}else if(['not_granted','sampling_disabled','not_declared','capability_disabled','capability_removed'].includes(c)){SAMPLE=null;helpErr='Claude недоступен на этом устройстве — пользуйтесь поиском по правилам.'}else if(c==='rate_limited')helpErr='Слишком много вопросов подряд — попробуйте чуть позже.';else if(c==='refused')helpErr='На этот вопрос ответа нет — переформулируйте.';else helpErr='Не удалось получить ответ. Попробуйте ещё раз.'}
+  helpBusy=false;helpCtl=null;render()}
 function renderDiceBar(){const el=$('#dicebar');if(!el)return;if(document.activeElement&&document.activeElement.id==='emoTo')return;if(!(view==='table'&&table)){el.innerHTML='';return}if(diceRolling)return;
   const me=pById(meId()),can=!!me&&!readOnly&&!isOut(me.id),deck=chanceDeck().filter(c=>(+c.w||0)>0),vals=lastDice&&lastDice.length===diceN?lastDice:null,sum=vals?vals.reduce((a,b)=>a+b,0):null;
   el.innerHTML=`<div class="db"><button class="dn" data-act="dcycle" aria-label="Число кубиков: ${diceN}. Нажмите, чтобы изменить">⚂ ${diceN}</button>
@@ -1309,6 +1548,7 @@ document.addEventListener('input',e=>{const el=e.target,d=el.dataset,num=v=>Stri
     if(k==='gtNote'){gt.note=el.value;return}
     if(k==='topUsd'){topup.usd=num(el.value);const u=+topup.usd||0,p=pById(topup.pid),bt=$('[data-act=topusd]');if(bt){bt.disabled=!(p&&u>0);bt.textContent=p&&u>0?`Начислить +${usd(u)} — ${p.name}`:'Выберите игрока и сумму';bt.dataset.label=`Точно? +${u} $ → ${p?p.name:''}`}return}
     if(k==='topAmt'){topup.amount=num(el.value);const a=+topup.amount||0,n=activeP().length,h=$('#topHint'),m=topup.dir<0;if(h)h.textContent=a>0?`Каждому ${m?'−':'+'}${rub(a)}, всего ${m?'спишется':'выдаст банк'} ${rub(a*n)}.`:'Введите сумму.';const bt=$('[data-act=topup]');if(bt){bt.textContent=`${m?'Списать':'Пополнить'} всем${a>0?` ${m?'−':'+'}${rub(a)}`:''}`;bt.dataset.label=`Точно? ${m?'−':'+'}${a} ₽ каждому`}return}
+    if(k==='helpQ'){helpQ=el.value;const q=helpQ.trim();let n=0;document.querySelectorAll('.hi').forEach(x=>{const ok=!q||helpMatch(x.dataset.k,q);x.hidden=!ok;if(x.tagName==='DETAILS')x.open=!!q&&ok;if(ok)n++});document.querySelectorAll('.hsec').forEach(sec=>{sec.hidden=!!q&&!sec.querySelector('.hi:not([hidden])')});const z=$('.hnone');if(z)z.hidden=!q||n>0;return}
     if(k==='patQ'){patQ=el.value;const q=patQ.trim().toLowerCase();let n=0;document.querySelectorAll('.rli').forEach(b=>{const h=!!q&&!b.dataset.k.includes(q);b.hidden=h;if(!h)n++});const z=$('.rnone');if(z)z.hidden=n>0;return}
     if(k==='payAmt'){pay.amount=num(el.value);pay.okNeg=false}else if(k==='getAmt'){get.amount=num(el.value);get.lap=false;get.stock=0}else if(k==='payAmt2'){}else if(k==='loanAmt'){loan.amount=num(el.value);renderFxHint()}else if(k==='roulBet'){roul.bet=num(el.value);roul.res=null}else if(k==='dealText'){dealB=dealB||blankDeal();dealB.text=el.value}else if(/^d(give|take)\.(rub|usd)$/.test(k)){dealB=dealB||blankDeal();const [sd,f]=k.slice(1).split('.');dealB[sd][f]=num(el.value)}else if(k==='presetName')presetName=el.value;else if(k==='joinCode')joinCode=num(el.value);else if(k==='getNote')get.note=el.value;
     else if(k==='fxUsd'){fxUsd=num(el.value);const p=fxSide==='buy'?buyPrice():sellPrice();fxRub=fxUsd?String((+fxUsd)*p):'';const o=$('[data-in=fxRub]');if(o)o.value=fxRub;renderFxHint()}
@@ -1330,7 +1570,7 @@ document.addEventListener('click',async e=>{
   const b=e.target.closest('[data-act]');if(!b||b.disabled)return;const a=b.dataset.act,v=b.dataset.v;
   if(b.dataset.label!==undefined&&b.dataset.armed!=='1'){b.dataset.armed='1';b.textContent='Точно?';setTimeout(()=>{if(b.isConnected){b.dataset.armed='';b.textContent=b.dataset.label}},2500);return}
   const me=meId();
-  if(view==='table'&&isPaused()&&!['tab','tick','lobby','open','seat','iam','resume','bsub','hf','hw','theme','unlock','export','pick','lapopen','dn','dcycle','fxside','lrounds','rk','csum','tdir','tpick','shtab','tmode','tpid','tusd','gtto','gtcur','gtpick','gtdir','tcode','copycode','hmenu','reload'].includes(a)){toast('Игра на паузе. Нажмите «▶ Продолжить», чтобы играть дальше.');return}
+  if(view==='table'&&isPaused()&&!['tab','tick','ntf','helpask','helpstop','ptsel','ptto','ptclose','lobby','open','seat','iam','resume','bsub','hf','hw','theme','unlock','export','pick','lapopen','dn','dcycle','fxside','lrounds','rk','csum','tdir','tpick','shtab','tmode','tpid','tusd','gtto','gtcur','gtpick','gtdir','tcode','copycode','hmenu','reload'].includes(a)){toast('Игра на паузе. Нажмите «▶ Продолжить», чтобы играть дальше.');return}
   switch(a){
     case 'tab':tab=v;view='table';window.scrollTo(0,0);break;
     case 'tick':tickOpen=!tickOpen;break;
@@ -1381,7 +1621,7 @@ document.addEventListener('click',async e=>{
     case 'forget':{const h=lget('nepbank2.hidden',[]);if(!h.includes(v))h.push(v);lset('nepbank2.hidden',h.slice(-200));
       const my=lget('nepbank2.my',null);if(Array.isArray(my)&&my.includes(v)){lset('nepbank2.my',my.filter(x=>x!==v));window.dispatchEvent(new Event('nepmy'))}
       toast('Стол убран из списка на этом устройстве.');break}
-    case 'draw':{const deck=chanceDeck().filter(c=>(+c.w||0)>0),tot=deck.reduce((s,c)=>s+(+c.w),0);let r=rint(tot),pick=deck[0];for(const c of deck){r-=+c.w;if(r<0){pick=c;break}}
+    case 'draw':{const bag=chanceBag(),deck=bag.left,tot=deck.reduce((s,c)=>s+(+c.w),0);if(!tot){toast('Колода пуста.');break}let r=rint(tot),pick=deck[0];for(const c of deck){r-=+c.w;if(r<0){pick=c;break}}
       if(await addEv({kind:'chance',pid:me,text:pick.text})){lastCard=pick.text;cardAnim=true}break}
     case 'rate':{const s=S(),list=rates().filter(x=>(+x.w||0)>0);if(!list.length){toast('В конструкторе нет курсов.');return}const tot=list.reduce((t,x)=>t+(+x.w),0);let r=rint(tot),pk=list[0];for(const x of list){r-=+x.w;if(r<0){pk=x;break}}
       if(await addEv({kind:'rate',pid:me,buy:+pk.buy,sell:+pk.sell})){if(s.fxMode!=='always')lset('nepbank2.fx.'+tid,Date.now()+(+s.fxMinutes||5)*60000);toast(`Курс: купить по ${pk.buy} ₽, продать по ${pk.sell} ₽. Биржа открыта.`)}fxRub=fxUsd?String((+fxUsd)*(fxSide==='buy'?+pk.buy:+pk.sell)):'';break}
@@ -1411,30 +1651,37 @@ document.addEventListener('click',async e=>{
     case 'unbuild':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o||o.pid!==me||o.level<=0)break;await addEv({kind:'unbuild',cell:v,refund:Math.round(c.develop*(+S().sellBuildPct||0)/100),pid:me});break}
     case 'rentsel':{rentSel=v;render();setTimeout(()=>{const r=$('#rentcard');if(r)r.scrollIntoView({behavior:reduceMo?'auto':'smooth',block:'start'})},30);return}
     case 'rentclose':rentSel=null;break;
+case 'helpask':helpAsk();return;
+case 'helpstop':if(helpCtl)helpCtl.abort();return;
+case 'ntf':{const m=NTFN[ntfMode()];lset('nepbank2.notify',m);toast(NTFL[m]);if(m==='off')ntfQ=[];break}
+case 'ptsel':{ptSel=v;ptTo=null;rentSel=null;render();setTimeout(()=>{const r=$('#ptcard');if(r)r.scrollIntoView({behavior:reduceMo?'auto':'smooth',block:'start'})},30);return}
+case 'ptto':ptTo=v;break;
+case 'ptclose':ptSel=null;ptTo=null;break;
+case 'ptgo':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o||o.pid!==me||!ptTo||ptTo===me||isOut(ptTo)){toast('Передача невозможна.');break}const ids=bundle(st,c);if(ids.some(id=>!st.own[id]||st.own[id].pid!==me)){toast('Часть синдиката уже не ваша.');break}if(await addEv({kind:'ptrans',pid:me,to:ptTo,cells:ids,syn:1})){toast(ids.length>1?'Синдикат передан.':'Патент передан.');ptSel=null;ptTo=null}break}
     case 'rentpay':{const st=state(),c=cellById(v),o=st.own[v];if(!c||!o){toast('У этого поля нет владельца.');break}if(o.pid===me)break;const rn=rentNow(st,c);if(await addEv({kind:'pay',from:me,to:o.pid,amount:rn.amount,note:`Рента «${c.name}»: ${rn.label}`,rent:v,pid:me})){rentSel=null;patQ=''}break}
     case 'buysh':{const st=state();{const cl=shCool(st,me,v);if(cl>0){toast(`После продажи акции этого синдиката покупка снова откроется через ${cl} ${cl===1?'круг':'круга'}.`);break}}if(issued(st,v)>=(+S().shareLimit||10)){toast('Все акции этого синдиката уже проданы.');break}await addEv({kind:'share',group:v,price:sharePrice(v),pid:me});break}
     case 'shtab':shTab=v;break;
     case 'sellsh':{const st=state();if(!((st.shares[v]||{})[me]>0)){toast('У вас нет акций этого синдиката.');break}await addEv({kind:'shsell',group:v,price:shSellPrice(v),pid:me,cd:1});break}
     case 'taxpay':{const t=taxCalc(state(),me);await addEv({kind:'pay',from:me,to:'bank',amount:t.total,note:`Налог: ${S().taxBase} + ${S().taxPct}% от вложений ${t.inv.total}`,tax:true,pid:me});break}
-    case 'dpat':{dealB=dealB||blankDeal();const l=dealB[b.dataset.side].patents,i=l.indexOf(v);if(i<0)l.push(v);else l.splice(i,1);break}
+    case 'dpat':{dealB=dealB||blankDeal();const l=dealB[b.dataset.side].patents,ids=bundle(state(),cellById(v)),on=l.includes(v);for(const x of ids){const i=l.indexOf(x);if(on&&i>=0)l.splice(i,1);if(!on&&i<0)l.push(x)}if(ids.length>1&&!on)toast(`Синдикат собран — в сделку идёт целиком: ${ids.map(x=>cellById(x).name).join(', ')}.`);break}
     case 'dloan':{dealB=dealB||blankDeal();const l=dealB[b.dataset.side].loans,i=l.indexOf(v);if(i<0)l.push(v);else l.splice(i,1);break}
     case 'dsh':{dealB=dealB||blankDeal();const sh=dealB[b.dataset.side].shares,g=b.dataset.g;sh[g]=Math.max(0,(+sh[g]||0)+(+v));if(!sh[g])delete sh[g];break}
     case 'dealsend':{const to=sel.dealTo;if(!to){toast('Выберите, с кем сделка.');return}const d=dealB||blankDeal(),clean=x=>({patents:x.patents.slice(),shares:Object.fromEntries(Object.entries(x.shares).filter(([,n])=>+n>0)),loans:x.loans.slice(),rub:+x.rub||0,usd:+x.usd||0}),give=clean(d.give),take=clean(d.take);
       if(!sideText(give)&&!sideText(take)){toast('Добавьте в сделку хотя бы что-нибудь.');return}
-      if(await addEv({kind:'deal',pid:me,to,give,take,text:(d.text||'').trim().slice(0,80)})){toast('Предложение отправлено.');dealB=blankDeal();sel.dealTo=null}break}
+      if(await addEv({kind:'deal',pid:me,to,give,take,whole:1,text:(d.text||'').trim().slice(0,80)})){toast('Предложение отправлено.');dealB=blankDeal();sel.dealTo=null}break}
     case 'dacc':{const st=state(),o=st.offers[v];if(!o)break;if(!sideOk(st,o.pid,o.give)||!sideOk(st,o.to,o.take)){toast('Сделка уже невозможна: части имущества нет у участников.');break}await addEv({kind:'dealOk',of:v,pid:me});break}
     case 'saveecon':{const s0=setDraft||S(),s1={v3:true};for(const k of Object.keys(DEFSET))s1[k]=k==='fxMode'?s0.fxMode:BOOLSET.has(k)?!!s0[k]:Math.max(0,+String(s0[k]).replace(',','.')||0);
       const patch={settings:s1};if(sprDraft)patch.sharePrices=Object.fromEntries(Object.entries(sprDraft).map(([g,v])=>[g,Math.max(0,+v||0)]));
       try{await store.updateTable(tid,patch);setDraft=null;sprDraft=null;toast('Правила сохранены.')}catch(_){toast('Не удалось сохранить правила.')}break}
 
-    case 'theme':lset('nepbank2.theme',v);document.body.classList.toggle('m3',v==='m3');tkKey='';break;
+    case 'theme':{const t=applyTheme(v);lset('nepbank2.theme',t);tkKey='';toast('Оформление: '+THEMES[t]);break}
     case 'react':{if(!me){toast('Выберите себя за столом, чтобы реагировать.');return}if(evs.some(r=>r.kind==='react'&&r.of===v&&r.emoji===b.dataset.e&&r.pid===me))return;addEv({kind:'react',of:v,emoji:b.dataset.e,pid:me});return}
     case 'ddir':deal.dir=v;break;
     case 'offer':{const amt=+deal.amount||0;if(!sel.dealTo){toast('Выберите, с кем сделка.');return}if(amt<=0){toast('Введите сумму сделки.');return}if(await addEv({kind:'offer',pid:me,to:sel.dealTo,dir:deal.dir,amount:amt,text:deal.text.trim().slice(0,80)})){toast('Предложение отправлено.');deal={dir:deal.dir,amount:'',text:''};sel.dealTo=null}break}
     case 'odec':await addEv({kind:'offerResp',of:v,ok:false,pid:me});break;
     case 'ocan':await addEv({kind:'offerResp',of:v,ok:false,cancel:true,pid:me});break;
     case 'lrounds':loan.rounds=+v;break;
-    case 'loan':{const s=S(),amt=+loan.amount||0;if(amt<=0){toast('Введите сумму ссуды.');return}const total=Math.round(amt*(1+(+s.loanRate||0)/100));if(await addEv({kind:'loan',pid:me,amount:amt,total,rounds:loan.rounds,per:Math.ceil(total/loan.rounds)})){loan={amount:'',rounds:loan.rounds}}break}
+    case 'loan':{const s=S(),amt=+loan.amount||0;if(activeLoans(me).length){toast('Одновременно — только одна ссуда. Сначала погасите текущую.');return}if(amt<=0){toast('Введите сумму ссуды.');return}const total=Math.round(amt*(1+(+s.loanRate||0)/100));if(await addEv({kind:'loan',pid:me,amount:amt,total,rounds:loan.rounds,per:Math.ceil(total/loan.rounds),syn:1})){loan={amount:'',rounds:loan.rounds}}break}
     case 'loanpay':{const L=activeLoans(me).find(x=>x.id===v);if(L)await addEv({kind:'pay',from:me,to:'bank',amount:L.left,note:'Ссуда: досрочное погашение',loanId:L.id,pid:me});break}
     case 'rk':roul.k=+v;roul.res=null;break;
     case 'roul':{if(roulSpin)return;const bet=+roul.bet||0;if(bet<=0){toast('Введите ставку.');return}const k=roul.k,pat=roulPattern(k),idx=rint(RSEG),win=!!pat[idx],amt=win?bet*k:bet,dg=360/RSEG,target=360-(idx*dg+dg/2);
